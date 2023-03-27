@@ -2,11 +2,12 @@
   "name": "nuxt-app",
   "private": true,
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "nuxt dev -o",
     "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "simple-git-hooks && nuxt prepare",
     "lint": "eslint . --fix",
     "lint:check": "eslint ."
   },
@@ -15,7 +16,15 @@
     "@nuxt/devtools": "^0.2.5",
     "@nuxtjs/eslint-module": "^4.0.2",
     "eslint": "^8.36.0",
+    "lint-staged": "^13.2.0",
     "nuxt": "^3.3.2",
+    "simple-git-hooks": "^2.8.1",
     "typescript": "^5.0.2"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
