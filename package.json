@@ -2,13 +2,20 @@
   "name": "nuxt-app",
   "private": true,
   "scripts": {
+    "dev": "nuxt dev -o",
     "build": "nuxt build",
-    "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint . --fix",
+    "lint:check": "eslint ."
   },
   "devDependencies": {
-    "nuxt": "^3.3.2"
+    "@bernankez/eslint-config": "^0.2.2",
+    "@nuxt/devtools": "^0.2.5",
+    "@nuxtjs/eslint-module": "^4.0.2",
+    "eslint": "^8.36.0",
+    "nuxt": "^3.3.2",
+    "typescript": "^5.0.2"
   }
 }
