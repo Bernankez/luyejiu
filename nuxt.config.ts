@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   modules: [
     "@nuxtjs/eslint-module",
+    "nuxt-typed-router",
     "@nuxt/devtools",
   ],
 });
