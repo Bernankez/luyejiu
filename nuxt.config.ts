@@ -4,5 +4,13 @@ export default defineNuxtConfig({
     "@nuxtjs/eslint-module",
     "nuxt-typed-router",
     "@nuxt/devtools",
+    [
+      "@pinia/nuxt",
+      {
+        autoImports: [
+          "defineStore",
+        ],
+      },
+    ],
   ],
 });
