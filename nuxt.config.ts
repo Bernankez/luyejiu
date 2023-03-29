@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@unocss/nuxt",
     "nuxt-headlessui",
+    "@vite-pwa/nuxt",
   ],
   eslint: {
     emitWarning: false,
@@ -57,5 +58,8 @@ export default defineNuxtConfig({
   unocss: {
     uno: true,
     icons: true,
+  },
+  pwa: {
+    // NOTE
   },
 });
