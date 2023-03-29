@@ -13,6 +13,9 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@unocss/nuxt",
   ],
+  eslint: {
+    emitWarning: false,
+  },
   pinia: {
     autoImports: [
       "defineStore",
