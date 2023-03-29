@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n-edge",
     "@pinia/nuxt",
     "@unocss/nuxt",
+    "nuxt-headlessui",
   ],
   eslint: {
     emitWarning: false,

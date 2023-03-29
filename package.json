@@ -25,6 +25,7 @@
     "eslint": "^8.36.0",
     "lint-staged": "^13.2.0",
     "nuxt": "^3.3.2",
+    "nuxt-headlessui": "^1.1.1",
     "nuxt-typed-router": "^3.0.7",
     "nuxt-vitest": "^0.6.9",
     "simple-git-hooks": "^2.8.1",
