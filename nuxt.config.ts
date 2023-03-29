@@ -1,3 +1,5 @@
+import { defineNuxtConfig } from "nuxt/config";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
@@ -9,6 +11,7 @@ export default defineNuxtConfig({
     // temporary use edge version, see https://github.com/nuxt-modules/i18n/issues/1954
     "@nuxtjs/i18n-edge",
     "@pinia/nuxt",
+    "@unocss/nuxt",
   ],
   pinia: {
     autoImports: [
@@ -46,5 +49,9 @@ export default defineNuxtConfig({
     vueI18n: {
       fallbackLocale: "zh",
     },
+  },
+  unocss: {
+    uno: true,
+    icons: true,
   },
 });

@@ -2,7 +2,10 @@
   <NuxtLink v-for="loc in avaliableLocales" :key="loc.code" :to="switchLocalePath(loc.code)">
     {{ loc.name }}
   </NuxtLink>
-  <p>{{ $t('welcome') }}</p>
+  <div class="i-uil:android"></div>
+  <p class="text-lg text-green font-bold">
+    {{ $t('welcome') }}
+  </p>
   <NuxtWelcome />
 </template>
 
