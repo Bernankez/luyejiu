@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     "nuxt-typed-router",
     "@nuxt/devtools",
     "nuxt-vitest",
+    "@vueuse/nuxt",
     [
       "@pinia/nuxt",
       {
