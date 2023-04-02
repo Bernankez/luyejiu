@@ -4,6 +4,7 @@ import { defineNuxtConfig } from "nuxt/config";
 export default defineNuxtConfig({
   modules: [
     "@nuxtjs/eslint-module",
+    "@nuxtjs/stylelint-module",
     "nuxt-typed-router",
     "@nuxt/devtools",
     "nuxt-vitest",
@@ -16,6 +17,9 @@ export default defineNuxtConfig({
     "@vite-pwa/nuxt",
   ],
   eslint: {
+    emitWarning: false,
+  },
+  stylelint: {
     emitWarning: false,
   },
   pinia: {
