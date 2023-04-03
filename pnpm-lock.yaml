@@ -10,11 +10,11 @@ dependencies:
 
 devDependencies:
   '@bernankez/eslint-config':
-    specifier: ^0.3.0
-    version: 0.3.0(eslint@8.37.0)(typescript@5.0.3)
+    specifier: ^0.4.2
+    version: 0.4.2(eslint@8.37.0)(typescript@5.0.3)
   '@bernankez/stylelint-config':
-    specifier: ^0.1.1
-    version: 0.1.1(postcss-html@1.5.0)(stylelint@15.4.0)
+    specifier: ^0.2.1
+    version: 0.2.1(postcss-html@1.5.0)(stylelint@15.4.0)
   '@iconify/json':
     specifier: ^2.2.43
     version: 2.2.43
@@ -1285,8 +1285,8 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
 
-  /@bernankez/eslint-config-basic@0.3.0(@typescript-eslint/eslint-plugin@5.57.0)(@typescript-eslint/parser@5.57.0)(eslint@8.37.0)(typescript@5.0.3):
-    resolution: {integrity: sha512-Gi9yWLotBZVnmYvo4aW0T/coieHPyPK5VfmlBuqGp0hEmI4fWHNfs4iVoM6Uo+lvMhN+dOplU8orVZOLeXRl7Q==}
+  /@bernankez/eslint-config-basic@0.4.2(@typescript-eslint/eslint-plugin@5.57.0)(@typescript-eslint/parser@5.57.0)(eslint@8.37.0)(typescript@5.0.3):
+    resolution: {integrity: sha512-m3/YTm7tETVblx2s1N2sfYvOooJZZOtLwDu1QdXLo6nS6JMWHoqbby16fI5KVtajhcq+v+FJiufEA/snAMZUuA==}
     peerDependencies:
       eslint: '>=7.4.0'
     dependencies:
@@ -1314,13 +1314,13 @@ packages:
       - typescript
     dev: true
 
-  /@bernankez/eslint-config-ts@0.3.0(eslint@8.37.0)(typescript@5.0.3):
-    resolution: {integrity: sha512-5+Wb2PHwnakGs9ZdFxfJzmX00rix2b22FzxGH93b3WMedWNSpunEVQfh6+QBK32waXFuStmGfCm45L/iiP6D2Q==}
+  /@bernankez/eslint-config-ts@0.4.2(eslint@8.37.0)(typescript@5.0.3):
+    resolution: {integrity: sha512-OT+0kZqbXjRXrgX63eeRYXPN+B89hYA9KkmuMSy1oDNiN5xhs4oPKEW/YQRW1mJ7zpUnpDfyykwXfG7vCgwLWw==}
     peerDependencies:
       eslint: '>=7.4.0'
       typescript: '>=3.9'
     dependencies:
-      '@bernankez/eslint-config-basic': 0.3.0(@typescript-eslint/eslint-plugin@5.57.0)(@typescript-eslint/parser@5.57.0)(eslint@8.37.0)(typescript@5.0.3)
+      '@bernankez/eslint-config-basic': 0.4.2(@typescript-eslint/eslint-plugin@5.57.0)(@typescript-eslint/parser@5.57.0)(eslint@8.37.0)(typescript@5.0.3)
       '@typescript-eslint/eslint-plugin': 5.57.0(@typescript-eslint/parser@5.57.0)(eslint@8.37.0)(typescript@5.0.3)
       '@typescript-eslint/parser': 5.57.0(eslint@8.37.0)(typescript@5.0.3)
       eslint: 8.37.0
@@ -1333,13 +1333,13 @@ packages:
       - supports-color
     dev: true
 
-  /@bernankez/eslint-config-vue@0.3.0(@typescript-eslint/eslint-plugin@5.57.0)(@typescript-eslint/parser@5.57.0)(eslint@8.37.0)(typescript@5.0.3):
-    resolution: {integrity: sha512-2avR0zuHtcX33xPhafGTTd/0unbBWpTgL9j56WQkVfWUyVrHhUtPdvcV4NgZohvPpt7BjQMYbqQBwCVYq6CYEQ==}
+  /@bernankez/eslint-config-vue@0.4.2(@typescript-eslint/eslint-plugin@5.57.0)(@typescript-eslint/parser@5.57.0)(eslint@8.37.0)(typescript@5.0.3):
+    resolution: {integrity: sha512-M/SpfIhUOrG3Q1VQstyo90C+9kfSzOlVTUmgC69kiol0jVmMUt0040QPv8+QujAneg4DoH3XaamXzAvm2JkRUw==}
     peerDependencies:
       eslint: '>=7.4.0'
     dependencies:
-      '@bernankez/eslint-config-basic': 0.3.0(@typescript-eslint/eslint-plugin@5.57.0)(@typescript-eslint/parser@5.57.0)(eslint@8.37.0)(typescript@5.0.3)
-      '@bernankez/eslint-config-ts': 0.3.0(eslint@8.37.0)(typescript@5.0.3)
+      '@bernankez/eslint-config-basic': 0.4.2(@typescript-eslint/eslint-plugin@5.57.0)(@typescript-eslint/parser@5.57.0)(eslint@8.37.0)(typescript@5.0.3)
+      '@bernankez/eslint-config-ts': 0.4.2(eslint@8.37.0)(typescript@5.0.3)
       eslint: 8.37.0
       eslint-plugin-vue: 9.10.0(eslint@8.37.0)
       local-pkg: 0.4.3
@@ -1353,12 +1353,12 @@ packages:
       - typescript
     dev: true
 
-  /@bernankez/eslint-config@0.3.0(eslint@8.37.0)(typescript@5.0.3):
-    resolution: {integrity: sha512-/P8XUx2wQH6zLiqbWQ+b6uRCHCcMyZcCxIbyhItfIbkTzaHrkAl5uWvf4VS9RFAQVGKekj7+XUtV3wthVxpCFw==}
+  /@bernankez/eslint-config@0.4.2(eslint@8.37.0)(typescript@5.0.3):
+    resolution: {integrity: sha512-Z/FWAVhD20gUZeaH7ExO9J74DIBjycV/zGMRAQJwigVZmNj5Fo8NzwrqKEzbGpjkRnBJyvyMchfXML1dboG7sA==}
     peerDependencies:
       eslint: '>=7.4.0'
     dependencies:
-      '@bernankez/eslint-config-vue': 0.3.0(@typescript-eslint/eslint-plugin@5.57.0)(@typescript-eslint/parser@5.57.0)(eslint@8.37.0)(typescript@5.0.3)
+      '@bernankez/eslint-config-vue': 0.4.2(@typescript-eslint/eslint-plugin@5.57.0)(@typescript-eslint/parser@5.57.0)(eslint@8.37.0)(typescript@5.0.3)
       '@typescript-eslint/eslint-plugin': 5.57.0(@typescript-eslint/parser@5.57.0)(eslint@8.37.0)(typescript@5.0.3)
       '@typescript-eslint/parser': 5.57.0(eslint@8.37.0)(typescript@5.0.3)
       eslint: 8.37.0
@@ -1381,25 +1381,25 @@ packages:
       - typescript
     dev: true
 
-  /@bernankez/stylelint-config-basic@0.1.1(stylelint@15.4.0):
-    resolution: {integrity: sha512-PtvIVPwKopnsAHdw1ClTnzIbe4G3w7mFOPLBqbrPeMxiTFQfS3biNsQFNuBCNfMQya0MBG4aufHFH6TGgzppoQ==}
+  /@bernankez/stylelint-config-basic@0.2.1(stylelint@15.4.0):
+    resolution: {integrity: sha512-Vx+YZInB+E2PBT8Wd61wQPvvt+315FOfE++1CpG4snUM9kzm1OFqjm94kcWXF+3PPtTnpuEQqmzWRVAYD3jDag==}
     peerDependencies:
       stylelint: '>=15.0.0'
     dependencies:
       stylelint: 15.4.0
       stylelint-config-rational-order: 0.1.2
       stylelint-order: 6.0.3(stylelint@15.4.0)
-      stylelint-stylistic: 0.2.0(stylelint@15.4.0)
+      stylelint-stylistic: 0.2.1(stylelint@15.4.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@bernankez/stylelint-config-vue@0.1.1(postcss-html@1.5.0)(stylelint@15.4.0):
-    resolution: {integrity: sha512-ilmGfpkmJLI1w/zYGq6imn1rKMhgOZ/EQOqWhTgItEzPsCyOi4r+29/v+aobNbF/fD4d/WwOzk+8X+7m4/fDjQ==}
+  /@bernankez/stylelint-config-vue@0.2.1(postcss-html@1.5.0)(stylelint@15.4.0):
+    resolution: {integrity: sha512-UBnInKQ55datawakRHgK1IBowmwjZLCKV6fTESz8njCapwfyz9IXJ7E8zZc9MTXzEO1cT6pIBIV4Dd45jHMXdA==}
     peerDependencies:
       stylelint: '>=15.0.0'
     dependencies:
-      '@bernankez/stylelint-config-basic': 0.1.1(stylelint@15.4.0)
+      '@bernankez/stylelint-config-basic': 0.2.1(stylelint@15.4.0)
       local-pkg: 0.4.3
       stylelint: 15.4.0
       stylelint-config-html: 1.1.0(postcss-html@1.5.0)(stylelint@15.4.0)
@@ -1408,12 +1408,12 @@ packages:
       - supports-color
     dev: true
 
-  /@bernankez/stylelint-config@0.1.1(postcss-html@1.5.0)(stylelint@15.4.0):
-    resolution: {integrity: sha512-ZTKUJODYpCPTUEwIj0ffkMRpiZTGm4hE1fGTUOOTXWSE5XYfHkuLm9lRhruALMRy60NTi3QACeJlE/WjJZt+Og==}
+  /@bernankez/stylelint-config@0.2.1(postcss-html@1.5.0)(stylelint@15.4.0):
+    resolution: {integrity: sha512-NC+KfcV9nvopOJ0MDmLIr1MaHOKRlDKCqNx0lTJL7c9VSrWvMCqdkHs25kswqnGJ2WSUPIQd6wa7dVsa08ruSw==}
     peerDependencies:
       stylelint: '>=15.0.0'
     dependencies:
-      '@bernankez/stylelint-config-vue': 0.1.1(postcss-html@1.5.0)(stylelint@15.4.0)
+      '@bernankez/stylelint-config-vue': 0.2.1(postcss-html@1.5.0)(stylelint@15.4.0)
       stylelint: 15.4.0
     transitivePeerDependencies:
       - postcss-html
@@ -11049,8 +11049,8 @@ packages:
       stylelint: 15.4.0
     dev: true
 
-  /stylelint-stylistic@0.2.0(stylelint@15.4.0):
-    resolution: {integrity: sha512-ebHTd36mg68ukLVn4BK7E5IU4H7JFn4QZTVbShqxfNISh4uwoEB6K7Wp2K2BlO3NGAKStBEdH/fRjClSodJn3A==}
+  /stylelint-stylistic@0.2.1(stylelint@15.4.0):
+    resolution: {integrity: sha512-eM2dHmNoi9zz5shCMCWHbsZc0pJ14mwSmUWlzax+48f8GHg2rAiFhWkV9QN9OxB1pBEPmseC2DPLaqe9TXWXJA==}
     engines: {node: '>=14.x'}
     peerDependencies:
       stylelint: ^15.0.0

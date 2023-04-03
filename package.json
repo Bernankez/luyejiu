@@ -1,6 +1,7 @@
 {
   "name": "nuxt-app",
   "private": true,
+  "packageManager": "pnpm@8.0.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "nuxt dev -o",
@@ -19,8 +20,8 @@
     "pinia": "^2.0.33"
   },
   "devDependencies": {
-    "@bernankez/eslint-config": "^0.3.0",
-    "@bernankez/stylelint-config": "^0.1.1",
+    "@bernankez/eslint-config": "^0.4.2",
+    "@bernankez/stylelint-config": "^0.2.1",
     "@iconify/json": "^2.2.43",
     "@nuxt/devtools": "^0.3.1",
     "@nuxtjs/eslint-module": "^4.0.2",

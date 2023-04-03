@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/eslint-module",
     "@nuxtjs/stylelint-module",
+    // may prompt error when building
     "nuxt-typed-router",
     "@nuxt/devtools",
     "nuxt-vitest",
