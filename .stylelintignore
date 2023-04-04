@@ -1,0 +1,3 @@
+# It seems that ignoreFiles in @bernankez/stylelint-config doesn't working
+# see https://stackoverflow.com/questions/75498883/stylelint-ignorefiles-not-working-includes-the-ignored-files-paths-always
+dist/**/*
