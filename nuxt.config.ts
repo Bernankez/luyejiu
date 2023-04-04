@@ -7,6 +7,8 @@ export default defineNuxtConfig({
     "@nuxtjs/stylelint-module",
     // may prompt error when building
     "nuxt-typed-router",
+    // if @nuxt/devtools reports an error, please run `pnpm dlx nuxi@latest devtools enable` manually
+    // see https://github.com/nuxt/devtools/issues/50#issuecomment-1442572171
     "@nuxt/devtools",
     "nuxt-vitest",
     "@vueuse/nuxt",
