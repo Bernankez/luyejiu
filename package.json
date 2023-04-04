@@ -47,6 +47,7 @@
     "pre-commit": "pnpm lint-staged"
   },
   "lint-staged": {
+    "*.{css,vue}": "stylelint --fix",
     "*": "eslint --fix"
   }
 }
