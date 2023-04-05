@@ -36,6 +36,7 @@
     "@vueuse/nuxt": "^9.13.0",
     "eslint": "^8.37.0",
     "lint-staged": "^13.2.0",
+    "lru-cache": "^8.0.5",
     "nuxt": "^3.3.3",
     "nuxt-headlessui": "^1.1.1",
     "nuxt-typed-router": "^3.0.9",
