@@ -1,19 +1,21 @@
 import { Howl } from "howler";
 import type { HowlOptions } from "howler";
 import { useHowlCache } from "./cache";
-import type { Optional } from "~/types/utils";
 
 export interface Song {
   id: string;
-  player: Howl;
+  player?: Howl;
 }
 
-export type UnstableSong = Optional<Song, "player">;
+export interface SongOptions {
+  howlOptions?: HowlOptions | ((song: Readonly<Song>) => HowlOptions);
+}
 
 const howlCache = useHowlCache(20);
-export function getSong(id: string, options?: { howlOptions?: HowlOptions | ((song: Readonly<UnstableSong>) => HowlOptions) }) {
+
+export function getSong(id: string, options?: SongOptions) {
   // TODO get song info from remote or somewhere
-  const song: UnstableSong = {
+  const song: Song = {
     id,
   };
 
@@ -28,5 +30,5 @@ export function getSong(id: string, options?: { howlOptions?: HowlOptions | ((so
 
   song.player = howl;
 
-  return song as Song;
+  return song;
 }
