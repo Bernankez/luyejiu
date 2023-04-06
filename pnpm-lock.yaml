@@ -4,6 +4,9 @@ dependencies:
   '@pinia/nuxt':
     specifier: ^0.4.7
     version: 0.4.7(rollup@2.79.1)(typescript@5.0.3)(vue@3.2.47)
+  consola:
+    specifier: 3.0.0-3
+    version: 3.0.0-3
   howler:
     specifier: ^2.2.3
     version: 2.2.3
@@ -4768,6 +4771,10 @@ packages:
 
   /consola@2.15.3:
     resolution: {integrity: sha512-9vAdYbHj6x2fLKC4+oPH0kFzY/orMZyG2Aj+kNylHxKGJ/Ed4dpNyAQYwJOdqO4zdM7XpVHmyejQDcQHrnuXbw==}
+
+  /consola@3.0.0-3:
+    resolution: {integrity: sha512-3vhBx7Qw5LlF1/QnaeoQSSA5fOohGr9xtHkQ1RFbNlr6kOTwtVz0FvUPx6CdobrDDSP19cj0uWwPtf+/+VBKQA==}
+    dev: false
 
   /console-control-strings@1.1.0:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}

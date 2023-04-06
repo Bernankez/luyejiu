@@ -19,6 +19,15 @@ export default defineNuxtConfig({
     "nuxt-headlessui",
     "@vite-pwa/nuxt",
   ],
+  hooks: {
+    // global import
+    "imports:sources": (sources) => {
+      sources.push({
+        from: "consola",
+        imports: ["consola"],
+      });
+    },
+  },
   eslint: {
     emitWarning: false,
   },
