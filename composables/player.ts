@@ -1,5 +1,4 @@
 import { Howl } from "howler";
-import type { Song } from "./song";
 
 export function usePlayer() {
   const playing = ref(false);
@@ -54,8 +53,4 @@ export function usePlayer() {
     volume,
     combinedVolume,
   };
-}
-
-export function usePlaylist() {
-  const playlist = ref<Song[]>([]);
 }
