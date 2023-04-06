@@ -42,7 +42,40 @@ export function usePlaylist() {
       playlist.value.unshift(id);
       return true;
     }
-    console.warn("The song is already in the playlist");
+    consola.warn("The song is already in the playlist");
     return false;
   }
+
+  function remove(id: string) {
+    const index = playlist.value.indexOf(id);
+    if (index > -1) {
+      playlist.value.splice(index, 1);
+    }
+  }
+
+  function insert(after: string, id: string) {
+    const index = playlist.value.indexOf(after);
+    const idIndex = playlist.value.indexOf(id);
+    if (idIndex > -1) {
+      playlist.value.splice(idIndex, 1);
+    }
+    if (index > -1) {
+      playlist.value.splice(index + 1, 0, id);
+    } else {
+      playlist.value.unshift(id);
+    }
+  }
+
+  function clear() {
+    playlist.value = [];
+  }
+
+  return {
+    playlist,
+
+    add,
+    remove,
+    insert,
+    clear,
+  };
 }
