@@ -1,6 +1,8 @@
 import type { Howl } from "howler";
 import LRU from "lru-cache";
 
+export const howlCache = useHowlCache(20);
+
 export function useHowlCache<T extends Howl = Howl>(max = 10) {
   function beforeDelete(howl: T) {
     howl.unload();
