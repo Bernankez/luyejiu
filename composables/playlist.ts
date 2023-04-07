@@ -1,7 +1,5 @@
-// TODO save in localStorage or indexedDB
-
 export function useHistoryList(max = 1000) {
-  const historyList = ref<string[]>([]);
+  const historyList = useLocalStorage(`${SONG_PREFIX}-history-list`, <string[]>[]);
 
   function add(id: string) {
     const index = historyList.value.indexOf(id);
@@ -34,8 +32,8 @@ export function useHistoryList(max = 1000) {
   };
 }
 
-export function usePlaylist() {
-  const playlist = ref<string[]>([]);
+export function usePlaylist(playlistId: string) {
+  const playlist = useLocalStorage(`${SONG_PREFIX}-${playlistId}`, <string[]>[]);
 
   function add(id: string) {
     if (!playlist.value.includes(id)) {
@@ -72,6 +70,7 @@ export function usePlaylist() {
 
   return {
     playlist,
+    playlistId,
 
     add,
     remove,
