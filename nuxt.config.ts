@@ -19,6 +19,12 @@ export default defineNuxtConfig({
     "nuxt-headlessui",
     "@vite-pwa/nuxt",
   ],
+  imports: {
+    dirs: [
+      "./components/ui/**",
+      "./store/**",
+    ],
+  },
   hooks: {
     // global import
     "imports:sources": (sources) => {
@@ -37,6 +43,7 @@ export default defineNuxtConfig({
   pinia: {
     autoImports: [
       "defineStore",
+      "storeToRefs",
     ],
   },
   i18n: {
