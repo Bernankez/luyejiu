@@ -5,6 +5,15 @@ export const enum Playmode {
   "sequence" = "sequence",
 }
 
+export interface Song {
+  id: string;
+  name: string;
+  originSinger: string;
+  singer: string;
+  duration: number;
+  // url
+}
+
 export interface Songlist {
   name: string;
   id: string;

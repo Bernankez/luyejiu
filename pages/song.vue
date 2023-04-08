@@ -8,13 +8,31 @@
     <div>
       isPlaying: {{ playing }}
     </div>
+
+    <div class="flex flex-col flex-gap-2">
+      <div v-for="song in songs" :key="song.id" class="bg-green cursor-pointer" @click="() => change(song.id)">
+        {{ song.name }}
+      </div>
+    </div>
+
+    <div class="flex flex-col flex-gap-2">
+      playlist
+      <div v-for="song in playlist" :key="song" class="bg-yellow">
+        {{ song }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { getAllSongs } from "~/api";
+
 const { playing, change, currentSongId, prev, next } = usePlayer();
-currentSongId.value = "test";
 if (currentSongId.value) {
   change(currentSongId.value, { immediate: false });
 }
+
+const { playlist } = usePlaylist();
+
+const songs = getAllSongs();
 </script>
