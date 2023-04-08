@@ -5,9 +5,9 @@ const songlists = useLocalStorage(`${SONG_PREFIX}-songlist`, <Songlist[]>[]);
 
 /** 歌单 */
 export function useSonglists() {
-  function add(songlist: Omit<Songlist, "id">) {
-    const id = uuid();
-    songlists.value.push({ ...songlist, id });
+  function add(songlist: Omit<Songlist, "id">, id?: string) {
+    const _id = id || uuid();
+    songlists.value.push({ ...songlist, id: _id });
   }
 
   function edit(id: string, songlist: Partial<Songlist>) {
@@ -25,20 +25,23 @@ export function useSonglists() {
     }
   }
 
+  function get(id: string) {
+    return songlists.value.find(item => item.id === id);
+  }
+
   return {
     songlists,
 
     add,
     edit,
     remove,
+    get,
   };
 }
 
 export function useSonglist(id: string) {
-  const { songlists } = useSonglists();
-  const songlist = computed(() => {
-    return songlists.value.find(item => item.id === id);
-  });
+  const { songlists, get } = useSonglists();
+  const songlist = computed(() => get(id));
 
   function add(id: string) {
     if (songlist.value?.songs.includes(id)) {
@@ -64,27 +67,15 @@ export function useSonglist(id: string) {
   };
 }
 
-const favoriteSongs = useLocalStorage<string[]>(`${SONG_PREFIX}-${FAVORITE_SUFFIX}`, []);
-
 export function useFavoriteList() {
-  function add(id: string) {
-    if (favoriteSongs.value.includes(id)) {
-      consola.warn("The song already exists in the favorite list");
-      return false;
-    }
-    favoriteSongs.value.push(id);
-    return true;
+  const { get, add: addSonglist } = useSonglists();
+  if (!get(FAVORITE_SUFFIX)) {
+    addSonglist({ name: "我喜欢", songs: [] }, FAVORITE_SUFFIX);
   }
-
-  function remove(id: string) {
-    const index = favoriteSongs.value.indexOf(id);
-    if (index && index > -1) {
-      favoriteSongs.value.splice(index, 1);
-    }
-  }
+  const { songlist: favoriteList, add, remove } = useSonglist(FAVORITE_SUFFIX);
 
   return {
-    favoriteSongs,
+    favoriteList,
 
     add,
     remove,
