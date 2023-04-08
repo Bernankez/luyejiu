@@ -1,56 +1,186 @@
-import { Howl } from "howler";
+import { Howl, Howler } from "howler";
+import type { Song } from "./song";
 
 export function usePlayer() {
-  const playing = ref(false);
-  /** seconds */
-  const duration = ref(0);
-  const mute = ref(false);
-  const volume = ref(0);
-  const combinedVolume = computed(() => mute.value ? 0 : volume.value);
+  const { volume: _volume, mute: _mute, belongingSonglistId, currentSongId } = storeToRefs(useSongStore());
+  const { next: playlistNext, prev: playlistPrev, insert: playlistInsert, change: playlistChange } = usePlaylist();
 
-  const player = new Howl({
-    src: ["http://rslbkj11r.hn-bkt.clouddn.com/songs/%E9%B9%BF%E9%87%8E%E7%81%B8%20-%20%E5%A4%A7%E8%B2%94%E8%B2%85%C2%B7%E5%B0%8F%E5%B0%91%E5%B9%B4%E7%89%88.mp3"],
-    format: ["webm", "mp3"],
-    // Determine whether to use HTML5 player based on file size
-    html5: true,
-    preload: "metadata",
+  const mute = computed({
+    get() {
+      return _mute.value;
+    },
+    set(value) {
+      _mute.value = value;
+      Howler.mute(value);
+    },
   });
 
-  function isPlay() {
-    return player.playing();
-  }
+  const volume = computed({
+    get() {
+      return _volume.value;
+    },
+    set(value) {
+      if (value !== 0) {
+        mute.value = true;
+      }
+      _volume.value = value;
+      Howler.volume(value);
+    },
+  });
 
+  const loading = ref(false);
+
+  const _playing = ref(false);
+  const playing = computed({
+    get() {
+      return _playing.value;
+    },
+    set(value) {
+      if (value) {
+        play();
+      } else {
+        pause();
+      }
+    },
+  });
+  /** seconds */
+  const duration = ref(0);
+  const _played = ref(0);
+  const played = computed({
+    get() {
+      return _played.value;
+    },
+    set(value) {
+      if (currentSong.value?.player) {
+        currentSong.value.player.seek(value);
+        _played.value = value;
+      }
+    },
+  });
+
+  const currentSong = ref<Song & { player: Howl }>();
+
+  /** 播放 */
   function play() {
-    player.play();
-    playing.value = true;
+    if (currentSong.value?.player) {
+      currentSong.value.player.play();
+      _playing.value = true;
+    }
   }
 
+  /** 暂停 */
   function pause() {
-    player.pause();
-    playing.value = false;
+    if (currentSong.value?.player) {
+      currentSong.value.player.pause();
+      _playing.value = false;
+    }
   }
 
-  function stop() {
-    player.stop();
-    playing.value = false;
+  /** 切歌 */
+  async function change(id: string, options?: { immediate?: boolean; songlistId?: string; playlist?: string[] }) {
+    const { immediate = true, songlistId, playlist } = options || {};
+    if (songlistId) {
+      const { songlist } = useSonglist(songlistId);
+      if (songlist.value?.songs) {
+        belongingSonglistId.value = songlistId;
+        playlistChange(songlist.value.songs);
+      }
+    } else if (playlist) {
+      belongingSonglistId.value = undefined;
+      playlistChange(playlist);
+    }
+
+    loading.value = true;
+    // NOTE getSong(id)
+    const song = {
+      id,
+    };
+    if (!song) {
+      loading.value = false;
+      return undefined;
+    }
+    if (!howlCache.get(id)) {
+      const newHowl = new Howl({
+        // song.url
+        src: "http://rslbkj11r.hn-bkt.clouddn.com/songs/%E9%B9%BF%E9%87%8E%E7%81%B8%20-%20%E5%A4%A7%E8%B2%94%E8%B2%85%C2%B7%E5%B0%8F%E5%B0%91%E5%B9%B4%E7%89%88.mp3",
+        html5: true,
+        onload() {
+          duration.value = newHowl.duration();
+          loading.value = false;
+        },
+        onloaderror(_, e) {
+          consola.error("usePlayer:loaderror", e);
+          loading.value = false;
+        },
+        onplayerror(_, e) {
+          consola.error("usePlayer:playerror", e);
+          loading.value = false;
+        },
+        onseek() {
+          function getPlayed() {
+            requestAnimationFrame(() => {
+              if (playing.value) {
+                _played.value = newHowl.seek();
+                getPlayed();
+              }
+            });
+          }
+          getPlayed();
+        },
+        onend() {
+          next(false);
+        },
+      });
+      howlCache.add(id, newHowl);
+    }
+    currentSongId.value = id;
+    currentSong.value = {
+      ...song,
+      player: howlCache.get(id)!,
+    };
+    if (immediate) {
+      play();
+    }
+
+    return currentSong.value;
   }
 
-  function unload() {
-    player.unload();
-    playing.value = false;
+  function next(manual = true) {
+    const id = playlistNext(manual);
+    if (id) {
+      change(id);
+    }
+    return id;
+  }
+
+  function prev(manual = true) {
+    const id = playlistPrev(manual);
+    if (id) {
+      change(id);
+    }
+    return id;
+  }
+
+  function insert(id: string) {
+    playlistInsert(currentSongId.value, [id]);
   }
 
   return {
-    play,
-    stop,
-    pause,
-    isPlay,
-    unload,
-
+    /** duration has been played */
+    played,
+    /** is playing */
     playing,
-    duration,
-    mute,
     volume,
-    combinedVolume,
+    mute,
+    /** change current song (with playlist) */
+    change,
+    /** insert song after current song in playlist */
+    insert,
+    next,
+    prev,
+
+    loading,
+    duration,
+    currentSong,
   };
 }

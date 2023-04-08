@@ -3,7 +3,10 @@ import type { HowlOptions } from "howler";
 
 export interface Song {
   id: string;
-  player?: Howl;
+  // name: string;
+  // originSinger: string;
+  // singer: string;
+  // duration: number;
 }
 
 export interface SongOptions {
@@ -25,7 +28,7 @@ export function getSong(id: string, options?: SongOptions) {
     howlCache.add(id, howl);
   }
 
-  song.player = howl;
+  // song.player = howl;
 
   return song;
 }
