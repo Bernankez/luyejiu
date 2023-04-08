@@ -1,5 +1,6 @@
 import { Howl, Howler } from "howler";
-import type { Song } from "./song";
+import type { Song } from "~/types/song";
+import { getSongById } from "~/api";
 
 export function usePlayer() {
   const { volume: _volume, mute: _mute, belongingSonglistId, currentSongId } = storeToRefs(useSongStore());
@@ -91,16 +92,14 @@ export function usePlayer() {
     }
 
     loading.value = true;
-    // NOTE getSong(id)
-    const song = {
-      id,
-    };
+    const song = getSongById(id);
     if (!song) {
       loading.value = false;
       return undefined;
     }
-    // pause before changing
-    pause();
+    // unload before changing
+    unload();
+    currentSongId.value = id;
     if (!howlCache.get(id)) {
       consola.info(`usePlayer:${currentSongId.value}: ready to create new Howl`);
       const newHowl = new Howl({
@@ -137,7 +136,6 @@ export function usePlayer() {
       });
       howlCache.add(id, newHowl);
     }
-    currentSongId.value = id;
     currentSong.value = {
       ...song,
       player: howlCache.get(id)!,
@@ -167,6 +165,14 @@ export function usePlayer() {
 
   function insert(id: string) {
     playlistInsert(currentSongId.value, [id]);
+  }
+
+  function unload() {
+    if (currentSong.value?.player) {
+      currentSong.value.player.unload();
+      consola.info(`usePlayer:${currentSongId.value}: before unloaded`);
+      _playing.value = false;
+    }
   }
 
   return {
