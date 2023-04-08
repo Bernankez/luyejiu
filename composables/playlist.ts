@@ -63,7 +63,7 @@ export function usePlaylist() {
 
   function next(manual = false) {
     if (playlist.value.length === 0) {
-      return "";
+      return undefined;
     }
     if (!currentSongId.value || !playlist.value.includes(currentSongId.value)) {
       return playlist.value[0];
@@ -75,12 +75,12 @@ export function usePlaylist() {
     if (playmode.value === Playmode.loop || manual) {
       return playlist.value[(index + 1) % playlist.value.length];
     }
-    return playlist.value[index + 1] || "";
+    return playlist.value[index + 1];
   }
 
   function prev(manual = false) {
     if (playlist.value.length === 0) {
-      return "";
+      return undefined;
     }
     if (!currentSongId.value || !playlist.value.includes(currentSongId.value)) {
       return playlist.value[0];
@@ -92,7 +92,7 @@ export function usePlaylist() {
     if (playmode.value === Playmode.loop || manual) {
       return playlist.value[(index - 1 + playlist.value.length) % playlist.value.length];
     }
-    return playlist.value[index - 1] || "";
+    return playlist.value[index - 1];
   }
 
   function change(list: string[]) {
