@@ -106,9 +106,16 @@ export function usePlaylist() {
     }
   }
 
+  function add(id: string) {
+    if (!originPlaylist.value.includes(id)) {
+      originPlaylist.value.unshift(id);
+    }
+  }
+
   return {
     playlist,
 
+    add,
     next,
     prev,
     change,

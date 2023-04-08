@@ -4,7 +4,7 @@ import { getSongById } from "~/api";
 
 export function usePlayer() {
   const { volume: _volume, mute: _mute, belongingSonglistId, currentSongId } = storeToRefs(useSongStore());
-  const { next: playlistNext, prev: playlistPrev, insert: playlistInsert, change: playlistChange } = usePlaylist();
+  const { add: playlistAdd, next: playlistNext, prev: playlistPrev, insert: playlistInsert, change: playlistChange } = usePlaylist();
 
   const mute = computed({
     get() {
@@ -90,6 +90,7 @@ export function usePlayer() {
       belongingSonglistId.value = undefined;
       playlistChange(playlist);
     }
+    playlistAdd(id);
 
     loading.value = true;
     const song = getSongById(id);
