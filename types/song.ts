@@ -4,3 +4,9 @@ export const enum Playmode {
   "single" = "single",
   "sequence" = "sequence",
 }
+
+export interface Songlist {
+  name: string;
+  id: string;
+  songs: string[];
+}

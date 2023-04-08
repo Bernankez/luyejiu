@@ -19,7 +19,8 @@
     "@pinia/nuxt": "^0.4.7",
     "consola": "3.0.0-3",
     "howler": "^2.2.3",
-    "pinia": "^2.0.33"
+    "pinia": "^2.0.33",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@bernankez/eslint-config": "^0.4.2",
@@ -31,6 +32,7 @@
     "@nuxtjs/i18n-edge": "8.0.0-beta.10-28003311.2c39470",
     "@nuxtjs/stylelint-module": "^5.0.1",
     "@types/howler": "^2.2.7",
+    "@types/uuid": "^9.0.1",
     "@unocss/nuxt": "^0.50.6",
     "@vite-pwa/nuxt": "^0.0.7",
     "@vueuse/core": "^9.13.0",

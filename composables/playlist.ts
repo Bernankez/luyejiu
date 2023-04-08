@@ -4,6 +4,7 @@ const songStore = useSongStore();
 
 const historyList = useLocalStorage(`${SONG_PREFIX}-history-list`, <string[]>[]);
 
+/** 历史列表 */
 export function useHistoryList(max = 1000) {
   function add(id: string) {
     const index = historyList.value.indexOf(id);
@@ -45,6 +46,7 @@ export function useHistoryList(max = 1000) {
 const originPlaylist = useLocalStorage(`${SONG_PREFIX}-playlist`, <string[]>[]);
 const randomPlaylist = useLocalStorage(`${SONG_PREFIX}-playlist-random`, <string[]>[]);
 
+/** 播放列表 */
 export function usePlaylist() {
   const { currentSongId, playmode } = storeToRefs(songStore);
   const playlist = computed(() => {
