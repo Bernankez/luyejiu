@@ -1,3 +1,5 @@
-export const howlCache = useHowlCache(20);
-
-export const historyList = useHistoryList();
+function shuffle<T = any>(array: T[]) {
+  const copy = [...array];
+  copy.sort(() => Math.random() - 0.5);
+  return copy;
+}

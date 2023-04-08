@@ -1,6 +1,10 @@
-export function useHistoryList(max = 1000) {
-  const historyList = useLocalStorage(`${SONG_PREFIX}-history-list`, <string[]>[]);
+import { Playmode } from "~/types/song";
 
+const songStore = useSongStore();
+
+const historyList = useLocalStorage(`${SONG_PREFIX}-history-list`, <string[]>[]);
+
+export function useHistoryList(max = 1000) {
   function add(id: string) {
     const index = historyList.value.indexOf(id);
     if (index > -1) {
@@ -23,6 +27,12 @@ export function useHistoryList(max = 1000) {
     historyList.value = [];
   }
 
+  watchEffect(() => {
+    if (songStore.currentSongId) {
+      add(songStore.currentSongId);
+    }
+  });
+
   return {
     historyList,
 
@@ -32,49 +42,74 @@ export function useHistoryList(max = 1000) {
   };
 }
 
-export function usePlaylist(playlistId: string) {
-  const playlist = useLocalStorage(`${SONG_PREFIX}-${playlistId}`, <string[]>[]);
+const originPlaylist = useLocalStorage(`${SONG_PREFIX}-playlist`, <string[]>[]);
+const randomPlaylist = useLocalStorage(`${SONG_PREFIX}-playlist-random`, <string[]>[]);
 
-  function add(id: string) {
-    if (!playlist.value.includes(id)) {
-      playlist.value.unshift(id);
-      return true;
+export function usePlaylist() {
+  const { currentSongId, playmode } = storeToRefs(songStore);
+  const playlist = computed(() => {
+    if (playmode.value === Playmode.random) {
+      return randomPlaylist.value;
     }
-    consola.warn("The song is already in the playlist");
-    return false;
+    return originPlaylist.value;
+  });
+  watch([playmode, originPlaylist], ([mode, list]) => {
+    if (mode === Playmode.random) {
+      randomPlaylist.value = shuffle(list);
+    }
+  });
+
+  function next(manual = false) {
+    if (playlist.value.length === 0) {
+      return "";
+    }
+    if (!currentSongId.value || !playlist.value.includes(currentSongId.value)) {
+      return playlist.value[0];
+    }
+    if (playmode.value === Playmode.single) {
+      return currentSongId.value;
+    }
+    const index = playlist.value.indexOf(currentSongId.value);
+    if (playmode.value === Playmode.loop || manual) {
+      return playlist.value[(index + 1) % playlist.value.length];
+    }
+    return playlist.value[index + 1] || "";
   }
 
-  function remove(id: string) {
-    const index = playlist.value.indexOf(id);
+  function prev(manual = false) {
+    if (playlist.value.length === 0) {
+      return "";
+    }
+    if (!currentSongId.value || !playlist.value.includes(currentSongId.value)) {
+      return playlist.value[0];
+    }
+    if (playmode.value === Playmode.single) {
+      return currentSongId.value;
+    }
+    const index = playlist.value.indexOf(currentSongId.value);
+    if (playmode.value === Playmode.loop || manual) {
+      return playlist.value[(index - 1 + playlist.value.length) % playlist.value.length];
+    }
+    return playlist.value[index - 1] || "";
+  }
+
+  function change(list: string[]) {
+    originPlaylist.value = [...list];
+  }
+
+  function insert(after: string, ids: string[]) {
+    const index = originPlaylist.value.indexOf(after);
     if (index > -1) {
-      playlist.value.splice(index, 1);
+      originPlaylist.value.splice(index + 1, 0, ...ids);
     }
-  }
-
-  function insert(after: string, id: string) {
-    const index = playlist.value.indexOf(after);
-    const idIndex = playlist.value.indexOf(id);
-    if (idIndex > -1) {
-      playlist.value.splice(idIndex, 1);
-    }
-    if (index > -1) {
-      playlist.value.splice(index + 1, 0, id);
-    } else {
-      playlist.value.unshift(id);
-    }
-  }
-
-  function clear() {
-    playlist.value = [];
   }
 
   return {
     playlist,
-    playlistId,
 
-    add,
-    remove,
+    next,
+    prev,
+    change,
     insert,
-    clear,
   };
 }
