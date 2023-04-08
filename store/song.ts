@@ -6,6 +6,9 @@ export const useSongStore = defineStore("song", () => {
   const belongingSonglistId = useLocalStorage<string | undefined>(`${SONG_PREFIX}-belonging-songlist-id`, undefined);
   const volume = useLocalStorage(`${SONG_PREFIX}-volume`, 1);
   const mute = useLocalStorage(`${SONG_PREFIX}-mute`, false);
+  watchEffect(() => {
+    consola.info(`songStore:${currentSongId.value}`);
+  });
 
   return {
     playmode,

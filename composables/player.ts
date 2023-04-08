@@ -99,21 +99,25 @@ export function usePlayer() {
       loading.value = false;
       return undefined;
     }
+    // pause before changing
+    pause();
     if (!howlCache.get(id)) {
+      consola.info(`usePlayer:${currentSongId.value}: ready to create new Howl`);
       const newHowl = new Howl({
         // song.url
         src: "http://rslbkj11r.hn-bkt.clouddn.com/songs/%E9%B9%BF%E9%87%8E%E7%81%B8%20-%20%E5%A4%A7%E8%B2%94%E8%B2%85%C2%B7%E5%B0%8F%E5%B0%91%E5%B9%B4%E7%89%88.mp3",
         html5: true,
         onload() {
+          consola.info(`usePlayer:${currentSongId.value}: new Howl loaded`);
           duration.value = newHowl.duration();
           loading.value = false;
         },
         onloaderror(_, e) {
-          consola.error("usePlayer:loaderror", e);
+          consola.error(`usePlayer:loaderror:${currentSongId}:`, e);
           loading.value = false;
         },
         onplayerror(_, e) {
-          consola.error("usePlayer:playerror", e);
+          consola.error(`usePlayer:loaderror:${currentSongId}:`, e);
           loading.value = false;
         },
         onseek() {
@@ -182,5 +186,6 @@ export function usePlayer() {
     loading,
     duration,
     currentSong,
+    currentSongId,
   };
 }

@@ -1,10 +1,10 @@
 import type { Howl } from "howler";
 import LRU from "lru-cache";
 
-export const howlCache = useHowlCache(20);
-
+export const howlCache = useHowlCache(5);
 export function useHowlCache<T extends Howl = Howl>(max = 10) {
-  function beforeDelete(howl: T) {
+  function beforeDelete(howl: T, key: string) {
+    consola.info(`useHowlCache:${key}: ready to unload howl instance`);
     howl.unload();
   }
 
@@ -26,9 +26,11 @@ export function useHowlCache<T extends Howl = Howl>(max = 10) {
     return cache.get(id);
   }
 
-  onUnmounted(() => {
-    cache.clear();
-  });
+  if (getCurrentInstance()) {
+    onUnmounted(() => {
+      cache.clear();
+    });
+  }
 
   return {
     add,
