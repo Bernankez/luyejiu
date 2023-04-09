@@ -12,10 +12,10 @@
       {{ duration }}
     </div>
     <div>
-      {{ played }}
+      {{ timePlayed }}
     </div>
     <input v-model="seekTime" />
-    <button @click="() => seek(Number(seekTime))">
+    <button @click="() => timePlayed = (Number(seekTime))">
       seek
     </button>
     <div>volume</div>
@@ -43,10 +43,7 @@
 <script setup lang="ts">
 import { getAllSongs } from "~/api";
 
-const { playing, change, currentSongId, prev, next, duration, played, seek, volume, mute } = usePlayer();
-if (currentSongId.value) {
-  change(currentSongId.value, { immediate: false });
-}
+const { playing, change, prev, next, duration, timePlayed, volume, mute } = usePlayer();
 
 const { playlist } = usePlaylist();
 

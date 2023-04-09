@@ -1,10 +1,23 @@
-import { Howl, Howler } from "howler";
-import type { Song } from "~/types/song";
-import { getSongById } from "~/api";
-
 export function usePlayer() {
   const { volume: _volume, mute: _mute, belongingSonglistId, currentSongId } = storeToRefs(useSongStore());
   const { add: playlistAdd, next: playlistNext, prev: playlistPrev, insert: playlistInsert, change: playlistChange } = usePlaylist();
+  /**
+   * 这里使用changableId的原因是，当通过change方法传入的id未找到歌曲信息时，不更新currentSongId
+   * currentSongId会影响历史记录，所以需要一个临时变量
+   */
+  const changableId = ref(currentSongId);
+  /**
+   * 这里返回的id即为有效id，即有对应歌曲信息的id
+   * 可以同步给currentSongId
+   */
+  const { loading, playing: _playing, duration, timePlayed: _timePlayed, song, howl, onEnd, id } = useSong(changableId);
+  watchEffect(() => {
+    if (id.value) {
+      currentSongId.value = id.value;
+    }
+  });
+
+  onEnd.value = next;
 
   const mute = computed({
     get() {
@@ -32,9 +45,6 @@ export function usePlayer() {
     },
   });
 
-  const loading = ref(false);
-
-  const _playing = ref(false);
   const playing = computed({
     get() {
       return _playing.value;
@@ -47,41 +57,38 @@ export function usePlayer() {
       }
     },
   });
-  /** seconds */
-  const duration = ref(0);
-  const _played = ref(0);
-  const played = computed({
+
+  const timePlayed = computed({
     get() {
-      return _played.value;
+      return _timePlayed.value;
     },
     set(value) {
-      if (currentSong.value?.player) {
-        currentSong.value.player.seek(value);
-        _played.value = value;
-      }
+      howl.value?.seek(value);
+      _timePlayed.value = value;
     },
   });
 
-  const currentSong = ref<Song & { player: Howl }>();
-
-  /** 播放 */
   function play() {
-    if (currentSong.value?.player) {
-      currentSong.value.player.play();
-      _playing.value = true;
-    }
+    howl.value?.play();
   }
 
-  /** 暂停 */
   function pause() {
-    if (currentSong.value?.player) {
-      currentSong.value.player.pause();
-      _playing.value = false;
-    }
+    howl.value?.pause();
   }
 
-  /** 切歌 */
-  async function change(id: string, options?: { immediate?: boolean; songlistId?: string; playlist?: string[] }) {
+  function next(manual = true) {
+    const id = playlistNext(manual);
+    id && change(id);
+    return id;
+  }
+
+  function prev(manual = true) {
+    const id = playlistPrev(manual);
+    id && change(id);
+    return id;
+  }
+
+  function change(id: string, options?: { immediate?: boolean;songlistId?: string;playlist?: string[] }) {
     const { immediate = true, songlistId, playlist } = options || {};
     if (songlistId) {
       const { songlist } = useSonglist(songlistId);
@@ -95,120 +102,28 @@ export function usePlayer() {
     }
     playlistAdd(id);
 
-    loading.value = true;
-    const song = getSongById(id);
-    if (!song) {
-      loading.value = false;
-      return undefined;
-    }
-    // unload before changing
-    unload();
-    currentSongId.value = id;
-    if (!howlCache.get(id)) {
-      consola.info(`usePlayer:${currentSongId.value}: ready to create new Howl`);
-      const newHowl = new Howl({
-        // song.url
-        src: "http://rslbkj11r.hn-bkt.clouddn.com/songs/%E9%B9%BF%E9%87%8E%E7%81%B8%20-%20%E5%A4%A7%E8%B2%94%E8%B2%85%C2%B7%E5%B0%8F%E5%B0%91%E5%B9%B4%E7%89%88.mp3",
-        html5: true,
-        onload() {
-          consola.info(`usePlayer:${currentSongId.value}: new Howl loaded`);
-          duration.value = newHowl.duration();
-          loading.value = false;
-        },
-        onloaderror(_, e) {
-          consola.error(`usePlayer:loaderror:${currentSongId}:`, e);
-          loading.value = false;
-        },
-        onplayerror(_, e) {
-          consola.error(`usePlayer:loaderror:${currentSongId}:`, e);
-          loading.value = false;
-        },
-        onseek() {
-          _getPlayed();
-        },
-        onplay() {
-          _getPlayed();
-        },
-        onend() {
-          next(false);
-        },
-      });
-      howlCache.add(id, newHowl);
-    }
-    currentSong.value = {
-      ...song,
-      player: howlCache.get(id)!,
-    };
+    changableId.value = id;
     if (immediate) {
-      play();
-    }
-
-    return currentSong.value;
-  }
-
-  function _getPlayed() {
-    requestAnimationFrame(() => {
-      if (playing.value && currentSong.value) {
-        _played.value = currentSong.value?.player.seek();
-        _getPlayed();
-      }
-    });
-  }
-
-  function next(manual = true) {
-    const id = playlistNext(manual);
-    if (id) {
-      change(id);
-    }
-    return id;
-  }
-
-  function prev(manual = true) {
-    const id = playlistPrev(manual);
-    if (id) {
-      change(id);
-    }
-    return id;
-  }
-
-  function seek(time: number) {
-    if (currentSong.value?.player) {
-      currentSong.value.player.seek(time);
-      played.value = time;
-    }
-  }
-
-  function insert(id: string) {
-    playlistInsert(currentSongId.value, [id]);
-  }
-
-  function unload() {
-    if (currentSong.value?.player) {
-      currentSong.value.player.unload();
-      consola.info(`usePlayer:${currentSongId.value}: before unloaded`);
-      _playing.value = false;
+      watchOnce(howl, (newHowl) => {
+        newHowl?.play();
+      });
     }
   }
 
   return {
-    /** duration has been played */
-    played,
-    /** is playing */
-    playing,
-    volume,
     mute,
-    /** change current song (with playlist) */
-    change,
-    /** insert song after current song in playlist */
-    insert,
-    next,
-    prev,
-    /** seek to the time you want to start with */
-    seek,
+    volume,
+    playing,
+    timePlayed,
 
     loading,
     duration,
-    currentSong,
-    currentSongId,
+    id,
+    song,
+    howl,
+
+    next,
+    prev,
+    change,
   };
 }
