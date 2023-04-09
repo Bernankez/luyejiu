@@ -44,6 +44,7 @@ export default defineNuxtConfig({
     autoImports: [
       "defineStore",
       "storeToRefs",
+      "skipHydrate",
     ],
   },
   i18n: {

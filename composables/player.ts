@@ -87,7 +87,7 @@ export function usePlayer() {
         playlistChange(songlist.value.songs);
       }
     } else if (playlist) {
-      belongingSonglistId.value = undefined;
+      belongingSonglistId.value = null;
       playlistChange(playlist);
     }
     playlistAdd(id);
