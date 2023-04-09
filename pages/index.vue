@@ -1,4 +1,7 @@
 <template>
+  <NuxtLink to="/song">
+    Song
+  </NuxtLink>
   <NuxtLink v-for="loc in avaliableLocales" :key="loc.code" :to="switchLocalePath(loc.code)">
     {{ loc.name }}
   </NuxtLink>
