@@ -40,7 +40,7 @@ export function useSonglists() {
 }
 
 export function useSonglist(id: string) {
-  const { songlists, get } = useSonglists();
+  const { get } = useSonglists();
   const songlist = computed(() => get(id));
 
   function add(id: string) {
