@@ -14,6 +14,10 @@
     <div>
       {{ played }}
     </div>
+    <input v-model="seekTime" />
+    <button @click="() => seek(Number(seekTime))">
+      seek
+    </button>
 
     <div class="flex flex-col flex-gap-2">
       <div v-for="song in songs" :key="song.id" class="bg-green cursor-pointer" @click="() => change(song.id)">
@@ -35,7 +39,7 @@
 <script setup lang="ts">
 import { getAllSongs } from "~/api";
 
-const { playing, change, currentSongId, prev, next, duration, played } = usePlayer();
+const { playing, change, currentSongId, prev, next, duration, played, seek } = usePlayer();
 if (currentSongId.value) {
   change(currentSongId.value, { immediate: false });
 }
@@ -43,4 +47,6 @@ if (currentSongId.value) {
 const { playlist } = usePlaylist();
 
 const songs = getAllSongs();
+
+const seekTime = ref(0);
 </script>

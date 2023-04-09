@@ -121,10 +121,10 @@ export function usePlayer() {
           loading.value = false;
         },
         onseek() {
-          getPlayed();
+          _getPlayed();
         },
         onplay() {
-          getPlayed();
+          _getPlayed();
         },
         onend() {
           next(false);
@@ -143,11 +143,11 @@ export function usePlayer() {
     return currentSong.value;
   }
 
-  function getPlayed() {
+  function _getPlayed() {
     requestAnimationFrame(() => {
       if (playing.value && currentSong.value) {
         _played.value = currentSong.value?.player.seek();
-        getPlayed();
+        _getPlayed();
       }
     });
   }
@@ -166,6 +166,13 @@ export function usePlayer() {
       change(id);
     }
     return id;
+  }
+
+  function seek(time: number) {
+    if (currentSong.value?.player) {
+      currentSong.value.player.seek(time);
+      played.value = time;
+    }
   }
 
   function insert(id: string) {
@@ -193,6 +200,8 @@ export function usePlayer() {
     insert,
     next,
     prev,
+    /** seek to the time you want to start with */
+    seek,
 
     loading,
     duration,
