@@ -121,14 +121,9 @@ export function usePlayer() {
           loading.value = false;
         },
         onseek() {
-          function getPlayed() {
-            requestAnimationFrame(() => {
-              if (playing.value) {
-                _played.value = newHowl.seek();
-                getPlayed();
-              }
-            });
-          }
+          getPlayed();
+        },
+        onplay() {
           getPlayed();
         },
         onend() {
@@ -146,6 +141,15 @@ export function usePlayer() {
     }
 
     return currentSong.value;
+  }
+
+  function getPlayed() {
+    requestAnimationFrame(() => {
+      if (playing.value && currentSong.value) {
+        _played.value = currentSong.value?.player.seek();
+        getPlayed();
+      }
+    });
   }
 
   function next(manual = true) {
