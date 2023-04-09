@@ -19,10 +19,15 @@ export default defineNuxtConfig({
     "nuxt-headlessui",
     "@vite-pwa/nuxt",
   ],
+  components: {
+    dirs: [
+      "./components/player",
+      "./components/ui",
+    ],
+  },
   imports: {
     dirs: [
-      "./components/ui/**",
-      "./store/**",
+      "./store",
     ],
   },
   hooks: {
