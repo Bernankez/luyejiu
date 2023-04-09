@@ -8,6 +8,9 @@ export function usePlayer() {
 
   const mute = computed({
     get() {
+      if (volume.value === 0) {
+        return true;
+      }
       return _mute.value;
     },
     set(value) {
@@ -22,7 +25,7 @@ export function usePlayer() {
     },
     set(value) {
       if (value !== 0) {
-        mute.value = true;
+        mute.value = false;
       }
       _volume.value = value;
       Howler.volume(value);

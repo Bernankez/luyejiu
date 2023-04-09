@@ -18,6 +18,10 @@
     <button @click="() => seek(Number(seekTime))">
       seek
     </button>
+    <div>volume</div>
+    <input :modelValue="volume" type="range" :min="0" :max="1" :step="0.1" @input="(e) => volume = Number((e.target as any).value)" />
+    <div>mute</div>
+    <input v-model="mute" type="checkbox" :truevalue="true" :falsevalue="false" />
 
     <div class="flex flex-col flex-gap-2">
       <div v-for="song in songs" :key="song.id" class="bg-green cursor-pointer" @click="() => change(song.id)">
@@ -39,7 +43,7 @@
 <script setup lang="ts">
 import { getAllSongs } from "~/api";
 
-const { playing, change, currentSongId, prev, next, duration, played, seek } = usePlayer();
+const { playing, change, currentSongId, prev, next, duration, played, seek, volume, mute } = usePlayer();
 if (currentSongId.value) {
   change(currentSongId.value, { immediate: false });
 }
