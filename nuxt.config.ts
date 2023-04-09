@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from "nuxt/config";
+import { orange } from "./styles/color";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -87,6 +88,11 @@ export default defineNuxtConfig({
   unocss: {
     uno: true,
     icons: true,
+    theme: {
+      colors: {
+        primary: orange,
+      },
+    },
   },
   pwa: {
     // NOTE
