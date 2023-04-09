@@ -15,12 +15,14 @@
       </div>
     </div>
 
-    <div class="flex flex-col flex-gap-2">
-      playlist
-      <div v-for="song in playlist" :key="song" class="bg-yellow">
-        {{ song }}
+    <ClientOnly>
+      <div class="flex flex-col flex-gap-2">
+        playlist
+        <div v-for="song in playlist" :key="song" class="bg-yellow">
+          {{ song }}
+        </div>
       </div>
-    </div>
+    </ClientOnly>
   </div>
 </template>
 
