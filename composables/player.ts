@@ -1,6 +1,13 @@
+import { Howler } from "howler";
+
 export function usePlayer() {
   const { volume: _volume, mute: _mute, belongingSonglistId, currentSongId } = storeToRefs(useSongStore());
   const { add: playlistAdd, next: playlistNext, prev: playlistPrev, insert: playlistInsert, change: playlistChange } = usePlaylist();
+
+  /** init */
+  Howler.volume(_volume.value);
+  Howler.mute(_mute.value);
+
   /**
    * 这里使用changableId的原因是，当通过change方法传入的id未找到歌曲信息时，不更新currentSongId
    * currentSongId会影响历史记录，所以需要一个临时变量
@@ -17,7 +24,9 @@ export function usePlayer() {
     }
   });
 
-  onEnd.value = next;
+  onEnd.value = () => {
+    next(false);
+  };
 
   const mute = computed({
     get() {
@@ -69,7 +78,10 @@ export function usePlayer() {
   });
 
   function play() {
-    howl.value?.play();
+    if (!playing.value) {
+      // Prevent multiple audio tracks from playing at once.
+      howl.value?.play();
+    }
   }
 
   function pause() {
