@@ -23,7 +23,6 @@ export default defineNuxtConfig({
   components: {
     dirs: [
       "./components/player",
-      "./components/ui",
     ],
   },
   imports: {
