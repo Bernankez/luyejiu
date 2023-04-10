@@ -14,13 +14,13 @@ function _usePlayer() {
    */
   const changableId = ref(currentSongId);
   /**
-   * 这里返回的id即为有效id，即有对应歌曲信息的id
+   * 这里返回的songId即为有效id，即有对应歌曲信息的id
    * 可以同步给currentSongId
    */
-  const { loading, playing: _playing, duration, timePlayed: _timePlayed, song, howl, onEnd, id } = useSong(changableId);
+  const { loading, playing: _playing, duration, timePlayed: _timePlayed, song, howl, onEnd, id: songId } = useSong(changableId);
   watchEffect(() => {
-    if (id.value) {
-      currentSongId.value = id.value;
+    if (songId.value) {
+      currentSongId.value = songId.value;
     }
   });
 
@@ -88,41 +88,20 @@ function _usePlayer() {
     howl.value?.pause();
   }
 
-  function stop() {
-    howl.value?.stop();
-  }
-
   function next(manual = true) {
-    const _id = playlistNext(manual);
-    if (_id) {
-      // has next song
-      if (_id === id.value) {
-        // replay current song
-        timePlayed.value = 0;
-        play();
-      } else {
-        change(_id);
-      }
-    }
-    return _id;
+    const id = playlistNext(manual);
+    id && change(id);
+    return id;
   }
 
   function prev(manual = true) {
-    const _id = playlistPrev(manual);
-    if (_id) {
-      // has prev song
-      if (_id === id.value) {
-        // replay current song
-        timePlayed.value = 0;
-        play();
-      } else {
-        change(_id);
-      }
-    }
+    const id = playlistPrev(manual);
+    id && change(id);
     return id;
   }
 
   function change(id: string, options?: { immediate?: boolean; songlistId?: string; playlist?: string[] }) {
+    if (!id) { return; }
     const { immediate = true, songlistId, playlist } = options || {};
     if (songlistId) {
       const { songlist } = useSonglist(songlistId);
@@ -136,6 +115,13 @@ function _usePlayer() {
     }
     playlistAdd(id);
 
+    if (id === songId.value) {
+      // The same kind of song as now.
+      // replay
+      timePlayed.value = 0;
+      play();
+      return;
+    }
     changableId.value = id;
     if (immediate) {
       watchOnce(howl, (newHowl) => {
@@ -152,7 +138,7 @@ function _usePlayer() {
 
     loading,
     duration,
-    id,
+    id: songId,
     song,
     howl,
 
