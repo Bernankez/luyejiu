@@ -21,6 +21,11 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
     resolveUnref(_id) && consola.info(`useSong:${resolveUnref(_id)}: unloaded`);
   }
 
+  function stop() {
+    howl.value?.stop();
+    resolveUnref(_id) && consola.info(`useSong:${resolveUnref(_id)}: stop`);
+  }
+
   watch(() => resolveUnref(id), async (id) => {
     if (id) {
       loading.value = true;
@@ -31,7 +36,7 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
         howl.value = undefined;
         return;
       }
-      unload();
+      stop();
       if (!howlCache.get(id)) {
         const newHowl = new Howl({
           // song.url
@@ -93,8 +98,10 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
     playing,
     duration,
     timePlayed,
+
     song,
     howl,
+
     onEnd,
   };
 }
