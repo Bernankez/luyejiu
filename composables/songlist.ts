@@ -1,10 +1,11 @@
+import type { MaybeComputedRef } from "@vueuse/core";
 import { v4 as uuid } from "uuid";
 import type { Songlist } from "~/types/song";
 
-const songlists = useLocalStorage(`${SONG_PREFIX}-songlist`, <Songlist[]>[]);
-
 /** 歌单 */
-export function useSonglists() {
+function _useSonglists() {
+  const songlists = useLocalStorage(`${SONG_PREFIX}-songlist`, <Songlist[]>[]);
+
   function add(songlist: Omit<Songlist, "id">, id?: string) {
     const _id = id || uuid();
     songlists.value.push({ ...songlist, id: _id });
@@ -38,10 +39,12 @@ export function useSonglists() {
     get,
   };
 }
+/** 单例全局歌单 */
+export const useSonglists = createSharedComposable(_useSonglists);
 
-export function useSonglist(id: string) {
+export function useSonglist(id: MaybeComputedRef<string>) {
   const { get } = useSonglists();
-  const songlist = computed(() => get(id));
+  const songlist = computed(() => get(resolveUnref(id)));
 
   function add(id: string) {
     if (songlist.value?.songs.includes(id)) {
@@ -67,7 +70,7 @@ export function useSonglist(id: string) {
   };
 }
 
-export function useFavoriteList() {
+function _useFavoriteList() {
   const { get, add: addSonglist } = useSonglists();
   if (!get(FAVORITE_SUFFIX)) {
     addSonglist({ name: "我喜欢", songs: [] }, FAVORITE_SUFFIX);
@@ -81,3 +84,5 @@ export function useFavoriteList() {
     remove,
   };
 }
+/** 单例我喜欢列表 */
+export const useFavoriteList = createSharedComposable(_useFavoriteList);

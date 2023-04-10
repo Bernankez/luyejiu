@@ -1,6 +1,6 @@
 import { Howler } from "howler";
 
-export function usePlayer() {
+function _usePlayer() {
   const { volume: _volume, mute: _mute, belongingSonglistId, currentSongId } = storeToRefs(useSongStore());
   const { add: playlistAdd, next: playlistNext, prev: playlistPrev, insert: playlistInsert, change: playlistChange } = usePlaylist();
 
@@ -88,19 +88,41 @@ export function usePlayer() {
     howl.value?.pause();
   }
 
+  function stop() {
+    howl.value?.stop();
+  }
+
   function next(manual = true) {
-    const id = playlistNext(manual);
-    id && change(id);
-    return id;
+    const _id = playlistNext(manual);
+    if (_id) {
+      // has next song
+      if (_id === id.value) {
+        // replay current song
+        timePlayed.value = 0;
+        play();
+      } else {
+        change(_id);
+      }
+    }
+    return _id;
   }
 
   function prev(manual = true) {
-    const id = playlistPrev(manual);
-    id && change(id);
+    const _id = playlistPrev(manual);
+    if (_id) {
+      // has prev song
+      if (_id === id.value) {
+        // replay current song
+        timePlayed.value = 0;
+        play();
+      } else {
+        change(_id);
+      }
+    }
     return id;
   }
 
-  function change(id: string, options?: { immediate?: boolean;songlistId?: string;playlist?: string[] }) {
+  function change(id: string, options?: { immediate?: boolean; songlistId?: string; playlist?: string[] }) {
     const { immediate = true, songlistId, playlist } = options || {};
     if (songlistId) {
       const { songlist } = useSonglist(songlistId);
@@ -139,3 +161,5 @@ export function usePlayer() {
     change,
   };
 }
+/** 全局单例播放器 */
+export const usePlayer = createSharedComposable(_usePlayer);

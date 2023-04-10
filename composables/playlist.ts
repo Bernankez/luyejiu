@@ -2,10 +2,11 @@ import { Playmode } from "~/types/song";
 
 const songStore = useSongStore();
 
-const historyList = useLocalStorage(`${SONG_PREFIX}-history-list`, <string[]>[]);
-
 /** 历史列表 */
-export function useHistoryList(max = 1000) {
+function _useHistoryList() {
+  const max = 1000;
+  const historyList = useLocalStorage(`${SONG_PREFIX}-history-list`, <string[]>[]);
+
   function add(id: string) {
     const index = historyList.value.indexOf(id);
     if (index > -1) {
@@ -42,12 +43,14 @@ export function useHistoryList(max = 1000) {
     clear,
   };
 }
-
-const originPlaylist = useLocalStorage(`${SONG_PREFIX}-playlist`, <string[]>[]);
-const randomPlaylist = useLocalStorage(`${SONG_PREFIX}-playlist-random`, <string[]>[]);
+/** 单例历史列表 */
+export const useHistoryList = createSharedComposable(_useHistoryList);
 
 /** 播放列表 */
-export function usePlaylist() {
+function _usePlaylist() {
+  const originPlaylist = useLocalStorage(`${SONG_PREFIX}-playlist`, <string[]>[]);
+  const randomPlaylist = useLocalStorage(`${SONG_PREFIX}-playlist-random`, <string[]>[]);
+
   const { currentSongId, playmode } = storeToRefs(songStore);
   const playlist = computed(() => {
     if (playmode.value === Playmode.random) {
@@ -122,3 +125,5 @@ export function usePlaylist() {
     insert,
   };
 }
+/** 单例播放列表 */
+export const usePlaylist = createSharedComposable(_usePlaylist);

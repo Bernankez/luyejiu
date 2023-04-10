@@ -62,6 +62,7 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
           },
           onstop() {
             playing.value = false;
+            timePlayed.value = 0;
           },
           onend() {
             playing.value = false;
