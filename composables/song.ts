@@ -75,6 +75,8 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
           },
         });
         howlCache.add(id, newHowl);
+      } else {
+        loading.value = false;
       }
       song.value = { ...newSong };
       howl.value = howlCache.get(id)!;
