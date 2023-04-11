@@ -38,6 +38,12 @@
           {{ song }}
         </div>
       </div>
+      <div class="flex flex-col flex-gap-2">
+        favoriteList
+        <div v-for="song in favoriteList?.songs" :key="song" class="bg-yellow">
+          {{ song }}
+        </div>
+      </div>
     </ClientOnly>
   </div>
 </template>
@@ -48,6 +54,8 @@ import { getAllSongs } from "~/api";
 const { playing, change, prev, next, duration, timePlayed, volume, mute } = usePlayer();
 
 const { playlist } = usePlaylist();
+
+const { favoriteList } = useFavoriteList();
 
 const songs = getAllSongs();
 
