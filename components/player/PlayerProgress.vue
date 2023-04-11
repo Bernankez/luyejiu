@@ -13,16 +13,38 @@
 import type { Fn } from "@vueuse/core";
 
 const props = withDefaults(defineProps<{
+  duration?: number;
+  timePlayed?: number;
   disabled?: boolean;
 }>(), {
+  duration: 0,
+  timePlayed: 0,
   disabled: false,
 });
 
-// TODO v-model max min step
-// 0 - 1
-const progress = ref(0);
+const emit = defineEmits<{
+  (event: "update:timePlayed", timePlayed: number): void;
+}>();
 
-const { disabled } = toRefs(props);
+const { disabled, timePlayed, duration } = toRefs(props);
+
+const dragging = ref(false);
+
+const actualProgress = computed({
+  get() {
+    return !duration.value ? 0 : timePlayed.value / duration.value;
+  },
+  set(progress) {
+    emit("update:timePlayed", duration.value * progress);
+  },
+});
+
+const progress = ref(0);
+watchEffect(() => {
+  if (!dragging.value) {
+    progress.value = actualProgress.value;
+  }
+});
 
 const railRef = ref<HTMLDivElement>();
 function getPointValue(e: MouseEvent | TouchEvent) {
@@ -64,6 +86,9 @@ function onMouseMove(e: MouseEvent | TouchEvent) {
 
 function onMouseUp() {
   stopDragging();
+  // Synchronize progress only when dragging ends
+  // Prevent dragging during playback from conflicting with the timePlayed
+  actualProgress.value = progress.value;
 }
 
 const listenerCleanups = ref<Fn[]>([]);
@@ -72,7 +97,6 @@ function stopListeners() {
   listenerCleanups.value = [];
 }
 
-const dragging = ref(false);
 function startDragging() {
   if (!dragging.value) {
     dragging.value = true;
