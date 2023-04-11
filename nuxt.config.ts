@@ -20,11 +20,12 @@ export default defineNuxtConfig({
     "nuxt-headlessui",
     "@vite-pwa/nuxt",
   ],
-  components: {
-    dirs: [
-      "./components/player",
-    ],
-  },
+  components: [
+    {
+      path: "~/components",
+      pathPrefix: false,
+    },
+  ],
   imports: {
     dirs: [
       "./store",
