@@ -57,7 +57,7 @@ export function useSonglist(id: MaybeComputedRef<string>) {
 
   function remove(id: string) {
     const index = songlist.value?.songs.indexOf(id);
-    if (index && index > -1) {
+    if (isDefined(index) && index > -1) {
       songlist.value?.songs.splice(index, 1);
     }
   }
