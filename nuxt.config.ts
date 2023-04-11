@@ -104,6 +104,7 @@ export default defineNuxtConfig({
           #__nuxt {
             min-height: 100%;
             display: grid;
+            overflow-x: hidden;
           }
         `,
       },
