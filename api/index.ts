@@ -3,14 +3,14 @@ import type { Song } from "~/types/song";
 export function getAllSongs(): Song[] {
   return [
     {
-      name: "大貔貅",
+      name: "大貔貅大貔貅大貔貅大貔貅大貔貅大貔貅大貔貅大貔貅大貔貅",
       id: "dapixiu",
       originSinger: "unknown",
       singer: "鹿野灸",
       duration: 300,
     },
     {
-      name: "小摩托",
+      name: "小摩托小摩托小摩托",
       id: "xiaomotuo",
       originSinger: "unknown",
       singer: "鹿野灸",
