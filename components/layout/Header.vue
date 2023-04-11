@@ -1,5 +1,5 @@
 <template>
-  <PlayerBar />
+  <header>Header</header>
 </template>
 
 <script setup lang="ts">

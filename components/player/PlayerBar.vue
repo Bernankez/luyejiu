@@ -1,5 +1,5 @@
 <template>
-  <PlayerBar />
+  <div>bar</div>
 </template>
 
 <script setup lang="ts">
