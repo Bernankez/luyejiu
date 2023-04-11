@@ -2,7 +2,7 @@
   <div>
     Player Test
     <div>Progress</div>
-    <Progress />
+    <PlayerProgress />
     <div class="i-uil:play cursor-pointer" @click="() => playing = true"></div>
     <div class="i-uil:pause cursor-pointer" @click="() => playing = false"></div>
     <div class="i-uil:angle-left-b cursor-pointer" @click="() => prev()"></div>
