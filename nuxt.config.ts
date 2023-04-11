@@ -93,6 +93,21 @@ export default defineNuxtConfig({
         primary: orange,
       },
     },
+    preflight: true,
+    preflights: [
+      {
+        getCSS: () => `
+          html, body {
+            height: 100%;
+          }
+
+          #__nuxt {
+            min-height: 100%;
+            display: grid;
+          }
+        `,
+      },
+    ],
   },
   pwa: {
     // NOTE
