@@ -1,11 +1,10 @@
 import { Playmode } from "~/types/song";
 
-const songStore = useSongStore();
-
 /** 历史列表 */
 function _useHistoryList() {
   const max = 1000;
   const historyList = useLocalStorage(`${SONG_PREFIX}-history-list`, <string[]>[]);
+  const songStore = useSongStore();
 
   function add(id: string) {
     const index = historyList.value.indexOf(id);
@@ -50,6 +49,7 @@ export const useHistoryList = createSharedComposable(_useHistoryList);
 function _usePlaylist() {
   const originPlaylist = useLocalStorage(`${SONG_PREFIX}-playlist`, <string[]>[]);
   const randomPlaylist = useLocalStorage(`${SONG_PREFIX}-playlist-random`, <string[]>[]);
+  const songStore = useSongStore();
 
   const { currentSongId, playmode } = storeToRefs(songStore);
   const playlist = computed(() => {
