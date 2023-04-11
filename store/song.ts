@@ -3,7 +3,7 @@ import { Playmode } from "~/types/song";
 export const useSongStore = defineStore("song", () => {
   const playmode = useLocalStorage<Playmode>(`${SONG_PREFIX}-playmode`, Playmode.sequence);
   const currentSongId = useLocalStorage(`${SONG_PREFIX}-current-song-id`, "");
-  const belongingSonglistId = useLocalStorage<string | null>(`${SONG_PREFIX}-belonging-songlist-id`, null);
+  const activeSonglistId = useLocalStorage<string | null>(`${SONGLIST_PREFIX}-belonging-songlist-id`, null);
   const volume = useLocalStorage(`${SONG_PREFIX}-volume`, 1);
   const mute = useLocalStorage(`${SONG_PREFIX}-mute`, false);
   watchEffect(() => {
@@ -15,7 +15,7 @@ export const useSongStore = defineStore("song", () => {
     // https://pinia.vuejs.org/zh/cookbook/composables.html
     playmode: skipHydrate(playmode),
     currentSongId: skipHydrate(currentSongId),
-    belongingSonglistId: skipHydrate(belongingSonglistId),
+    activeSonglistId: skipHydrate(activeSonglistId),
     volume: skipHydrate(volume),
     mute: skipHydrate(mute),
   };

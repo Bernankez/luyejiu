@@ -1,7 +1,7 @@
 import { Howler } from "howler";
 
 function _usePlayer() {
-  const { volume: _volume, mute: _mute, belongingSonglistId, currentSongId } = storeToRefs(useSongStore());
+  const { volume: _volume, mute: _mute, activeSonglistId, currentSongId } = storeToRefs(useSongStore());
   const { add: playlistAdd, next: playlistNext, prev: playlistPrev, insert: playlistInsert, change: playlistChange } = usePlaylist();
 
   /** init */
@@ -106,11 +106,11 @@ function _usePlayer() {
     if (songlistId) {
       const { songlist } = useSonglist(songlistId);
       if (songlist.value?.songs) {
-        belongingSonglistId.value = songlistId;
+        activeSonglistId.value = songlistId;
         playlistChange(songlist.value.songs);
       }
     } else if (playlist) {
-      belongingSonglistId.value = null;
+      activeSonglistId.value = null;
       playlistChange(playlist);
     }
     playlistAdd(id);
