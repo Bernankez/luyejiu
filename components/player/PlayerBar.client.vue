@@ -13,9 +13,12 @@
           <div class="text-3.5 cursor-default truncate">
             {{ song?.name }}
           </div>
-          <div class="flex justify-between items-center">
-            <div class="shrink-0 text-3 text-primary-400">
+          <div class="flex items-center flex-gap-2 text-3 text-primary-400">
+            <div class="shrink-0">
               {{ song?.singer }}
+            </div>
+            <div>
+              {{ dayjs.duration(timePlayed, 'seconds').format("mm:ss") }}/{{ dayjs.duration(duration, 'seconds').format("mm:ss") }}
             </div>
           </div>
         </div>
@@ -56,7 +59,11 @@
 
 <script setup lang="ts">
 import { breakpointsTailwind } from "@vueuse/core";
+import dayjs from "dayjs";
+import dayjsDuration from "dayjs/plugin/duration";
 import { usePlayerBarSwipe } from "./PlayerBar";
+
+dayjs.extend(dayjsDuration);
 
 const { duration, timePlayed, loading, playing, song, id, prev, next } = usePlayer();
 
