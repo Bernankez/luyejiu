@@ -25,7 +25,8 @@
         <div class="flex items-center flex-gap-2">
           <div class="lg:absolute lg:left-50% lg:-translate-x-50% flex items-center flex-gap-2 lg:flex-gap-5">
             <!-- like button -->
-            <div v-if="sm" class="i-solar:heart-outline text-6 cursor-pointer active:scale-90 transition"></div>
+            <div v-if="sm && !like" class="i-solar:heart-outline text-6 cursor-pointer active:scale-90 transition" @click="() => like = true"></div>
+            <div v-if="sm && like" class="i-solar:heart-bold text-6 cursor-pointer active:scale-90 transition" @click="() => like = false"></div>
             <!-- prev button -->
             <div v-if="sm" class="i-solar:skip-previous-bold-duotone text-4.5 cursor-pointer" @click="() => prev()"></div>
             <!-- play button -->
@@ -67,12 +68,27 @@ dayjs.extend(dayjsDuration);
 
 const { duration, timePlayed, loading, playing, song, id, prev, next } = usePlayer();
 
+// player bar swipe
 const { containerRef, targetRef, triggerNext, triggerPrev, next: onNext, prev: onPrev, isSwiping, left } = usePlayerBarSwipe();
-
 onNext.value = () => next();
 onPrev.value = () => prev();
-
+// breakpoints
 const { sm } = useBreakpoints(breakpointsTailwind);
+
+const { favoriteList, add, remove } = useFavoriteList();
+const like = computed({
+  get() {
+    return id.value && favoriteList.value?.songs.includes(id.value);
+  },
+  set(like) {
+    if (!id.value) { return; }
+    if (like) {
+      add(id.value);
+    } else {
+      remove(id.value);
+    }
+  },
+});
 </script>
 
 <style scoped>
