@@ -63,6 +63,10 @@ function _usePlaylist() {
       randomPlaylist.value = shuffle(list);
     }
   });
+  // init random playlist
+  if (playmode.value === Playmode.random && randomPlaylist.value.length === 0 && originPlaylist.value.length !== 0) {
+    randomPlaylist.value = shuffle(originPlaylist.value);
+  }
 
   function next(manual = false) {
     if (playlist.value.length === 0) {
