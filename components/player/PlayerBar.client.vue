@@ -11,15 +11,11 @@
         </div>
         <div class="flex-auto w-0 flex flex-col flex-gap-1">
           <div class="text-3.5 cursor-default truncate">
-            <ClientOnly>
-              {{ song?.name }}
-            </ClientOnly>
+            {{ song?.name }}
           </div>
           <div class="flex justify-between items-center">
             <div class="shrink-0 text-3 text-primary-400">
-              <ClientOnly>
-                {{ song?.singer }}
-              </ClientOnly>
+              {{ song?.singer }}
             </div>
           </div>
         </div>
