@@ -33,8 +33,14 @@
 
     <ClientOnly>
       <div class="flex flex-col flex-gap-2">
-        playlist
+        display playlist
         <div v-for="song in playlist" :key="song" class="bg-yellow">
+          {{ song }}
+        </div>
+      </div>
+      <div class="flex flex-col flex-gap-2">
+        actual playlist
+        <div v-for="song in actualPlaylist" :key="song" class="bg-yellow">
           {{ song }}
         </div>
       </div>
@@ -53,7 +59,7 @@ import { getAllSongs } from "~/api";
 
 const { playing, change, prev, next, duration, timePlayed, volume, mute } = usePlayer();
 
-const { playlist } = usePlaylist();
+const { playlist, actualPlaylist } = usePlaylist();
 
 const { favoriteList } = useFavoriteList();
 
