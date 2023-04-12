@@ -72,7 +72,7 @@ function _usePlaylist() {
       return playlist.value[0];
     }
     if (playmode.value === Playmode.single) {
-      return currentSongId.value;
+      if (!manual) { return currentSongId.value; }
     }
     const index = playlist.value.indexOf(currentSongId.value);
     if (playmode.value === Playmode.loop || manual) {
@@ -89,7 +89,7 @@ function _usePlaylist() {
       return playlist.value[0];
     }
     if (playmode.value === Playmode.single) {
-      return currentSongId.value;
+      if (!manual) { return currentSongId.value; }
     }
     const index = playlist.value.indexOf(currentSongId.value);
     if (playmode.value === Playmode.loop || manual) {
@@ -116,7 +116,8 @@ function _usePlaylist() {
   }
 
   return {
-    playlist,
+    playlist: originPlaylist,
+    actualPlaylist: playlist,
 
     add,
     next,
