@@ -24,10 +24,20 @@
           </div>
         </div>
         <div class="flex items-center flex-gap-2">
-          <!-- play button -->
-          <div v-if="loading" class="i-svg-spinners:ring-resize text-7"></div>
-          <div v-else-if="playing" class="i-solar:pause-bold text-7 cursor-pointer active:scale-90 transition" @click="() => playing = false"></div>
-          <div v-else class="i-solar:play-bold text-7 cursor-pointer active:scale-90 transition" @click="() => playing = true"></div>
+          <div class="lg:absolute lg:left-50% lg:-translate-x-50% flex items-center flex-gap-2 lg:flex-gap-5">
+            <!-- like button -->
+            <div v-if="sm" class="i-solar:heart-outline text-6 cursor-pointer active:scale-90 transition"></div>
+            <!-- prev button -->
+            <div v-if="sm" class="i-solar:skip-previous-bold-duotone text-4.5 cursor-pointer" @click="() => prev()"></div>
+            <!-- play button -->
+            <div v-if="loading" class="i-svg-spinners:ring-resize text-7"></div>
+            <div v-else-if="playing" class="i-solar:pause-bold text-7 cursor-pointer active:scale-90 transition" @click="() => playing = false"></div>
+            <div v-else class="i-solar:play-bold text-7 cursor-pointer active:scale-90 transition" @click="() => playing = true"></div>
+            <!-- next button -->
+            <div v-if="sm" class="i-solar:skip-next-bold-duotone text-4.5 cursor-pointer" @click="() => next()"></div>
+            <!-- repeat button -->
+            <div v-if="sm" class="i-solar:repeat-outline text-6 cursor-pointer"></div>
+          </div>
           <!-- volume button -->
           <div class="i-solar:volume-loud-bold text-7 cursor-pointer"></div>
           <!-- playlist button -->
@@ -49,6 +59,7 @@
 </template>
 
 <script setup lang="ts">
+import { breakpointsTailwind } from "@vueuse/core";
 import { usePlayerBarSwipe } from "./PlayerBar";
 
 const { duration, timePlayed, loading, playing, song, id, prev, next } = usePlayer();
@@ -57,6 +68,8 @@ const { containerRef, targetRef, triggerNext, triggerPrev, next: onNext, prev: o
 
 onNext.value = () => next();
 onPrev.value = () => prev();
+
+const { sm } = useBreakpoints(breakpointsTailwind);
 </script>
 
 <style scoped>
