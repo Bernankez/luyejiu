@@ -1,7 +1,7 @@
 <template>
   <div ref="containerRef" class="relative">
     <PlayerProgress
-      v-model:timePlayed="timePlayed" class="z-1 absolute w-full left-0 -top-1" :duration="duration"
+      v-model:timePlayed="timePlayed" class="z-1 absolute w-full left-0 -top-1" :duration="duration" :buffer-progress="bufferProgress"
       :disabled="loading"
     />
     <div ref="targetRef" :style="{ left }" class="absolute p-t-4 p-r-4 p-b-3 p-l-2 box-border w-full select-none bg-gray-50 text-primary-700" :class="{ 'transition-all duration-200 ease-linear': !isSwiping }">
@@ -67,7 +67,7 @@ import { usePlayerBarSwipe } from "./PlayerBar";
 
 dayjs.extend(dayjsDuration);
 
-const { duration, timePlayed, loading, playing, song, id, prev, next } = usePlayer();
+const { duration, timePlayed, bufferProgress, loading, playing, song, id, prev, next } = usePlayer();
 
 /**
  * Volume is not working on iOS Safari with HTML5 Audio.

@@ -1,5 +1,5 @@
 import type { MaybeComputedRef } from "@unhead/vue";
-import type { AnyFn } from "@vueuse/core";
+import type { AnyFn, Fn } from "@vueuse/core";
 import { Howl } from "howler";
 import { getSongById } from "~/api";
 import type { Song } from "~/types/song";
@@ -9,11 +9,25 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
   const playing = ref(false);
   const duration = ref(0);
   const timePlayed = ref(0);
+  /**
+   * 0 - 1
+   */
+  const bufferProgress = ref(0);
+  const stopBufferProgressListenMap = new Map<string, Fn>();
   const song = ref<Song>();
   const howl = ref<Howl>();
   const _id = computed(() => song.value?.id);
 
   const onEnd = ref<AnyFn>();
+
+  // registry howl onDispose callback
+  howlCache.onDispose.value = (id) => {
+    if (stopBufferProgressListenMap.has(id)) {
+      // stop buffer progress listen on unload
+      stopBufferProgressListenMap.get(id)?.();
+      stopBufferProgressListenMap.delete(id);
+    }
+  };
 
   function unload() {
     playing.value = false;
@@ -37,7 +51,10 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
         return;
       }
       stop();
+      bufferProgress.value = 0;
       if (!howlCache.get(id)) {
+        // reset bufferProgress before creating new Howl
+        // bufferProgress.value = 0;
         const newHowl = new Howl({
           // song.url
           src: "http://rslbkj11r.hn-bkt.clouddn.com/songs/%E9%B9%BF%E9%87%8E%E7%81%B8%20-%20%E5%A4%A7%E8%B2%94%E8%B2%85%C2%B7%E5%B0%8F%E5%B0%91%E5%B9%B4%E7%89%88.mp3",
@@ -51,6 +68,10 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
             consola.info(`useSong:${id}: new Howl loaded`);
             duration.value = newHowl.duration();
             loading.value = false;
+            const stop = handleBufferProgress(newHowl, (progress) => {
+              bufferProgress.value = progress;
+            });
+            stopBufferProgressListenMap.set(id, stop);
           },
           onloaderror(_, e) {
             consola.error(`useSong:loaderror:${id}:`, e);
@@ -81,6 +102,8 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
         });
         howlCache.add(id, newHowl);
       } else {
+        // cached howl's bufferProgress should be 1
+        // bufferProgress.value = 1;
         loading.value = false;
       }
       song.value = { ...newSong };
@@ -105,10 +128,36 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
     playing,
     duration,
     timePlayed,
+    bufferProgress,
 
     song,
     howl,
 
     onEnd,
   };
+}
+
+function handleBufferProgress(howl: Howl, onProgress?: (progress: number) => void) {
+  const audio: HTMLAudioElement = (howl as any)._sounds[0]._node;
+  // this does not trigger after full loaded
+  const stop = useEventListener(audio, "progress", () => {
+    const duration = howl.duration();
+
+    // https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/buffering_seeking_time_ranges#Creating_our_own_Buffering_Feedback
+    if (duration > 0) {
+      for (let i = 0; i < audio.buffered.length; i++) {
+        if (audio.buffered.start(audio.buffered.length - 1 - i) < audio.currentTime) {
+          const bufferProgress = (audio.buffered.end(audio.buffered.length - 1 - i) / duration);
+          onProgress?.(bufferProgress);
+          break;
+        }
+      }
+    }
+  });
+
+  if (getCurrentInstance()) {
+    onUnmounted(stop);
+  }
+
+  return stop;
 }

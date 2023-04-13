@@ -1,8 +1,9 @@
 <template>
   <!-- The layer was wrapped to increase the touch area. -->
   <div class="group p-y-1" :class="disabled ? 'cursor-not-allowed' : ''" @mousedown="onMouseDown" @touchstart="onMouseDown">
-    <div ref="railRef" class="w-full h-1 bg-primary-50">
-      <div class="slider relative h-full " :class="disabled ? 'bg-primary-200' : 'bg-primary-500'">
+    <div ref="railRef" class="relative w-full h-1 bg-primary-50">
+      <div class="buffer absolute top-0 h-full bg-amber-100"></div>
+      <div class="slider relative h-full" :class="disabled ? 'bg-primary-200' : 'bg-primary-500'">
         <div class="hidden group-hover:block group-active:block absolute left-100% top-50% -translate-x-50% -translate-y-50% w-2.5 h-2.5 rounded-2 transition-all" :class="disabled ? 'bg-primary-200' : 'bg-primary-500'"></div>
       </div>
     </div>
@@ -15,10 +16,12 @@ import type { Fn } from "@vueuse/core";
 const props = withDefaults(defineProps<{
   duration?: number;
   timePlayed?: number;
+  bufferProgress?: number;
   disabled?: boolean;
 }>(), {
   duration: 0,
   timePlayed: 0,
+  bufferProgress: 0,
   disabled: false,
 });
 
@@ -26,7 +29,7 @@ const emit = defineEmits<{
   (event: "update:timePlayed", timePlayed: number): void;
 }>();
 
-const { disabled, timePlayed, duration } = toRefs(props);
+const { disabled, timePlayed, duration, bufferProgress } = toRefs(props);
 
 const dragging = ref(false);
 
@@ -119,5 +122,9 @@ function stopDragging() {
 <style scoped>
 .slider {
   width: calc(v-bind(progress) * 100%);
+}
+
+.buffer {
+  width: calc(v-bind(bufferProgress) * 100%);
 }
 </style>

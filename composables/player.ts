@@ -17,7 +17,7 @@ function _usePlayer() {
    * 这里返回的songId即为有效id，即有对应歌曲信息的id
    * 可以同步给currentSongId
    */
-  const { loading, playing: _playing, duration, timePlayed: _timePlayed, song, howl, onEnd, id: songId } = useSong(changableId);
+  const { loading, playing: _playing, duration, timePlayed: _timePlayed, bufferProgress, song, howl, onEnd, id: songId } = useSong(changableId);
   watchEffect(() => {
     if (songId.value) {
       currentSongId.value = songId.value;
@@ -131,17 +131,21 @@ function _usePlayer() {
   }
 
   return {
+    // v-model
     mute,
     volume,
     playing,
     timePlayed,
 
+    // readonly
     loading,
     duration,
+    bufferProgress,
     id: songId,
     song,
     howl,
 
+    // methods
     next,
     prev,
     change,

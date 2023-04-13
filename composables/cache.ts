@@ -3,8 +3,11 @@ import LRU from "lru-cache";
 
 export const howlCache = useHowlCache(5);
 export function useHowlCache<T extends Howl = Howl>(max = 10) {
+  const onDispose = ref<(id: string) => void>();
+
   function beforeDelete(howl: T, key: string) {
     consola.info(`useHowlCache:${key}: ready to unload howl instance`);
+    onDispose.value?.(key);
     howl.unload();
   }
 
@@ -35,6 +38,7 @@ export function useHowlCache<T extends Howl = Howl>(max = 10) {
   return {
     add,
     get,
+    onDispose,
   };
 }
 
