@@ -19,8 +19,10 @@ export function usePlayerBarSwipe() {
     pointerTypes: ["touch"],
     onSwipe() {
       if (containerWidth.value && !volumeButtonDragging.value) {
-        // see https://github.com/nolimits4web/swiper/blob/3fbec6e5a730f073575f57422262585471eaae5b/src/core/events/onTouchMove.js#L206
-        // 触发阻尼距离
+        /**
+         * @description 触发阻尼距离
+         * @see https://github.com/nolimits4web/swiper/blob/3fbec6e5a730f073575f57422262585471eaae5b/src/core/events/onTouchMove.js#L206
+         */
         const minDistance = 30;
         const distance = Math.abs(distanceX.value);
         // 阻尼 越接近0阻尼越大

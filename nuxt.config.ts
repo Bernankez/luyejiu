@@ -8,12 +8,17 @@ export default defineNuxtConfig({
     "@nuxtjs/stylelint-module",
     // may prompt error when building
     "nuxt-typed-router",
-    // if @nuxt/devtools reports an error, please run `pnpm dlx nuxi@latest devtools enable` manually
-    // see https://github.com/nuxt/devtools/issues/50#issuecomment-1442572171
+    /**
+     * if @nuxt/devtools reports an error, please run `pnpm dlx nuxi@latest devtools enable` manually
+     * @see https://github.com/nuxt/devtools/issues/50#issuecomment-1442572171
+     */
     "@nuxt/devtools",
     "nuxt-vitest",
     "@vueuse/nuxt",
-    // temporary use edge version, see https://github.com/nuxt-modules/i18n/issues/1954
+    /**
+     * temporary use edge version
+     * @see https://github.com/nuxt-modules/i18n/issues/1954
+     */
     "@nuxtjs/i18n-edge",
     "@pinia/nuxt",
     "@unocss/nuxt",

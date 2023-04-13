@@ -11,8 +11,10 @@ export const useSongStore = defineStore("song", () => {
   });
 
   return {
-    // see https://stackoverflow.com/questions/72203619/nuxt3-pinia-vueuse-usestorage-not-working
-    // https://pinia.vuejs.org/zh/cookbook/composables.html
+    /**
+     * @see https://stackoverflow.com/questions/72203619/nuxt3-pinia-vueuse-usestorage-not-working
+     * @see https://pinia.vuejs.org/zh/cookbook/composables.html
+     */
     playmode: skipHydrate(playmode),
     currentSongId: skipHydrate(currentSongId),
     activeSonglistId: skipHydrate(activeSonglistId),
