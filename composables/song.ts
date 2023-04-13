@@ -41,7 +41,12 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
         const newHowl = new Howl({
           // song.url
           src: "http://rslbkj11r.hn-bkt.clouddn.com/songs/%E9%B9%BF%E9%87%8E%E7%81%B8%20-%20%E5%A4%A7%E8%B2%94%E8%B2%85%C2%B7%E5%B0%8F%E5%B0%91%E5%B9%B4%E7%89%88.mp3",
+          /**
+           * If setting html5 to false, musics cannot resume after locking the screen or switching to other apps.
+           * @see https://github.com/goldfire/howler.js/issues/1309
+           */
           html5: true,
+          preload: "metadata",
           onload() {
             consola.info(`useSong:${id}: new Howl loaded`);
             duration.value = newHowl.duration();

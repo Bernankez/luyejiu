@@ -39,7 +39,7 @@
             <PlaymodeButton v-if="sm" />
           </div>
           <!-- volume button -->
-          <VolumeButton />
+          <VolumeButton v-if="!isIOS" />
           <!-- playlist button -->
           <div role="button" class="i-solar:playlist-2-bold text-7 cursor-pointer"></div>
         </div>
@@ -62,11 +62,19 @@
 import { breakpointsTailwind } from "@vueuse/core";
 import dayjs from "dayjs";
 import dayjsDuration from "dayjs/plugin/duration";
+import { UAParser } from "ua-parser-js";
 import { usePlayerBarSwipe } from "./PlayerBar";
 
 dayjs.extend(dayjsDuration);
 
 const { duration, timePlayed, loading, playing, song, id, prev, next } = usePlayer();
+
+/**
+ * Volume is not working on iOS Safari with HTML5 Audio.
+ * @see https://github.com/goldfire/howler.js/issues/1519
+ */
+const parser = new UAParser();
+const isIOS = parser.getOS().name === "iOS";
 
 // player bar swipe
 const { containerRef, targetRef, triggerNext, triggerPrev, next: onNext, prev: onPrev, isSwiping, left } = usePlayerBarSwipe();
