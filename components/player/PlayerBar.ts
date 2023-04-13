@@ -1,4 +1,5 @@
 import type { Fn } from "@vueuse/core";
+import { useVolumeButtonDragging } from "./VolumnButton";
 
 export function usePlayerBarSwipe() {
   const containerRef = ref<HTMLDivElement>();
@@ -12,10 +13,12 @@ export function usePlayerBarSwipe() {
 
   const left = ref("0");
 
+  const volumeButtonDragging = useVolumeButtonDragging();
+
   const { distanceX, isSwiping } = usePointerSwipe(targetRef, {
     pointerTypes: ["touch"],
     onSwipe() {
-      if (containerWidth.value) {
+      if (containerWidth.value && !volumeButtonDragging.value) {
         // see https://github.com/nolimits4web/swiper/blob/3fbec6e5a730f073575f57422262585471eaae5b/src/core/events/onTouchMove.js#L206
         // 触发阻尼距离
         const minDistance = 30;

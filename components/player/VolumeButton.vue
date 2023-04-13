@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 import type { Fn } from "@vueuse/core";
+import { useVolumeButtonDragging } from "./VolumnButton";
 
 const { volume } = storeToRefs(useSongStore());
 
@@ -27,7 +28,7 @@ const volumeIcon = computed(() => {
 });
 
 const railRef = ref<HTMLDivElement>();
-const dragging = ref(false);
+const dragging = useVolumeButtonDragging();
 
 function getPointValue(e: MouseEvent | TouchEvent) {
   const railEl = railRef.value;
