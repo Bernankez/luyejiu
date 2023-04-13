@@ -15,7 +15,7 @@
 import type { Fn } from "@vueuse/core";
 import { useVolumeButtonDragging } from "./VolumnButton";
 
-const { volume } = storeToRefs(useSongStore());
+const { volume } = usePlayer();
 
 const volumeIcon = computed(() => {
   if (volume.value > 0.5) {
