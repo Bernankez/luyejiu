@@ -40,7 +40,6 @@
           </div>
           <!-- volume button -->
           <VolumeButton />
-          <div role="button" class="i-solar:volume-loud-bold text-7 cursor-pointer"></div>
           <!-- playlist button -->
           <div role="button" class="i-solar:playlist-2-bold text-7 cursor-pointer"></div>
         </div>
