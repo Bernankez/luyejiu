@@ -1,5 +1,5 @@
 import { defineNuxtConfig } from "nuxt/config";
-import { gray, orange } from "./styles/color";
+import { amber, gray, orange, yellow } from "./styles/color";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -93,6 +93,8 @@ export default defineNuxtConfig({
       colors: {
         primary: orange,
         gray,
+        amber,
+        yellow,
       },
     },
     preflight: true,
