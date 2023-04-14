@@ -27,9 +27,13 @@ export default defineNuxtConfig({
   ],
   components: [
     {
+      // import all the components under ~/components recursively
       path: "~/components",
       extensions: [".vue"],
+      // explicitly not using prefix
       pathPrefix: false,
+      // on demand import, default is false
+      // global: false,
     },
   ],
   imports: {
