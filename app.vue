@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <Header />
+  <div class="h-full">
+    <Header class="fixed" />
     <NuxtPage />
-    <div v-if="true" class="w-full">
+    <div v-if="false" class="w-full">
       <PlayerBar />
     </div>
   </div>
