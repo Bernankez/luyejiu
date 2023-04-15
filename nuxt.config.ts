@@ -110,11 +110,11 @@ export default defineNuxtConfig({
     preflights: [
       {
         getCSS: () => `
-          html, body {
+          html, body, #__nuxt {
             height: 100%;
           }
 
-          #__nuxt {
+          body {
             min-height: 100%;
             display: grid;
             overflow-x: hidden;
