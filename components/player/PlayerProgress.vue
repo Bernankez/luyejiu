@@ -1,9 +1,9 @@
 <template>
   <!-- The layer was wrapped to increase the touch area. -->
   <div class="group p-y-1" :class="disabled ? 'cursor-not-allowed' : ''" @mousedown="onMouseDown" @touchstart="onMouseDown">
-    <div ref="railRef" class="relative w-full h-1 bg-primary-50">
-      <div class="buffer absolute top-0 h-full bg-amber-100"></div>
-      <div class="slider relative h-full" :class="disabled ? 'bg-primary-200' : 'bg-primary-500'">
+    <div ref="railRef" class="relative w-full h-1 bg-primary-50" :class="{ rounded: round }">
+      <div class="buffer absolute top-0 h-full bg-amber-100" :class="{ rounded: round }"></div>
+      <div class="slider relative h-full rounded-2" :class="[disabled ? 'bg-primary-200' : 'bg-primary-500', { rounded: round }]">
         <div class="absolute left-100% top-50% -translate-x-50% -translate-y-50% w-2.5 h-2.5 rounded-2 transition-all" :class="[disabled ? 'bg-primary-200' : 'bg-primary-500', showIndicate === 'auto' ? 'hidden group-hover:block group-active:block' : '']"></div>
       </div>
     </div>
@@ -19,12 +19,14 @@ const props = withDefaults(defineProps<{
   bufferProgress?: number;
   disabled?: boolean;
   showIndicate?: "always" | "auto";
+  round?: boolean;
 }>(), {
   duration: 0,
   timePlayed: 0,
   bufferProgress: 0,
   disabled: false,
   showIndicate: "auto",
+  round: false,
 });
 
 const emit = defineEmits<{
