@@ -1,41 +1,27 @@
 <template>
-  <HeadlessPopover class="relative">
-    <Transition name="slide-fade">
-      <HeadlessPopoverPanel class="z-7 absolute bottom-100% left-50% -translate-x-50% m-b-1">
-        <div ref="railRef" class="flex flex-col-reverse h-22 w-10 rounded-3 bg-primary-50 shadow-inset shadow shadow-amber-100 overflow-hidden" @mousedown="onMouseDown" @touchstart="onMouseDown">
-          <div class="slider bg-primary-300"></div>
-        </div>
-      </HeadlessPopoverPanel>
-    </Transition>
-    <HeadlessPopoverButton as="div" role="button" class="text-7 cursor-pointer" :class="volumeIcon" />
-  </HeadlessPopover>
+  <div
+    ref="railRef"
+    class="flex flex-col-reverse h-2 md:h-4 w-full rounded-99 bg-gray-200 bg-opacity-50 overflow-hidden"
+    @mousedown="onMouseDown" @touchstart="onMouseDown"
+  >
+    <div class="slider h-full bg-white"></div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import type { Fn } from "@vueuse/core";
-import { useVolumeButtonDragging } from "./VolumeButton";
 
 const { volume } = usePlayer();
 
-const volumeIcon = computed(() => {
-  if (volume.value > 0.5) {
-    return "i-solar:volume-loud-bold";
-  } else if (volume.value > 0) {
-    return "i-solar:volume-small-bold";
-  } else {
-    return "i-solar:volume-cross-bold";
-  }
-});
-
 const railRef = ref<HTMLDivElement>();
-const dragging = useVolumeButtonDragging();
+const dragging = ref(false);
 
 function getPointValue(e: MouseEvent | TouchEvent) {
   const railEl = railRef.value;
   if (!railEl) { return; }
   const touchEvent = isTouchEvent(e) ? e.touches[0] : e;
   const railRect = railEl.getBoundingClientRect();
-  let percentage = 1 - (touchEvent.clientY - railRect.top) / railRect.height;
+  let percentage = (touchEvent.clientX - railRect.left) / railRect.width;
   if (percentage > 1) {
     percentage = 1;
   } else if (percentage < 0) {
@@ -97,17 +83,6 @@ function stopDragging() {
 
 <style scoped>
 .slider {
-  height: calc(v-bind(volume) * 100%);
-}
-
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-  transition: all 0.15s ease-out;
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(-50%) translateY(10px);
-  opacity: 0;
+  width: calc(v-bind(volume) * 100%);
 }
 </style>
