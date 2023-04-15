@@ -1,16 +1,18 @@
 <template>
   <div class="background grid w-full min-h-full">
-    <div class="flex flex-col w-full h-full p-x-8 box-border bg-gray-800 bg-opacity-60 backdrop-blur-60 backdrop-saturate-80">
-      <div>header</div>
+    <div class="relative flex flex-col w-full h-full p-x-8 box-border bg-gray-800 bg-opacity-60 backdrop-blur-60 backdrop-saturate-80">
+      <div class="absolute top-8 box-border text-8 text-gray-50">
+        <div role="button" class="i-solar:reply-outline cursor-pointer"></div>
+      </div>
       <div class="flex flex-col h-full w-full">
         <div class="flex flex-col md:flex-row md:flex-gap-8 h-full">
           <!-- cover image -->
-          <div class="flex items-center justify-center h-full">
-            <img class="w-full max-w-100 md:w-100 object-fit rounded-3 shadow-lg transition-400 ease-in-out" :class="{ 'scale-70': !playing }" src="~/assets/demo1.png" />
+          <div class="flex items-center justify-center h-full select-none">
+            <img class="w-full max-w-100 md:w-100 object-fit rounded-3 shadow-lg transition-400 ease-in-out" :class="{ 'scale-70': !playing }" src="~/assets/demo1.png" alt="cover" />
           </div>
           <div class="md:flex md:flex-col md:justify-between md:p-y-8 box-border md:w-full">
             <!-- song info -->
-            <div class="flex flex-col flex-gap-2 p-b-4 box-border">
+            <div class="flex flex-col flex-gap-2 p-b-4 box-border cursor-default">
               <div class="text-5.5 md:text-8 text-gray-50">
                 {{ song?.name }}
               </div>
@@ -43,7 +45,7 @@
           <!-- player progress -->
           <div>
             <PlayerProgress v-model:time-played="timePlayed" round :disabled="loading" :duration="duration" show-indicate="always" :buffer-progress="bufferProgress" @real-time="onRealTime" />
-            <div class="flex items-center justify-between text-3 text-gray-50">
+            <div class="flex items-center justify-between text-3 text-gray-50 cursor-default">
               <div>
                 {{ dayjs.duration(realTime, 'seconds').format("mm:ss") }}
               </div>
