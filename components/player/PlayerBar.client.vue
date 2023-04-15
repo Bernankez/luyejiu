@@ -1,8 +1,8 @@
 <template>
   <div ref="containerRef" class="relative">
     <PlayerProgress
-      v-model:timePlayed="timePlayed" class="z-1 absolute w-full left-0 -top-1" :duration="duration" :buffer-progress="bufferProgress"
-      :disabled="loading"
+      v-model:timePlayed="timePlayed" class="z-1 absolute w-full left-0 -top-1" :duration="duration" :buffer-progress="bufferProgress" :disabled="loading"
+      @real-time="onRealTime"
     />
     <div ref="targetRef" :style="{ left }" class="p-t-4 p-r-4 p-b-3 p-l-2 box-border w-full select-none bg-gray-50 text-primary-700" :class="{ 'transition-all duration-200 ease-linear': !isSwiping }">
       <div class="flex items-center flex-gap-4">
@@ -18,7 +18,7 @@
               {{ song?.singer }}
             </div>
             <div>
-              {{ dayjs.duration(timePlayed, 'seconds').format("mm:ss") }}/{{ dayjs.duration(duration, 'seconds').format("mm:ss") }}
+              {{ dayjs.duration(realTime, 'seconds').format("mm:ss") }}/{{ dayjs.duration(duration, 'seconds').format("mm:ss") }}
             </div>
           </div>
         </div>
@@ -82,6 +82,11 @@ onNext.value = () => next();
 onPrev.value = () => prev();
 // breakpoints
 const { sm } = useBreakpoints(breakpointsTailwind);
+
+const realTime = ref(0);
+function onRealTime(time: number) {
+  realTime.value = time;
+}
 
 const { favoriteList, add, remove } = useFavoriteList();
 const like = computed({

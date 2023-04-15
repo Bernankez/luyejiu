@@ -31,6 +31,7 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits<{
   (event: "update:timePlayed", timePlayed: number): void;
+  (event: "realTime", realTime: number): void;
 }>();
 
 const { disabled, showIndicate, timePlayed, duration, bufferProgress } = toRefs(props);
@@ -46,7 +47,11 @@ const actualProgress = computed({
   },
 });
 
-const progress = ref(0);
+const progress = useProxy(0, {
+  set(v) {
+    emit("realTime", duration.value * v);
+  },
+});
 watchEffect(() => {
   if (!dragging.value) {
     progress.value = actualProgress.value;
