@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import type { Fn } from "@vueuse/core";
-import { useVolumeButtonDragging } from "./VolumnButton";
+import { useVolumeButtonDragging } from "./VolumeButton";
 
 const { volume } = usePlayer();
 

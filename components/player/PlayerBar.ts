@@ -1,5 +1,5 @@
 import type { Fn } from "@vueuse/core";
-import { useVolumeButtonDragging } from "./VolumnButton";
+import { useVolumeButtonDragging } from "./VolumeButton";
 
 export function usePlayerBarSwipe() {
   const containerRef = ref<HTMLDivElement>();
