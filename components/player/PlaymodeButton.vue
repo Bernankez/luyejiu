@@ -1,5 +1,5 @@
 <template>
-  <div role="button" class="text-6 cursor-pointer" :class="playmodeIcon" @click="switchPlaymode"></div>
+  <div role="button" :class="playmodeIcon" @click="switchPlaymode"></div>
 </template>
 
 <script setup lang="ts">
