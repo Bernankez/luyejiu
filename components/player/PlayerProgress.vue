@@ -4,7 +4,7 @@
     <div ref="railRef" class="relative w-full h-1 bg-primary-50">
       <div class="buffer absolute top-0 h-full bg-amber-100"></div>
       <div class="slider relative h-full" :class="disabled ? 'bg-primary-200' : 'bg-primary-500'">
-        <div class="hidden group-hover:block group-active:block absolute left-100% top-50% -translate-x-50% -translate-y-50% w-2.5 h-2.5 rounded-2 transition-all" :class="disabled ? 'bg-primary-200' : 'bg-primary-500'"></div>
+        <div class="absolute left-100% top-50% -translate-x-50% -translate-y-50% w-2.5 h-2.5 rounded-2 transition-all" :class="[disabled ? 'bg-primary-200' : 'bg-primary-500', showIndicate === 'auto' ? 'hidden group-hover:block group-active:block' : '']"></div>
       </div>
     </div>
   </div>
@@ -18,18 +18,20 @@ const props = withDefaults(defineProps<{
   timePlayed?: number;
   bufferProgress?: number;
   disabled?: boolean;
+  showIndicate?: "always" | "auto";
 }>(), {
   duration: 0,
   timePlayed: 0,
   bufferProgress: 0,
   disabled: false,
+  showIndicate: "auto",
 });
 
 const emit = defineEmits<{
   (event: "update:timePlayed", timePlayed: number): void;
 }>();
 
-const { disabled, timePlayed, duration, bufferProgress } = toRefs(props);
+const { disabled, showIndicate, timePlayed, duration, bufferProgress } = toRefs(props);
 
 const dragging = ref(false);
 
