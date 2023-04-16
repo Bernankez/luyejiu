@@ -65,6 +65,7 @@ function _usePlayer() {
         _playing.value = true;
       } else {
         pause();
+        _playing.value = false;
       }
     },
   });
