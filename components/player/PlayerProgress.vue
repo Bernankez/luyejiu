@@ -1,10 +1,10 @@
 <template>
   <!-- The layer was wrapped to increase the touch area. -->
   <div class="group p-y-1" :class="disabled ? 'cursor-not-allowed' : ''" @mousedown="onMouseDown" @touchstart="onMouseDown">
-    <div ref="railRef" class="relative w-full h-1 bg-primary-50" :class="{ rounded: round }">
-      <div class="buffer absolute top-0 h-full bg-amber-100" :class="{ rounded: round }"></div>
-      <div class="slider relative h-full rounded-2" :class="[disabled ? 'bg-primary-200' : 'bg-primary-500', { rounded: round }]">
-        <div class="absolute left-100% top-50% -translate-x-50% -translate-y-50% w-2.5 h-2.5 rounded-2 transition-all" :class="[disabled ? 'bg-primary-200' : 'bg-primary-500', showIndicate === 'auto' ? 'hidden group-hover:block group-active:block' : '']"></div>
+    <div ref="railRef" class="relative w-full h-1" :class="[{ rounded: round }, colorRail]">
+      <div class="buffer absolute top-0 h-full" :class="[{ rounded: round }, colorBufferProgress]"></div>
+      <div class="slider relative h-full rounded-2" :class="[disabled ? colorDisabled : colorActive, { rounded: round }]">
+        <div class="absolute left-100% top-50% -translate-x-50% -translate-y-50% w-2.5 h-2.5 rounded-2 transition-all" :class="[disabled ? colorDisabled : colorActive, { 'hidden group-hover:block group-active:block': showIndicate === 'auto' }]"></div>
       </div>
     </div>
   </div>
@@ -20,6 +20,7 @@ const props = withDefaults(defineProps<{
   disabled?: boolean;
   showIndicate?: "always" | "auto";
   round?: boolean;
+  theme?: "primary" | "white";
 }>(), {
   duration: 0,
   timePlayed: 0,
@@ -27,6 +28,7 @@ const props = withDefaults(defineProps<{
   disabled: false,
   showIndicate: "auto",
   round: false,
+  theme: "primary",
 });
 
 const emit = defineEmits<{
@@ -34,7 +36,32 @@ const emit = defineEmits<{
   (event: "realTime", realTime: number): void;
 }>();
 
-const { disabled, showIndicate, timePlayed, duration, bufferProgress } = toRefs(props);
+const { disabled, showIndicate, timePlayed, duration, bufferProgress, theme } = toRefs(props);
+
+const colorDisabled = computed(() => {
+  if (theme.value === "white") {
+    return "bg-gray-500";
+  }
+  return "bg-primary-200";
+});
+const colorActive = computed(() => {
+  if (theme.value === "white") {
+    return "bg-gray-50";
+  }
+  return "bg-primary-500";
+});
+const colorBufferProgress = computed(() => {
+  if (theme.value === "white") {
+    return "bg-gray-200 bg-opacity-30";
+  }
+  return "bg-amber-100";
+});
+const colorRail = computed(() => {
+  if (theme.value === "white") {
+    return "bg-gray-200 bg-opacity-50";
+  }
+  return "bg-primary-50";
+});
 
 const dragging = ref(false);
 

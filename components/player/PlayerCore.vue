@@ -44,7 +44,7 @@
         <div>
           <!-- player progress -->
           <div>
-            <PlayerProgress v-model:time-played="timePlayed" round :disabled="loading" :duration="duration" show-indicate="always" :buffer-progress="bufferProgress" @real-time="onRealTime" />
+            <PlayerProgress v-model:time-played="timePlayed" round :disabled="loading" :duration="duration" show-indicate="always" theme="white" :buffer-progress="bufferProgress" @real-time="onRealTime" />
             <div class="flex items-center justify-between text-3 text-gray-50 cursor-default">
               <div>
                 {{ dayjs.duration(realTime, 'seconds').format("mm:ss") }}
