@@ -8,7 +8,7 @@
         <div class="flex flex-col md:flex-row md:flex-gap-8 h-full">
           <!-- cover image -->
           <div class="flex items-center justify-center h-full select-none">
-            <img class="w-full max-w-100 md:w-100 object-fit rounded-3 shadow-lg transition-400 ease-in-out" :class="{ 'scale-70': !playing }" src="~/assets/demo1.png" alt="cover" />
+            <img class="cover w-full max-w-100 md:w-100 object-fit rounded-3 shadow-lg transition-500" :class="{ 'cover--playing': playing }" src="~/assets/demo1.png" alt="cover" />
           </div>
           <div class="md:flex md:flex-col md:justify-between md:p-y-8 box-border md:w-full">
             <!-- song info -->
@@ -114,5 +114,15 @@ const like = computed({
   background-repeat: no-repeat;
   background-position-x: 50%;
   background-size: cover;
+}
+
+.cover {
+  transform: scale(0.7);
+  transition-timing-function: ease-in-out;
+}
+
+.cover--playing {
+  transform: scale(1);
+  transition-timing-function: cubic-bezier(0.52, 0.41, 0.45, 1.3);
 }
 </style>

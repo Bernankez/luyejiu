@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@bernankez/eslint-config": "^0.4.2",
-    "@bernankez/stylelint-config": "^0.2.1",
+    "@bernankez/stylelint-config": "^0.3.0",
     "@iconify/json": "^2.2.43",
     "@nuxt/devtools": "^0.3.1",
     "@nuxtjs/eslint-module": "^4.0.2",
