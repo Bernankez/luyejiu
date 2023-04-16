@@ -80,6 +80,7 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
           onplayerror(_, e) {
             consola.error(`useSong:loaderror:${id}:`, e);
             loading.value = false;
+            playing.value = false;
           },
           onseek() {
             getTimePlayed();

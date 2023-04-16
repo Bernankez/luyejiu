@@ -59,8 +59,10 @@ function _usePlayer() {
       return _playing.value;
     },
     set(value) {
-      if (value) {
+      if (value && !_playing.value) {
         play();
+        // immediately set to true to avoid multiple play
+        _playing.value = true;
       } else {
         pause();
       }
