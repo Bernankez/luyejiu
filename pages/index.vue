@@ -9,7 +9,7 @@
   <p class="text-lg text-green font-bold">
     {{ $t('welcome') }}
   </p>
-  <NuxtWelcome />
+  <!-- <NuxtWelcome /> -->
 </template>
 
 <script setup lang="ts">

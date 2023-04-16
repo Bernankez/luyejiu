@@ -20,6 +20,7 @@
     "consola": "3.0.0-3",
     "dayjs": "^1.11.7",
     "howler": "^2.2.3",
+    "nuxt-icons": "^3.1.0",
     "pinia": "^2.0.33",
     "ua-parser-js": "^1.0.35",
     "uuid": "^9.0.0"
