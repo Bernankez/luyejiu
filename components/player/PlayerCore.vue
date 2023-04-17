@@ -1,7 +1,7 @@
 <template>
   <div class="background grid w-full min-h-full">
     <div class="relative flex flex-col w-full h-full p-x-8 box-border bg-gray-800 bg-opacity-60 backdrop-blur-60 backdrop-saturate-80">
-      <div class="absolute top-8 box-border text-8 text-gray-50">
+      <div class="z-1 absolute top-8 box-border text-8 text-gray-50">
         <div role="button" class="i-solar:reply-outline cursor-pointer"></div>
       </div>
       <div class="flex flex-col h-full w-full">
@@ -44,7 +44,7 @@
         <div>
           <!-- player progress -->
           <div>
-            <PlayerProgress v-model:time-played="timePlayed" round :disabled="loading" :duration="duration" show-indicate="always" theme="white" :buffer-progress="bufferProgress" @real-time="onRealTime" />
+            <PlayerProgress v-model:time-played="timePlayed" round :disabled="loading" :duration="duration" :show-indicate="true" theme="white" :buffer-progress="bufferProgress" @real-time="onRealTime" />
             <div class="flex items-center justify-between text-3 text-gray-50 cursor-default">
               <div>
                 {{ dayjs.duration(realTime, 'seconds').format("mm:ss") }}

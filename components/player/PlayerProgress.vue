@@ -3,8 +3,8 @@
   <div class="group p-y-1" :class="disabled ? 'cursor-not-allowed' : ''" @mousedown="onMouseDown" @touchstart="onMouseDown">
     <div ref="railRef" class="relative w-full h-1" :class="[{ rounded: round }, colorRail]">
       <div class="buffer absolute top-0 h-full" :class="[{ rounded: round }, colorBufferProgress]"></div>
-      <div class="slider relative h-full rounded-2" :class="[disabled ? colorDisabled : colorActive, { rounded: round }]">
-        <div class="absolute left-100% top-50% -translate-x-50% -translate-y-50% w-2.5 h-2.5 rounded-2 transition-all" :class="[disabled ? colorDisabled : colorActive, { 'hidden group-hover:block group-active:block': showIndicate === 'auto' }]"></div>
+      <div class="slider relative h-full" :class="[disabled ? colorDisabled : colorActive, { rounded: round }]">
+        <div class="absolute left-100% top-50% -translate-x-50% -translate-y-50% w-2.5 h-2.5 rounded-2 transition-all" :class="[disabled ? colorDisabled : colorActive, { 'hidden group-hover:block group-active:block': !isDefined(showIndicate) }]"></div>
       </div>
     </div>
   </div>
@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<{
   timePlayed?: number;
   bufferProgress?: number;
   disabled?: boolean;
-  showIndicate?: "always" | "auto";
+  showIndicate?: boolean;
   round?: boolean;
   theme?: "primary" | "white";
 }>(), {
@@ -26,9 +26,9 @@ const props = withDefaults(defineProps<{
   timePlayed: 0,
   bufferProgress: 0,
   disabled: false,
-  showIndicate: "auto",
   round: false,
   theme: "primary",
+  showIndicate: undefined,
 });
 
 const emit = defineEmits<{
