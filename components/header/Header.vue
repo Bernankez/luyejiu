@@ -1,6 +1,7 @@
 <template>
   <header class="flex justify-center p-y-6 box-border bg-gray-50 w-full bg-opacity-20 backdrop-blur backdrop-saturate-100">
-    <div class="flex items-center flex-gap-4">
+    <div class="relative flex items-center flex-gap-4">
+      <!-- TODO offsetLeft getCurrentActive -->
       <HeaderItem icon="i-solar:home-smile-bold" to="/">
         <template #icon>
           <NuxtIcon class="block h-1em w-1em text-4.3" name="paw" />
