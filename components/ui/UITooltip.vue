@@ -72,6 +72,14 @@ watch(trigger, (newTrigger, _, onCleanup) => {
       stopEffect();
       stop();
     });
+  } else if (newTrigger === "click") {
+    const activeEl = useActiveElement();
+    const stop = watch(activeEl, (el) => {
+      if (el !== triggerRef.value) {
+        closeContent();
+      }
+    });
+    onCleanup(stop);
   }
 }, {
   immediate: true,
