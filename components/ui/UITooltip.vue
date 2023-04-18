@@ -2,7 +2,7 @@
   <div ref="triggerRef" @click="onTrigger">
     <slot></slot>
   </div>
-  <div v-if="showContent" ref="contentRef" class="tooltip-content p-x-2 rounded-1 box-border shadow-md b-1 b-solid b-gray-100 bg-gray-50">
+  <div v-if="showContent && !disabled" ref="contentRef" class="tooltip-content p-x-2 rounded-1 box-border shadow-md b-1 b-solid b-gray-100 bg-gray-50">
     <slot name="content">
     </slot>
   </div>
@@ -13,10 +13,12 @@ import type { Placement, Strategy } from "@floating-ui/vue";
 import { offset, useFloating } from "@floating-ui/vue";
 
 const props = withDefaults(defineProps<{
+  disabled?: boolean;
   strategy?: Strategy;
   placement?: Placement;
   trigger?: "click" | "hover";
 }>(), {
+  disabled: false,
   trigger: "hover",
 });
 
