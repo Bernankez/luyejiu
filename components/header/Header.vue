@@ -1,6 +1,7 @@
 <template>
   <header class="flex justify-center items-center h-16 w-full bg-gray-50 bg-opacity-70 backdrop-blur backdrop-saturate-100">
     <div class="relative flex items-center flex-gap-4">
+      <!-- TODO to with locale -->
       <HeaderItem icon="i-solar:home-smile-bold" to="/" aria-label="Homepage">
         <template #icon>
           <NuxtIcon class="block h-1em w-1em text-4.3" name="paw" />

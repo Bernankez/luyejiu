@@ -43,6 +43,7 @@ const { sm } = useBreakpoints(breakpointsTailwind);
 const route = useRoute();
 const router = useRouter();
 const LinkRef = ref<ComponentPublicInstance>();
+// TODO active locale判定
 const active = computed(() => router.resolve(props.to).path === route.path);
 watchEffect(() => {
   if (LinkRef.value?.$el && active.value) {
