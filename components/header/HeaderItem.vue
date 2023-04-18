@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="to" :target="props.target" :class="{ active }" class="relative flex items-center flex-gap-1 text-gray-900 cursor-pointer select-none transition">
+  <NuxtLink ref="LinkRef" :to="to" :target="props.target" class="flex items-center flex-gap-1 text-gray-900 cursor-pointer select-none transition">
     <slot name="icon" class="text-5">
       <div :class="icon" class="text-5"></div>
     </slot>
@@ -12,7 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import { yellow } from "~/styles/color";
+import type { ComponentPublicInstance } from "vue";
+import { onActiveKey } from "./Header";
 
 const props = withDefaults(defineProps<{
   icon?: string;
@@ -24,25 +25,15 @@ const props = withDefaults(defineProps<{
   to: "/",
 });
 
+const onActive = inject(onActiveKey, undefined);
+
 const route = useRoute();
 const router = useRouter();
-const active = computed(() => {
-  return router.resolve(props.to).path === route.path;
+const LinkRef = ref<ComponentPublicInstance>();
+watchEffect(() => {
+  const active = router.resolve(props.to).path === route.path;
+  if (LinkRef.value?.$el && active) {
+    onActive?.(LinkRef.value.$el);
+  }
 });
-
-const activeColor = yellow[500];
 </script>
-
-<style scoped>
-.active::before {
-  position: absolute;
-  top: 50%;
-  bottom: 0;
-  left: -5%;
-  z-index: -1;
-  display: block;
-  width: 110%;
-  background-color: v-bind(activeColor);
-  content: " ";
-}
-</style>
