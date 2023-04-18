@@ -1,6 +1,6 @@
 <template>
   <UITooltip :disabled="sm" :delay="100">
-    <NuxtLink ref="LinkRef" :to="to" :target="props.target" class="flex items-center flex-gap-1 text-gray-900 cursor-pointer select-none transition">
+    <NuxtLink ref="LinkRef" :to="to" :target="props.target" :aria-label="ariaLabel" class="flex items-center flex-gap-1 text-gray-900 cursor-pointer select-none transition">
       <slot name="icon" class="text-5">
         <div :class="icon" class="text-5"></div>
       </slot>
@@ -29,10 +29,12 @@ const props = withDefaults(defineProps<{
   target?: "_blank" | "_self" | "_parent" | "_top" | string;
   title?: string;
   showTitle?: boolean;
+  ariaLabel?: string;
 }>(), {
   icon: "",
   to: "/",
   showTitle: undefined,
+  ariaLabel: "this is a default link",
 });
 
 const onActive = inject(onActiveKey, undefined);
