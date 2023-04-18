@@ -5,14 +5,15 @@
         <template #icon>
           <NuxtIcon class="block h-1em w-1em text-4.3" name="paw" />
         </template>
-        首页
+        {{ $t('header.homepageItem') }}
       </HeaderItem>
       <HeaderItem icon="i-solar:music-note-3-bold" to="/song" aria-label="Phonograph">
-        留声机
+        {{ $t('header.phonographItem') }}
       </HeaderItem>
       <HeaderItem icon="i-fa6-solid:dog" to="/preview" aria-label="About">
-        关于
+        {{ $t('header.aboutItem') }}
       </HeaderItem>
+      <!-- TODO Bilibili Translation github -->
       <div class="header-active-bar -z-1 absolute h-50% m-t-6% bg-yellow transition-all-300"></div>
     </div>
   </header>
