@@ -1,5 +1,5 @@
 <template>
-  <header class="flex justify-center p-y-5 box-border bg-gray-50 w-full bg-opacity-70 backdrop-blur backdrop-saturate-100">
+  <header class="flex justify-center items-center h-16 w-full bg-gray-50 bg-opacity-70 backdrop-blur backdrop-saturate-100">
     <div class="relative flex items-center flex-gap-4">
       <HeaderItem icon="i-solar:home-smile-bold" to="/">
         <template #icon>
