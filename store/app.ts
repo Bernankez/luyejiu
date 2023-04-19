@@ -1,6 +1,7 @@
 export const useAppStore = defineStore("app", {
   state: () => ({
-    contentPaddingTop: true,
+    // in most cases, pages should handle padding-top itself
+    contentPaddingTop: false,
     headerHeight: "4rem",
     contentPaddingBottom: false,
     playerBarHeight: "71px",
