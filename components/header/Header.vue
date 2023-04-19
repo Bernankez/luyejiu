@@ -22,18 +22,7 @@
         </HeaderItem>
       </HeaderGroup>
       <div class="w-2px h-4 bg-gray-500"></div>
-      <!-- <HeaderGroup>
-        <HeaderItem icon="i-heroicons-outline:translate" to="https://space.bilibili.com/5659864" aria-label="Bilibili" :show-title="false" target="_blank">
-          {{ $t("header.bilibiliItem") }}
-        </HeaderItem>
-        <HeaderItem icon="i-fa:github" to="https://github.com/Bernankez/luyejiu" aria-label="Bilibili" :show-title="false" target="_blank">
-          {{ $t("header.githubItem") }}
-        </HeaderItem>
-      </HeaderGroup> -->
-      <HeaderItem icon="i-solar:menu-dots-bold" to="https://github.com/Bernankez/luyejiu" aria-label="Bilibili" :show-title="false" target="_blank">
-        {{ $t("header.githubItem") }}
-      </HeaderItem>
-      <!-- TODO Translation github -->
+      <HeaderMenu />
       <div class="header-active-bar -z-1 absolute h-50% m-t-6% bg-yellow transition-all-300"></div>
     </div>
   </header>

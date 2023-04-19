@@ -9,6 +9,9 @@
 </template>
 
 <script setup lang="ts">
+// keeping player instance
+const player = usePlayer();
+
 const { contentPaddingTop, headerHeight, contentPaddingBottom, playerBarHeight } = storeToRefs(useAppStore());
 const mainPaddingBottom = computed(() => contentPaddingBottom.value ? playerBarHeight.value : "0");
 const mainPaddingTop = computed(() => contentPaddingTop.value ? headerHeight.value : "0");
