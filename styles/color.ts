@@ -116,3 +116,5 @@ export const lightBlue: Record<ColorID, string> = {
   800: "#0277bd",
   900: "#01579b",
 };
+
+export const primary = orange;

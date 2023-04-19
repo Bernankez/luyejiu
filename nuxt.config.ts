@@ -1,5 +1,4 @@
 import { defineNuxtConfig } from "nuxt/config";
-import { amber, deepOrange, gray, orange, red, yellow } from "./styles/color";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -36,6 +35,9 @@ export default defineNuxtConfig({
       // on demand import, default is false
       // global: false,
     },
+  ],
+  css: [
+    "@unocss/reset/tailwind.css",
   ],
   imports: {
     dirs: [
@@ -95,37 +97,6 @@ export default defineNuxtConfig({
     vueI18n: {
       fallbackLocale: "zh",
     },
-  },
-  unocss: {
-    uno: true,
-    icons: true,
-    theme: {
-      colors: {
-        primary: orange,
-        gray,
-        amber,
-        yellow,
-        red,
-        deepOrange,
-      },
-    },
-    preflight: true,
-    preflights: [
-      {
-        getCSS: () => `
-          html, body, #__nuxt {
-            height: 100%;
-            width: 100%;
-          }
-
-          body {
-            min-height: 100%;
-            display: flex;
-            overflow-x: hidden;
-          }
-        `,
-      },
-    ],
   },
   pwa: {
     // NOTE
