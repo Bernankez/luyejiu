@@ -9,6 +9,7 @@ export default defineI18nLocale(async (_context, _locale) => {
       phonographItem: "phonograph",
       aboutItem: "about",
       bilibiliItem: "visit Bilibili",
+      githubItem: "GitHub",
     },
     song: {
       myFavorite: "My favorite",
