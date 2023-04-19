@@ -1,6 +1,8 @@
 export const useAppStore = defineStore("app", {
   state: () => ({
-    contentPaddingBottom: true,
-    playerBarHeight: 71,
+    contentPaddingTop: true,
+    headerHeight: "4rem",
+    contentPaddingBottom: false,
+    playerBarHeight: "71px",
   }),
 });

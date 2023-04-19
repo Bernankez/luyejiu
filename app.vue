@@ -9,14 +9,15 @@
 </template>
 
 <script setup lang="ts">
-const { contentPaddingBottom, playerBarHeight } = storeToRefs(useAppStore());
-const mainPaddingBottom = computed(() => contentPaddingBottom.value ? `${playerBarHeight.value}px` : "0");
+const { contentPaddingTop, headerHeight, contentPaddingBottom, playerBarHeight } = storeToRefs(useAppStore());
+const mainPaddingBottom = computed(() => contentPaddingBottom.value ? playerBarHeight.value : "0");
+const mainPaddingTop = computed(() => contentPaddingTop.value ? headerHeight.value : "0");
 </script>
 
 <style scoped>
 main {
   box-sizing: border-box;
-  padding-top: 4rem;
+  padding-top: v-bind(mainPaddingTop);
   padding-bottom: v-bind(mainPaddingBottom);
 }
 </style>
