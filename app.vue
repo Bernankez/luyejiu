@@ -1,16 +1,22 @@
 <template>
   <div class="grid min-h-full">
     <Background />
-    <Header class="fixed" />
-    <main class="h-full p-t-20" :class="[{ 'p-b-[71px]': contentPaddingBottom }]">
+    <Header class="fixed top-0 left-0" />
+    <main class="h-full bg-primary-50 bg-opacity-40">
       <NuxtPage />
     </main>
-    <div v-if="false" class="fixed bottom-0 w-full">
-      <PlayerBar />
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const { contentPaddingBottom } = storeToRefs(useAppStore());
+const { contentPaddingBottom, playerBarHeight } = storeToRefs(useAppStore());
+const mainPaddingBottom = computed(() => contentPaddingBottom.value ? `${playerBarHeight.value}px` : "0");
 </script>
+
+<style scoped>
+main {
+  box-sizing: border-box;
+  padding-top: 4rem;
+  padding-bottom: v-bind(mainPaddingBottom);
+}
+</style>
