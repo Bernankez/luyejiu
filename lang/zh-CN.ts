@@ -8,6 +8,7 @@ export default defineI18nLocale(async (_context, _locale) => {
       homepageItem: "主页",
       phonographItem: "留声机",
       aboutItem: "关于",
+      bilibiliItem: "鹿野灸b站",
     },
     song: {
       myFavorite: "我喜欢",

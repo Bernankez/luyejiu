@@ -1,7 +1,6 @@
 <template>
   <header class="flex justify-center items-center h-16 w-full bg-gray-50 bg-opacity-70 backdrop-blur backdrop-saturate-100">
     <div class="relative flex items-center flex-gap-4">
-      <!-- TODO to with locale -->
       <HeaderItem icon="i-solar:home-smile-bold" to="/" aria-label="Homepage">
         <template #icon>
           <NuxtIcon class="block h-1em w-1em text-4.3" name="paw" />
@@ -14,7 +13,10 @@
       <HeaderItem icon="i-fa6-solid:dog" to="/preview" aria-label="About">
         {{ $t('header.aboutItem') }}
       </HeaderItem>
-      <!-- TODO Bilibili Translation github -->
+      <HeaderItem icon="i-fa6-brands:bilibili" to="https://space.bilibili.com/5659864" aria-label="Bilibili" :show-title="false" target="_blank">
+        {{ $t("header.bilibiliItem") }}
+      </HeaderItem>
+      <!-- TODO Translation github -->
       <div class="header-active-bar -z-1 absolute h-50% m-t-6% bg-yellow transition-all-300"></div>
     </div>
   </header>
