@@ -1,7 +1,7 @@
 {
   "name": "luyejiu",
   "private": true,
-  "packageManager": "pnpm@8.2.0",
+  "packageManager": "pnpm@8.3.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "nuxt dev -o",
