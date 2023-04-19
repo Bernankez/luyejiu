@@ -1,10 +1,10 @@
 <template>
-  <UITooltip :disabled="sm" :delay="100">
+  <UITooltip :disabled="sm && showTitle !== false" :delay="100">
     <NuxtLink ref="LinkRef" :to="targetPath!" :href="href" :target="props.target" :aria-label="ariaLabel" class="flex items-center flex-gap-1 text-gray-900 cursor-pointer select-none transition">
       <slot name="icon" class="text-5">
         <div :class="icon" class="text-5"></div>
       </slot>
-      <div class="hidden sm:block text-4 font-bold">
+      <div v-if="showTitle !== false" class="hidden sm:block text-4 font-bold">
         <slot>
           {{ title }}
         </slot>
