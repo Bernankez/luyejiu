@@ -1,6 +1,7 @@
 <template>
   <HeadlessMenu as="div" class="relative">
     <HeadlessMenuButton role="button" as="div" class="i-solar:menu-dots-bold text-5" />
+    <!-- TODO Transition -->
     <HeadlessMenuItems as="div" class="absolute right-0 min-w-50 m-t-2 p-1 box-border text-gray-900 rounded-2 bg-gray-50 shadow">
       <HeadlessMenuItem as="div" class="menu-item p-0! p-r-1.5!">
         <select v-model="locale" class="h-full w-full p-x-2 p-y-2 box-border text-4.5 rounded-1 bg-gray-50 hover:bg-gray-200 focus:outline-none" @click.stop>
