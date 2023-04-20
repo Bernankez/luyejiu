@@ -3,7 +3,7 @@ export const useAppStore = defineStore("app", {
     // in most cases, pages should handle padding-top itself
     contentPaddingTop: false,
     headerHeight: "4rem",
-    contentPaddingBottom: false,
+    contentPaddingBottom: true,
     playerBarHeight: "71px",
   }),
 });

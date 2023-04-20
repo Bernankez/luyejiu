@@ -42,6 +42,7 @@
           <VolumeButton v-if="!isIOS" />
           <!-- playlist button -->
           <div role="button" class="i-solar:playlist-2-bold text-7 cursor-pointer"></div>
+          <div role="button" class="i-solar:close-square-bold-duotone text-7 cursor-pointer"></div>
         </div>
       </div>
       <Transition name="fade">
