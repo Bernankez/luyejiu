@@ -1,8 +1,8 @@
 <template>
-  <div class="grid min-h-full">
+  <div class="grid min-h-full bg-primary-50">
     <Background />
     <Header class="fixed top-0 left-0" />
-    <main class="h-full bg-primary-50 bg-opacity-40">
+    <main class="z-0 h-full">
       <NuxtPage />
     </main>
     <Transition name="player-bar">

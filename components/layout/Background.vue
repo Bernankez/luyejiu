@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { orange } from "~/styles/color";
 
-const fill = ref(orange[300]);
+const fill = ref(orange[500]);
 const ratio = 1.0619;
 const height = ref(100);
 const width = computed(() => height.value * ratio);
@@ -49,9 +49,9 @@ watchEffect(async () => {
 svg {
   position: absolute;
   top: 0;
-  z-index: -1;
+  z-index: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 </style>
