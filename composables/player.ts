@@ -155,4 +155,4 @@ function _usePlayer() {
   };
 }
 /** 全局单例播放器 */
-export const usePlayer = createSharedComposable(_usePlayer);
+export const { composable: usePlayer } = createPersistentSharedComposable(_usePlayer);
