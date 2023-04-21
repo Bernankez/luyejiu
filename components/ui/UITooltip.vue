@@ -12,6 +12,7 @@
 import type { Placement, Strategy } from "@floating-ui/vue";
 import { offset, useFloating } from "@floating-ui/vue";
 import type { Fn } from "@vueuse/core";
+import type { EffectScope } from "vue";
 
 const props = withDefaults(defineProps<{
   disabled?: boolean;
@@ -58,28 +59,35 @@ const closeContent = () => {
   canceled.value = true;
 };
 
-watch(trigger, (newTrigger, _, onCleanup) => {
+let triggerScope: EffectScope;
+const dispose = () => {
+  triggerScope && triggerScope.stop();
+};
+onScopeDispose(dispose);
+watch(trigger, (newTrigger) => {
+  dispose();
   if (newTrigger === "hover") {
-    const { isOutside, stop } = useMouseInElement(triggerRef);
-    const stopEffect = watchEffect(() => {
-      if (isOutside.value) {
-        closeContent();
-      } else {
-        openContent();
-      }
-    });
-    onCleanup(() => {
-      stopEffect();
-      stop();
+    triggerScope = effectScope();
+    triggerScope.run(() => {
+      const { isOutside } = useMouseInElement(triggerRef);
+      watchEffect(() => {
+        if (isOutside.value) {
+          closeContent();
+        } else {
+          openContent();
+        }
+      });
     });
   } else if (newTrigger === "click") {
-    const activeEl = useActiveElement();
-    const stop = watch(activeEl, (el) => {
-      if (el !== triggerRef.value) {
-        closeContent();
-      }
+    triggerScope = effectScope();
+    triggerScope.run(() => {
+      const activeEl = useActiveElement();
+      watch(activeEl, (el) => {
+        if (el !== triggerRef.value) {
+          closeContent();
+        }
+      });
     });
-    onCleanup(stop);
   }
 }, {
   immediate: true,
