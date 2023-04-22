@@ -1,6 +1,7 @@
 <template>
   <div class="grid min-h-full bg-primary-50">
-    <Background />
+    <!-- <Background /> -->
+    <Bg />
     <Transition name="header">
       <Header v-if="showHeader" class="fixed top-0 left-0" />
     </Transition>
