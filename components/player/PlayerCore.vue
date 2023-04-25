@@ -14,10 +14,10 @@
             <!-- song info -->
             <div class="flex flex-col flex-gap-2 p-b-4 box-border cursor-default">
               <div class="text-5.5 md:text-8 text-gray-50">
-                {{ isHydrated && song?.name }}
+                {{ isHydrated ? song?.name : '' }}
               </div>
               <div class="text-4.5 md:text-6 text-white">
-                {{ isHydrated && song?.singer }}
+                {{ isHydrated ? song?.singer : '' }}
               </div>
             </div>
             <div>

@@ -11,11 +11,11 @@
         </div>
         <div class="flex-auto w-0 flex flex-col flex-gap-1">
           <div class="text-3.5 cursor-default truncate">
-            {{ isHydrated && song?.name }}
+            {{ isHydrated ? song?.name : '' }}
           </div>
           <div class="flex items-center flex-gap-2 text-3 text-primary-400">
             <div class="shrink-0">
-              {{ isHydrated && song?.singer }}
+              {{ isHydrated ? song?.singer : '' }}
             </div>
             <div>
               {{ dayjs.duration(realTime, 'seconds').format("mm:ss") }}/{{ dayjs.duration(duration, 'seconds').format("mm:ss") }}
