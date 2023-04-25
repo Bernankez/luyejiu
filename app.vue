@@ -33,8 +33,7 @@ main {
 
 .header-enter-active,
 .header-leave-active {
-  /* TODO animation */
-  transition: all 0.2s ease-in;
+  transition: all 0.4s cubic-bezier(0.72, 0.3, 0.36, 0.86);
 }
 
 .header-enter-from,
@@ -45,7 +44,6 @@ main {
 
 .player-bar-enter-active,
 .player-bar-leave-active {
-  /* TODO animation */
   transition: all 0.2s ease-in;
 }
 
