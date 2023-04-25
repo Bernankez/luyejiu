@@ -1,7 +1,9 @@
 <template>
   <div class="grid min-h-full bg-primary-50">
-    <!-- <Background /> -->
-    <Bg />
+    <!-- Too many SVGs occupy resources, which can easily cause lagging. -->
+    <!-- <BackgroundSvg /> -->
+    <!-- Displays too large on Safari, freezes on Firefox. -->
+    <!-- <BackgroundCanvas /> -->
     <Transition name="header">
       <Header v-if="showHeader" class="fixed top-0 left-0" />
     </Transition>
