@@ -42,7 +42,8 @@
           <VolumeButton v-if="!isIOS" />
           <!-- playlist button -->
           <div role="button" class="i-solar:playlist-2-bold text-7 cursor-pointer"></div>
-          <div role="button" class="i-solar:close-square-bold-duotone text-7 cursor-pointer"></div>
+          <!-- close button -->
+          <div role="button" class="i-solar:close-square-bold-duotone text-7 cursor-pointer active:scale-90 transition" @click="() => showPlayerBar = false"></div>
         </div>
       </div>
       <Transition name="fade">
@@ -67,6 +68,8 @@ import { UAParser } from "ua-parser-js";
 import { usePlayerBarSwipe } from "./PlayerBar";
 
 dayjs.extend(dayjsDuration);
+
+const { showPlayerBar } = storeToRefs(useAppStore());
 
 const { duration, timePlayed, bufferProgress, loading, playing, song, id, prev, next } = usePlayer();
 

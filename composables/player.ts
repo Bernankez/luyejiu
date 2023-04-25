@@ -17,7 +17,7 @@ function _usePlayer() {
    * 这里返回的songId即为有效id，即有对应歌曲信息的id
    * 可以同步给currentSongId
    */
-  const { loading, playing: _playing, duration, timePlayed: _timePlayed, bufferProgress, song, howl, onEnd, id: songId } = useSong(changableId);
+  const { loading, playing: _playing, duration, timePlayed: _timePlayed, bufferProgress, song, howl, onEnd, unload, id: songId } = useSong(changableId);
   watchEffect(() => {
     if (songId.value) {
       currentSongId.value = songId.value;
@@ -155,4 +155,5 @@ function _usePlayer() {
   };
 }
 /** 全局单例播放器 */
-export const { composable: usePlayer } = createPersistentSharedComposable(_usePlayer);
+export const usePlayer = createSharedComposable(_usePlayer);
+// export const { composable: usePlayer, stop: unmountPlayer } = createPersistentSharedComposable(_usePlayer);

@@ -123,6 +123,8 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
     immediate: true,
   });
 
+  onScopeDispose(unload);
+
   return {
     id: _id,
     loading,
@@ -135,6 +137,8 @@ export function useSong(id: MaybeComputedRef<string | undefined>) {
     howl,
 
     onEnd,
+
+    unload,
   };
 }
 
@@ -156,9 +160,7 @@ function handleBufferProgress(howl: Howl, onProgress?: (progress: number) => voi
     }
   });
 
-  if (getCurrentInstance()) {
-    onUnmounted(stop);
-  }
+  tryOnScopeDispose(stop);
 
   return stop;
 }
