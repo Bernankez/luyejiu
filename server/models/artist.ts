@@ -1,33 +1,35 @@
 import { getModelForClass, index, modelOptions, prop } from "@typegoose/typegoose";
-import { BaseClass } from "./base";
+import type { ObjectId } from "mongoose";
 import { SongModel } from "./song";
 
-// TODO mergeDefaultOptions
-@index({ disabled: 1 })
 @index({ name: 1 })
-@modelOptions({ schemaOptions: { collection: "artist" } })
-export class ArtistClass extends BaseClass {
+@modelOptions({ schemaOptions: { collection: "artist", timestamps: true } })
+export class ArtistClass {
+  public _id!: ObjectId;
+  public createdAt!: Date;
+  public updatedAt!: Date;
+
   /**
-   * 歌手名
+   * @description 歌手名
    */
   @prop({ required: true })
   public name!: string;
 
   /**
-   * 歌手所有歌曲
+   * @description 歌手所有歌曲
    */
   public get songs() {
     return SongModel.find({ "artist.id": this._id });
   }
 
   /**
-   * 歌手头像
+   * @description 歌手头像
    */
   @prop()
   public avatarPath?: string;
 
   /**
-   * 是否禁用
+   * @description 是否禁用
    */
   @prop({ default: false })
   public disabled!: boolean;
