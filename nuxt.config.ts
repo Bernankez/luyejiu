@@ -25,6 +25,14 @@ export default defineNuxtConfig({
     "@vite-pwa/nuxt",
     "nuxt-icons",
   ],
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        experimentalDecorators: true,
+        emitDecoratorMetadata: true,
+      },
+    },
+  },
   components: [
     {
       // import all the components under ~/components recursively
