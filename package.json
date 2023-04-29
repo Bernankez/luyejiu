@@ -2,6 +2,7 @@
   "name": "luyejiu",
   "private": true,
   "packageManager": "pnpm@8.3.1",
+  "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "nuxt dev -o",
