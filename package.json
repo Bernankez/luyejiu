@@ -55,6 +55,7 @@
     "nuxt-vitest": "^0.6.9",
     "simple-git-hooks": "^2.8.1",
     "stylelint": "^15.6.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.3",
     "vue-tsc": "^1.2.0"
   },
