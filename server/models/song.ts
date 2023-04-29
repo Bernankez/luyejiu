@@ -4,6 +4,8 @@ import type { SongLanguage, SongTag } from "./song.types";
 import { SongLanguageEnum, SongQualitySource, SongTagEnum } from "./song.types";
 import { BaseClass } from "./base";
 
+// TODO required? ? !
+// https://typegoose.github.io/typegoose/docs/api/decorators/prop#required
 @index({ title: 1 })
 @index({ artist: 1 })
 @modelOptions({ schemaOptions: { collection: "song" } })
@@ -90,7 +92,7 @@ export class SongClass extends BaseClass {
    * 歌曲语种
    */
   @prop({ default: "Chinese", enum: SongLanguageEnum })
-  public language!: SongLanguage;
+  public language?: SongLanguage;
 
   /**
    * 歌曲备注
@@ -102,7 +104,7 @@ export class SongClass extends BaseClass {
    * 是否禁用
    */
   @prop({ default: false })
-  public disabled!: boolean;
+  public disabled?: boolean;
 }
 
 export const SongModel = getModelForClass(SongClass);
