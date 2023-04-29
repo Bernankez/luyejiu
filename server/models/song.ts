@@ -1,17 +1,13 @@
 import { getModelForClass, index, modelOptions, prop } from "@typegoose/typegoose";
-import type { ObjectId } from "mongoose";
 import { ArtistClass } from "./artist";
 import type { SongLanguage, SongTag } from "./song.types";
 import { SongLanguageEnum, SongQualitySource, SongTagEnum } from "./song.types";
+import { BaseClass } from "./base";
 
 @index({ title: 1 })
 @index({ artist: 1 })
-@modelOptions({ schemaOptions: { collection: "song", timestamps: true } })
-export class SongClass {
-  public _id!: ObjectId;
-  public createdAt!: Date;
-  public updatedAt!: Date;
-
+@modelOptions({ schemaOptions: { collection: "song" } })
+export class SongClass extends BaseClass {
   /**
    * @description 专辑封面url
    */

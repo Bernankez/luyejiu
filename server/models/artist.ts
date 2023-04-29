@@ -1,14 +1,10 @@
 import { getModelForClass, index, modelOptions, prop } from "@typegoose/typegoose";
-import type { ObjectId } from "mongoose";
 import { SongModel } from "./song";
+import { BaseClass } from "./base";
 
 @index({ name: 1 })
-@modelOptions({ schemaOptions: { collection: "artist", timestamps: true } })
-export class ArtistClass {
-  public _id!: ObjectId;
-  public createdAt!: Date;
-  public updatedAt!: Date;
-
+@modelOptions({ schemaOptions: { collection: "artist" } })
+export class ArtistClass extends BaseClass {
   /**
    * @description 歌手名
    */
