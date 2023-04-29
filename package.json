@@ -19,9 +19,11 @@
   "dependencies": {
     "@floating-ui/vue": "^0.2.1",
     "@pinia/nuxt": "^0.4.7",
+    "@typegoose/typegoose": "^11.0.3",
     "consola": "3.1.0",
     "dayjs": "^1.11.7",
     "howler": "^2.2.3",
+    "mongoose": "^7.1.0",
     "nuxt-icons": "^3.1.0",
     "pinia": "^2.0.33",
     "ua-parser-js": "^1.0.35",
