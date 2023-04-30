@@ -3,7 +3,6 @@ import type { SongLanguage, SongTag } from "./song.types";
 import { SongArtists, SongLanguageEnum, SongQualitySource, SongTagEnum } from "./song.types";
 import { BaseClass } from "./base";
 
-// TODO required? ? !
 // https://typegoose.github.io/typegoose/docs/api/decorators/prop#required
 @index({ title: 1 })
 @index({ artist: 1 })
@@ -30,7 +29,7 @@ export class SongClass extends BaseClass {
   /**
    * @description 歌曲演唱者
    */
-  @prop({ type: () => [SongArtists] })
+  @prop({ required: true, type: () => [SongArtists] })
   public artists!: SongArtists[];
 
   /**
@@ -66,13 +65,13 @@ export class SongClass extends BaseClass {
   /**
    * @description 相关视频url
    */
-  @prop({ type: () => [String] })
+  @prop({ required: true, type: () => [String] })
   public relatedVideoPath!: string[];
 
   /**
    * 不同质量歌曲源
    */
-  @prop({ type: () => [SongQualitySource] })
+  @prop({ required: true, type: () => [SongQualitySource] })
   public sources!: SongQualitySource[];
 
   /**

@@ -1,9 +1,10 @@
+import type { Ref } from "@typegoose/typegoose";
 import { index, modelOptions, prop } from "@typegoose/typegoose";
 import { BaseClass } from "./base";
-import { SongModel } from ".";
+import { SongClass } from "./song";
 
 @index({ name: 1 })
-@modelOptions({ schemaOptions: { collection: "artist" } })
+@modelOptions({ schemaOptions: { collection: "artist", toJSON: { virtuals: true }, toObject: { virtuals: true } } })
 export class ArtistClass extends BaseClass {
   /**
    * @description 歌手名
@@ -14,9 +15,8 @@ export class ArtistClass extends BaseClass {
   /**
    * @description 歌手所有歌曲
    */
-  public get songs() {
-    return SongModel.find({ "artist.id": this._id });
-  }
+  @prop({ ref: () => SongClass, foreignField: "artists.artist", localField: "_id" })
+  public songs?: Ref<SongClass>[];
 
   /**
    * @description 歌手头像
@@ -28,5 +28,5 @@ export class ArtistClass extends BaseClass {
    * @description 是否禁用
    */
   @prop({ default: false })
-  public disabled!: boolean;
+  public disabled?: boolean;
 }

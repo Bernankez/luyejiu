@@ -23,11 +23,12 @@ export type SongQuality = typeof SongQualityEnum[number];
 /**
  * @description 歌曲演唱者
  */
+@modelOptions({ schemaOptions: { _id: false } })
 export class SongArtists {
   /**
    * @description 歌手
    */
-  @prop({ ref: () => ArtistClass })
+  @prop({ required: true, ref: () => ArtistClass })
   public artist!: Ref<ArtistClass>;
 
   /**
