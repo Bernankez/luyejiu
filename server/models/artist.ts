@@ -1,6 +1,6 @@
-import { getModelForClass, index, modelOptions, prop } from "@typegoose/typegoose";
-import { SongModel } from "./song";
+import { index, modelOptions, prop } from "@typegoose/typegoose";
 import { BaseClass } from "./base";
+import { SongModel } from ".";
 
 @index({ name: 1 })
 @modelOptions({ schemaOptions: { collection: "artist" } })
@@ -30,5 +30,3 @@ export class ArtistClass extends BaseClass {
   @prop({ default: false })
   public disabled!: boolean;
 }
-
-export const ArtistModel = getModelForClass(ArtistClass);

@@ -1,5 +1,5 @@
 import type { Ref } from "@typegoose/typegoose";
-import { getModelForClass, index, modelOptions, prop } from "@typegoose/typegoose";
+import { index, modelOptions, prop } from "@typegoose/typegoose";
 import { ArtistClass } from "./artist";
 import type { SongLanguage, SongTag } from "./song.types";
 import { SongLanguageEnum, SongQualitySource, SongTagEnum } from "./song.types";
@@ -107,6 +107,4 @@ export class SongClass extends BaseClass {
   @prop({ default: false })
   public disabled?: boolean;
 }
-
-export const SongModel = getModelForClass(SongClass);
 
