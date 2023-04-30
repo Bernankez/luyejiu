@@ -27,9 +27,16 @@ export default defineNuxtConfig({
   ],
   typescript: {
     tsConfig: {
-      compilerOptions: {
+      "compilerOptions": {
         experimentalDecorators: true,
         emitDecoratorMetadata: true,
+      },
+      // for ts-node's compat
+      "ts-node": {
+        // only suitable for Node 18 and below versions.
+        // will need to be replaced with `--loader` in the future.
+        experimentalSpecifierResolution: "node",
+        esm: true,
       },
     },
   },

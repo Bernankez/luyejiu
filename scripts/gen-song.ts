@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
+import { ArtistModel, SongModel } from "../server/models";
 import { createArtist } from "./gen-artist";
 import { run } from "./run";
-import { ArtistModel } from "~/server/models/artist";
-import { SongModel } from "~/server/models/song";
 
 async function createSong() {
   let artist = await ArtistModel.findOne({ name: "鹿野灸" });

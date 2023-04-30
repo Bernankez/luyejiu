@@ -1,5 +1,5 @@
+import { ArtistModel } from "../server/models";
 import { run } from "./run";
-import { ArtistModel } from "~/server/models/artist";
 
 export async function createArtist() {
   await ArtistModel.ensureIndexes();
