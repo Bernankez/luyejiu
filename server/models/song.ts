@@ -3,7 +3,6 @@ import type { SongLanguage, SongTag } from "./song.types";
 import { SongArtists, SongLanguageEnum, SongQualitySource, SongTagEnum } from "./song.types";
 import { BaseClass } from "./base";
 
-// https://typegoose.github.io/typegoose/docs/api/decorators/prop#required
 @index({ title: 1 })
 @index({ artist: 1 })
 @index({ createdAt: -1 })
