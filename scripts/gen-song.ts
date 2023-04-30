@@ -28,7 +28,7 @@ async function createSong() {
       },
     ],
     singingTime: "2023-03-10 19:48:00",
-    tag: ["Official"],
+    // tag: ["Official"],
   });
 }
 
