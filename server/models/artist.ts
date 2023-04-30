@@ -4,7 +4,7 @@ import { BaseClass } from "./base";
 import { SongClass } from "./song";
 
 @index({ name: 1 })
-@modelOptions({ schemaOptions: { collection: "artist", toJSON: { virtuals: true }, toObject: { virtuals: true } } })
+@modelOptions({ schemaOptions: { collection: "artist" } })
 export class ArtistClass extends BaseClass {
   /**
    * @description 歌手名
