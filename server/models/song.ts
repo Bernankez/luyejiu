@@ -1,3 +1,4 @@
+import type { Ref } from "@typegoose/typegoose";
 import { getModelForClass, index, modelOptions, prop } from "@typegoose/typegoose";
 import { ArtistClass } from "./artist";
 import type { SongLanguage, SongTag } from "./song.types";
