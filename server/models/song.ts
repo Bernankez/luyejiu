@@ -6,6 +6,7 @@ import { BaseClass } from "./base";
 // https://typegoose.github.io/typegoose/docs/api/decorators/prop#required
 @index({ title: 1 })
 @index({ artist: 1 })
+@index({ createdAt: -1 })
 @modelOptions({ schemaOptions: { collection: "song" } })
 export class SongClass extends BaseClass {
   /**
