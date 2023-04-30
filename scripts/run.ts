@@ -2,7 +2,7 @@ import type { Fn } from "@vueuse/core";
 import mongoose from "mongoose";
 
 export async function run(funcs: (Fn | (() => Promise<any>))[]) {
-  await mongoose.connect("mongodb://localhost:27017", {
+  const inst = await mongoose.connect("mongodb://localhost:27017", {
     dbName: "mongodb",
   });
 
@@ -10,5 +10,5 @@ export async function run(funcs: (Fn | (() => Promise<any>))[]) {
     await fn();
   }
 
-  await mongoose.disconnect();
+  await inst.disconnect();
 }
