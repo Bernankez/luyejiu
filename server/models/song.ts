@@ -1,8 +1,6 @@
-import type { Ref } from "@typegoose/typegoose";
 import { index, modelOptions, prop } from "@typegoose/typegoose";
-import { ArtistClass } from "./artist";
 import type { SongLanguage, SongTag } from "./song.types";
-import { SongLanguageEnum, SongQualitySource, SongTagEnum } from "./song.types";
+import { SongArtists, SongLanguageEnum, SongQualitySource, SongTagEnum } from "./song.types";
 import { BaseClass } from "./base";
 
 // TODO required? ? !
@@ -32,8 +30,8 @@ export class SongClass extends BaseClass {
   /**
    * @description 歌手
    */
-  @prop({ ref: () => ArtistClass })
-  public artist!: Ref<ArtistClass>[];
+  @prop({ type: () => [SongArtists] })
+  public artists!: SongArtists[];
 
   /**
    * @description 作词

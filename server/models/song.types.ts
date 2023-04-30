@@ -1,4 +1,6 @@
+import type { Ref } from "@typegoose/typegoose";
 import { modelOptions, prop } from "@typegoose/typegoose";
+import { ArtistClass } from "./artist";
 
 /**
  * @description 歌曲标签
@@ -17,6 +19,23 @@ export type SongLanguage = typeof SongLanguageEnum[number];
  */
 export const SongQualityEnum = ["Standard", "High", "Lossless", "Hi-Res"] as const;
 export type SongQuality = typeof SongQualityEnum[number];
+
+/**
+ * @description 歌曲演唱者
+ */
+export class SongArtists {
+  /**
+   * @description 歌手
+   */
+  @prop({ ref: () => ArtistClass })
+  public artist!: Ref<ArtistClass>;
+
+  /**
+   * @description 是否伴唱
+   */
+  @prop({ default: false })
+  public feat?: boolean;
+}
 
 /**
  * @description 歌曲质量与url
