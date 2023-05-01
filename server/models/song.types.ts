@@ -5,20 +5,30 @@ import { ArtistClass } from "./artist";
 /**
  * @description 歌曲标签
  */
-export const SongTagEnum = ["Official", "Cut", "AI"] as const;
-export type SongTag = typeof SongTagEnum[number];
+export enum SongTag {
+  Official = "Official",
+  Cut = "Cut",
+  AI = "AI",
+}
 
 /**
  * @description 歌曲语种
  */
-export const SongLanguageEnum = ["Chinese", "English", "Japanese"] as const;
-export type SongLanguage = typeof SongLanguageEnum[number];
+export enum SongLanguage {
+  Chinese = "Chinese",
+  English = "English",
+  Japanese = "Japanese",
+}
 
 /**
  * @description 歌曲质量
  */
-export const SongQualityEnum = ["Standard", "High", "Lossless", "Hi-Res"] as const;
-export type SongQuality = typeof SongQualityEnum[number];
+export enum SongQuality {
+  Standard = "Standard",
+  High = "High",
+  Lossless = "Lossless",
+  HiRes = "Hi-Res",
+}
 
 /**
  * @description 歌曲演唱者
@@ -46,7 +56,7 @@ export class SongQualitySource {
   /**
    * @description 歌曲质量
    */
-  @prop({ required: true, enum: SongQualityEnum })
+  @prop({ required: true, enum: SongQuality })
   public quality!: SongQuality;
 
   /**

@@ -1,6 +1,5 @@
 import { index, modelOptions, prop } from "@typegoose/typegoose";
-import type { SongLanguage, SongTag } from "./song.types";
-import { SongArtists, SongLanguageEnum, SongQualitySource, SongTagEnum } from "./song.types";
+import { SongArtists, SongLanguage, SongQualitySource, SongTag } from "./song.types";
 import { BaseClass } from "./base";
 
 @index({ title: 1 })
@@ -83,13 +82,13 @@ export class SongClass extends BaseClass {
   /**
    * 歌曲标签
    */
-  @prop({ type: () => [String], enum: SongTagEnum })
+  @prop({ type: () => [String], enum: SongTag })
   public tag?: SongTag[];
 
   /**
    * 歌曲语种
    */
-  @prop({ default: "Chinese", enum: SongLanguageEnum })
+  @prop({ default: "Chinese", enum: SongLanguage })
   public language?: SongLanguage;
 
   /**
