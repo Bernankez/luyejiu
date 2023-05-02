@@ -22,8 +22,8 @@ export class SongClass extends BaseClass {
   /**
    * @description 原唱
    */
-  @prop({ type: () => String })
-  public originSinger?: string;
+  @prop({ type: () => [String] }, PropType.ARRAY)
+  public originSinger?: string[];
 
   /**
    * @description 歌曲演唱者
