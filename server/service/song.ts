@@ -13,8 +13,8 @@ export class SongService {
     return this._song.create;
   }
 
-  async find(filter: Partial<FilterOutFunctionKeys<SongClass>>) {
-    const doc = await this._song.find(filter).populate("artsits.artist");
+  async find(filter?: Partial<FilterOutFunctionKeys<SongClass>>) {
+    const doc = await this._song.find(filter as any).populate("artsits.artist");
     return doc.map(item => item.toObject());
   }
 
