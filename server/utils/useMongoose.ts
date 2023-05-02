@@ -7,9 +7,16 @@ export function useMongoose() {
 
   async function connect() {
     const config = useRuntimeConfig();
+    const { mongodbHost, mongodbPort, mongodbUser, mongodbDatabase, mongodbPassword } = config;
+    let url = "";
+    if (mongodbUser && mongodbPassword) {
+      url = `mongodb://${mongodbUser}:${mongodbPassword}@${mongodbHost}:${mongodbPort}`;
+    } else {
+      url = `mongodb://${mongodbHost}:${mongodbPort}`;
+    }
     try {
-      const res = await mongoose.connect(`mongodb://${config.mongodbHost}:${config.mongodbPort}`, {
-        dbName: config.mongodbDatabase,
+      const res = await mongoose.connect(url, {
+        dbName: mongodbDatabase,
       });
       client.value = res;
       return res;
