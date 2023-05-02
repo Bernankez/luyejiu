@@ -1,5 +1,5 @@
 import type { Ref } from "@typegoose/typegoose";
-import { index, modelOptions, prop } from "@typegoose/typegoose";
+import { PropType, index, modelOptions, prop } from "@typegoose/typegoose";
 import { BaseClass } from "./base";
 import { SongClass } from "./song";
 
@@ -15,7 +15,7 @@ export class ArtistClass extends BaseClass {
   /**
    * @description 歌手所有歌曲
    */
-  @prop({ ref: () => SongClass, foreignField: "artists.artist", localField: "_id" })
+  @prop({ ref: () => SongClass, foreignField: "artists.artist", localField: "_id" }, PropType.ARRAY)
   public songs?: Ref<SongClass>[];
 
   /**

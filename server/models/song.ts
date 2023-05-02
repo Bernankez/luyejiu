@@ -1,4 +1,4 @@
-import { index, modelOptions, prop } from "@typegoose/typegoose";
+import { PropType, index, modelOptions, prop } from "@typegoose/typegoose";
 import { SongArtists, SongLanguage, SongQualitySource, SongTag } from "./song.types";
 import { BaseClass } from "./base";
 
@@ -28,7 +28,7 @@ export class SongClass extends BaseClass {
   /**
    * @description 歌曲演唱者
    */
-  @prop({ required: true, type: () => [SongArtists] })
+  @prop({ required: true, type: () => [SongArtists] }, PropType.ARRAY)
   public artists!: SongArtists[];
 
   /**
@@ -64,13 +64,13 @@ export class SongClass extends BaseClass {
   /**
    * @description 相关视频url
    */
-  @prop({ required: true, type: () => [String] })
+  @prop({ required: true, type: () => [String] }, PropType.ARRAY)
   public relatedVideoPath!: string[];
 
   /**
    * 不同质量歌曲源
    */
-  @prop({ required: true, type: () => [SongQualitySource] })
+  @prop({ required: true, type: () => [SongQualitySource] }, PropType.ARRAY)
   public sources!: SongQualitySource[];
 
   /**
@@ -82,7 +82,7 @@ export class SongClass extends BaseClass {
   /**
    * 歌曲标签
    */
-  @prop({ type: () => [String], enum: SongTag })
+  @prop({ type: () => [String], enum: SongTag }, PropType.ARRAY)
   public tag?: SongTag[];
 
   /**
