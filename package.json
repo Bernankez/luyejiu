@@ -46,6 +46,7 @@
     "@vite-pwa/nuxt": "^0.0.7",
     "@vueuse/core": "^9.13.0",
     "@vueuse/nuxt": "^9.13.0",
+    "c12": "^1.4.1",
     "eslint": "^8.39.0",
     "lint-staged": "^13.2.0",
     "lru-cache": "^8.0.5",

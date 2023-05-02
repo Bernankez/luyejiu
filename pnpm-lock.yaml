@@ -81,6 +81,9 @@ devDependencies:
   '@vueuse/nuxt':
     specifier: ^9.13.0
     version: 9.13.0(nuxt@3.4.2)(rollup@2.79.1)(vue@3.2.47)
+  c12:
+    specifier: ^1.4.1
+    version: 1.4.1
   eslint:
     specifier: ^8.39.0
     version: 8.39.0
