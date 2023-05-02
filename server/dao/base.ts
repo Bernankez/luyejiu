@@ -3,7 +3,7 @@ import type { AnyParamConstructor } from "@typegoose/typegoose/lib/types";
 import type { BaseClass } from "../models/base";
 import type { ModelOmit } from "../utils/type";
 
-export class BaseDao<T extends BaseClass> {
+export abstract class BaseDao<T extends BaseClass> {
   constructor(protected model: ReturnModelType<AnyParamConstructor<T>>) {}
 
   ensureIndexes() {
