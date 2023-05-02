@@ -1,19 +1,26 @@
 import mongoose from "mongoose";
 import dayjs from "dayjs";
-import { SongService } from "../../server/service/song";
-import { ArtistService } from "../../server/service/artist";
-import { SongQuality, SongTag } from "../../server/models/song.types";
+import consola from "consola";
+import { SongService } from "~/server/service/song";
+import { ArtistService } from "~/server/service/artist";
+import { SongLanguage, SongQuality, SongTag } from "~/server/models/song.types";
 
 export async function addSong() {
   const artistService = new ArtistService();
   const artist = await artistService.find({ name: "鹿野灸" });
   const songService = new SongService();
   await songService.create({
+    coverPath: "",
     title: "大貔貅",
     originSinger: ["ONER", "宋木子"],
     artists: [{
       artist: new mongoose.Types.ObjectId(artist[0].id),
+      feat: false,
     }],
+    lyricist: "",
+    songwritter: "",
+    album: "",
+    lyric: "",
     duration: 201,
     relatedVideoPath: ["https://www.bilibili.com/video/BV1Wk4y1h7Ji"],
     sources: [
@@ -32,5 +39,14 @@ export async function addSong() {
     ],
     singingTime: dayjs("2023-03-10 19:48:00").toDate(),
     tag: [SongTag.Official],
+    language: SongLanguage.Chinese,
+    remark: "",
+    disabled: false,
   });
+}
+
+export async function findSongs() {
+  const songService = new SongService();
+  const res = await songService.find();
+  consola.success(res);
 }
