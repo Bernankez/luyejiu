@@ -10,7 +10,7 @@ export class ArtistService {
   }
 
   get create() {
-    return this._artist.create;
+    return this._artist.create.bind(this._artist);
   }
 
   async find(filter?: Partial<FilterOutFunctionKeys<ArtistClass>>) {
