@@ -1,6 +1,7 @@
 import type { ReturnModelType } from "@typegoose/typegoose";
 import type { AnyParamConstructor } from "@typegoose/typegoose/lib/types";
 import type { BaseClass } from "../models/base";
+import type { ModelOmit } from "../utils/type";
 
 export class BaseDao<T extends BaseClass> {
   constructor(protected model: ReturnModelType<AnyParamConstructor<T>>) {}
@@ -9,7 +10,7 @@ export class BaseDao<T extends BaseClass> {
     return this.model.ensureIndexes();
   }
 
-  create(doc: T) {
+  create(doc: ModelOmit<T>) {
     return this.model.create(doc);
   }
 

@@ -1,11 +1,21 @@
-import type { SongDao } from "../dao/song";
+import type { FilterOutFunctionKeys } from "@typegoose/typegoose/lib/types";
 import { song } from "../dao/song";
+import type { SongClass } from "../models/song";
 
 export class SongService {
-  private _song: SongDao;
+  private _song: typeof song;
 
   constructor() {
     this._song = song;
+  }
+
+  get create() {
+    return this._song.create;
+  }
+
+  async find(filter: Partial<FilterOutFunctionKeys<SongClass>>) {
+    const doc = await this._song.find(filter).populate("artsits.artist");
+    return doc.map(item => item.toObject());
   }
 
   async findById(id: string) {
@@ -14,7 +24,7 @@ export class SongService {
   }
 
   async findByIds(ids: string[]) {
-    const doc = await this._song.findByIds(ids);
+    const doc = await this._song.findByIds(ids).populate("artists.artist");
     return doc.map(item => item.toObject());
   }
 }
