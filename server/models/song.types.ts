@@ -44,7 +44,7 @@ export class SongArtists {
   /**
    * @description 是否伴唱
    */
-  @prop({ default: false })
+  @prop({ default: false, type: () => Boolean })
   public feat?: boolean;
 }
 
@@ -56,12 +56,12 @@ export class SongQualitySource {
   /**
    * @description 歌曲质量
    */
-  @prop({ required: true, enum: SongQuality })
+  @prop({ required: true, enum: SongQuality, type: () => String })
   public quality!: SongQuality;
 
   /**
    * @description 歌曲url
    */
-  @prop({ required: true })
+  @prop({ required: true, type: () => String })
   public url!: string;
 }

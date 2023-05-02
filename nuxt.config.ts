@@ -27,17 +27,9 @@ export default defineNuxtConfig({
   ],
   typescript: {
     tsConfig: {
-      "compilerOptions": {
+      compilerOptions: {
         // typegoose compat
         experimentalDecorators: true,
-        emitDecoratorMetadata: true,
-      },
-      // ts-node compat
-      "ts-node": {
-        // NOTE only suitable for Node 18 and below versions.
-        // will need to be replaced with `--loader` in the future.
-        experimentalSpecifierResolution: "node",
-        esm: true,
       },
     },
   },
@@ -71,11 +63,11 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     // mongodb config
-    mongodbHost: "",
-    mongodbPort: "",
-    mongodbUser: "",
-    mongodbPassword: "",
-    mongodbDatabase: "",
+    mongodbHost: process.env.MONGODB_HOST,
+    mongodbPort: process.env.MONGODB_PORT,
+    mongodbUser: process.env.MONGODB_USER,
+    mongodbPassword: process.env.MONGODB_PASSWORD,
+    mongodbDatabase: process.env.MONGODB_DATABASE,
   },
   eslint: {
     emitWarning: false,

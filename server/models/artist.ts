@@ -9,7 +9,7 @@ export class ArtistClass extends BaseClass {
   /**
    * @description 歌手名
    */
-  @prop({ required: true })
+  @prop({ required: true, type: () => String })
   public name!: string;
 
   /**
@@ -21,12 +21,12 @@ export class ArtistClass extends BaseClass {
   /**
    * @description 歌手头像
    */
-  @prop()
+  @prop({ type: () => String })
   public avatarPath?: string;
 
   /**
    * @description 是否禁用
    */
-  @prop({ default: false })
+  @prop({ default: false, type: () => Boolean })
   public disabled?: boolean;
 }

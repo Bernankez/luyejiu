@@ -10,19 +10,19 @@ export class SongClass extends BaseClass {
   /**
    * @description 专辑封面url
    */
-  @prop()
+  @prop({ type: () => String })
   public coverPath?: string;
 
   /**
    * @description 歌曲名
    */
-  @prop({ required: true })
+  @prop({ required: true, type: () => String })
   public title!: string;
 
   /**
    * @description 原唱
    */
-  @prop()
+  @prop({ type: () => String })
   public originSinger?: string;
 
   /**
@@ -34,31 +34,31 @@ export class SongClass extends BaseClass {
   /**
    * @description 作词
    */
-  @prop()
+  @prop({ type: () => String })
   public lyricist?: string;
 
   /**
    * @description 作曲
    */
-  @prop()
+  @prop({ type: () => String })
   public songwritter?: string;
 
   /**
    * @description 专辑名
    */
-  @prop()
+  @prop({ type: () => String })
   public album?: string;
 
   /**
    * @description 歌词
    */
-  @prop()
+  @prop({ type: () => String })
   public lyric?: string;
 
   /**
    * @description 歌曲时长，单位秒（s）
    */
-  @prop({ required: true })
+  @prop({ required: true, type: () => Boolean })
   public duration!: number;
 
   /**
@@ -76,7 +76,7 @@ export class SongClass extends BaseClass {
   /**
    * 演唱时间
    */
-  @prop()
+  @prop({ type: () => Date })
   public singingTime?: Date;
 
   /**
@@ -88,19 +88,19 @@ export class SongClass extends BaseClass {
   /**
    * 歌曲语种
    */
-  @prop({ default: "Chinese", enum: SongLanguage })
+  @prop({ default: "Chinese", enum: SongLanguage, type: () => String })
   public language?: SongLanguage;
 
   /**
    * 歌曲备注
    */
-  @prop()
+  @prop({ type: () => String })
   public remark?: string;
 
   /**
    * 是否禁用
    */
-  @prop({ default: false })
+  @prop({ default: false, type: () => Boolean })
   public disabled?: boolean;
 }
 
