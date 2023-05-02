@@ -58,7 +58,7 @@ export class SongClass extends BaseClass {
   /**
    * @description 歌曲时长，单位秒（s）
    */
-  @prop({ required: true, type: () => Boolean })
+  @prop({ required: true, type: () => Number })
   public duration!: number;
 
   /**
