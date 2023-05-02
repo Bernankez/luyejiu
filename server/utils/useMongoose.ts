@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 import consola from "consola";
+import { ref } from "vue";
 
 export function useMongoose() {
-  const client: { value: typeof mongoose | undefined } = {
-    value: undefined,
-  };
+  const client = ref<typeof mongoose>();
 
   async function connect() {
     const config = useRuntimeConfig();

@@ -1,5 +1,5 @@
-import { SongService } from "~/server/service/song";
 import { createServiceError } from "~/server/utils/create";
+import { SongService } from "~/server/service/song";
 
 export default defineEventHandler(async (event) => {
   const id = event.context.params?.id;
