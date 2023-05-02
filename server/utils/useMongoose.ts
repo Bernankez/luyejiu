@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
-import { ref } from "vue";
 import consola from "consola";
 
 export function useMongoose() {
-  const client = ref<typeof mongoose>();
+  const client: { value: typeof mongoose | undefined } = {
+    value: undefined,
+  };
 
   async function connect() {
     const config = useRuntimeConfig();
-    consola.log("config", config);
     try {
       const res = await mongoose.connect(`mongodb://${config.mongodbHost}:${config.mongodbPort}`, {
         dbName: config.mongodbDatabase,

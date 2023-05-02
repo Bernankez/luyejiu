@@ -14,11 +14,11 @@ export class BaseDao<T extends BaseClass> {
   }
 
   get find() {
-    return this.model.find;
+    return this.model.find.bind(this.model);
   }
 
   get findById() {
-    return this.model.findById;
+    return this.model.findById.bind(this.model);
   }
 
   findByIds(ids: string[]) {
@@ -26,10 +26,10 @@ export class BaseDao<T extends BaseClass> {
   }
 
   get update() {
-    return this.model.findByIdAndUpdate;
+    return this.model.findByIdAndUpdate.bind(this.model);
   }
 
   get delete() {
-    return this.model.findByIdAndDelete;
+    return this.model.findByIdAndDelete.bind(this.model);
   }
 }
