@@ -7,7 +7,7 @@ export function useMongoose() {
 
   async function connect() {
     const config = useRuntimeConfig();
-    const { mongodbHost, mongodbPort, mongodbUser, mongodbDatabase, mongodbPassword } = config;
+    const { mongodbHost = "localhost", mongodbPort = 27017, mongodbUser, mongodbDatabase = "luyejiu", mongodbPassword } = config;
     let url = "";
     if (mongodbUser && mongodbPassword) {
       url = `mongodb://${mongodbUser}:${mongodbPassword}@${mongodbHost}:${mongodbPort}`;
