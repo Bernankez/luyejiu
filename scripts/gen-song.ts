@@ -7,7 +7,7 @@ async function createSong() {
   await SongModel.ensureIndexes();
   await SongModel.create({
     title: "大貔貅",
-    originSinger: "佚名",
+    originSinger: ["佚名"],
     artists: [{
       artist: new mongoose.Types.ObjectId(artist!.id),
     }],
