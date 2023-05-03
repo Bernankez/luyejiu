@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import dayjs from "dayjs";
 import { SongService } from "~/server/service/song";
 import { ArtistService } from "~/server/service/artist";
-import { SongLanguage, SongQuality, SongTag } from "~/server/models/song.types";
+import { SongLanguage, SongQuality, SongRelatedSourceType, SongTag } from "~/server/models/song.types";
 
 export async function addSong() {
   const artistService = new ArtistService();
@@ -21,7 +21,16 @@ export async function addSong() {
     album: "",
     lyric: "",
     duration: 201,
-    relatedVideoPath: ["https://www.bilibili.com/video/BV1Wk4y1h7Ji"],
+    relatedSource: [
+      {
+        url: "https://www.bilibili.com/video/BV1Wk4y1h7Ji",
+        type: SongRelatedSourceType.Video,
+      },
+      {
+        url: "https://music.163.com/song?id=2029212359&userid=349400380",
+        type: SongRelatedSourceType.Audio,
+      },
+    ],
     sources: [
       {
         quality: SongQuality.Standard,
