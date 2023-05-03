@@ -86,6 +86,9 @@ export class SongRelatedSource {
   @prop({ required: true, type: () => String })
   public url!: string;
 
+  /**
+   * @description 相关音视频类型
+   */
   @prop({ required: true, enum: SongRelatedSourceType, type: () => String })
   public type!: SongRelatedSourceType;
 }
