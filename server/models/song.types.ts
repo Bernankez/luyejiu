@@ -31,6 +31,15 @@ export enum SongQuality {
 }
 
 /**
+ * @description 相关音视频类型
+ */
+export enum SongRelatedSourceType {
+  Video = "Video",
+  Audio = "Audio",
+  Other = "Other",
+}
+
+/**
  * @description 歌曲演唱者
  */
 @modelOptions({ schemaOptions: { _id: false } })
@@ -64,4 +73,19 @@ export class SongQualitySource {
    */
   @prop({ required: true, type: () => String })
   public url!: string;
+}
+
+/**
+ * @description 相关视频/音频url
+ */
+@modelOptions({ schemaOptions: { _id: false } })
+export class SongRelatedSource {
+  /**
+   * @description 相关音视频url
+   */
+  @prop({ required: true, type: () => String })
+  public url!: string;
+
+  @prop({ required: true, enum: SongRelatedSourceType, type: () => String })
+  public type!: SongRelatedSourceType;
 }

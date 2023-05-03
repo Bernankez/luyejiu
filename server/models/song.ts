@@ -1,5 +1,5 @@
 import { PropType, index, modelOptions, prop } from "@typegoose/typegoose";
-import { SongArtists, SongLanguage, SongQualitySource, SongTag } from "./song.types";
+import { SongArtists, SongLanguage, SongQualitySource, SongRelatedSource, SongTag } from "./song.types";
 import { BaseClass } from "./base";
 
 @index({ title: 1 })
@@ -62,10 +62,10 @@ export class SongClass extends BaseClass {
   public duration!: number;
 
   /**
-   * @description 相关视频url
+   * @description 相关视频/音频url
    */
-  @prop({ required: true, type: () => [String] }, PropType.ARRAY)
-  public relatedVideoPath!: string[];
+  @prop({ type: () => [SongRelatedSource] }, PropType.ARRAY)
+  public relatedSource?: SongRelatedSource[];
 
   /**
    * 不同质量歌曲源
