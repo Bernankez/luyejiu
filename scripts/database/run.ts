@@ -1,6 +1,7 @@
 import type { AnyFn } from "@vueuse/core";
 import { loadConfig } from "c12";
 import mongoose from "mongoose";
+import consola from "consola";
 
 await loadConfig({
   dotenv: true,
@@ -19,7 +20,8 @@ export async function run(funcs: AnyFn[]) {
   });
 
   for (const func of funcs) {
-    await func();
+    const res = await func();
+    consola.success(res);
   }
 
   await mongoose.disconnect();

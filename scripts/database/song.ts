@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import dayjs from "dayjs";
-import consola from "consola";
 import { SongService } from "~/server/service/song";
 import { ArtistService } from "~/server/service/artist";
 import { SongLanguage, SongQuality, SongTag } from "~/server/models/song.types";
@@ -9,7 +8,7 @@ export async function addSong() {
   const artistService = new ArtistService();
   const artist = await artistService.find({ name: "鹿野灸" });
   const songService = new SongService();
-  await songService.create({
+  const res = await songService.create({
     coverPath: "",
     title: "大貔貅",
     originSinger: ["ONER", "宋木子"],
@@ -43,10 +42,17 @@ export async function addSong() {
     remark: "",
     disabled: false,
   });
+  return res;
 }
 
 export async function findSongs() {
   const songService = new SongService();
   const res = await songService.find();
-  consola.success(res);
+  return res;
+}
+
+export async function findSongsByIds() {
+  const songService = new SongService();
+  const res = await songService.findByIds(["644f535eb4887ef4ab05d9f7", "644f535eb4887ef4ab05d9f9", "645153c90187d45944ad4cd0"]);
+  return res;
 }
