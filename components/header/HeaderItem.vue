@@ -59,7 +59,7 @@ const targetPath = computed(() => {
 const LinkRef = ref<ComponentPublicInstance>();
 
 const active = computed(() => {
-  if (targetPath.value) {
+  if (targetPath.value && !/^https?/.test(targetPath.value)) {
     return router.resolve(targetPath.value).path === route.path;
   }
   return false;
