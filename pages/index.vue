@@ -25,6 +25,22 @@ const flightImgRef = ref<HTMLImageElement>();
 
 const proudImgRef = ref<HTMLImageElement>();
 
+watch(flightImgRef, (image) => {
+  if (image) {
+    if (image.complete) {
+      initTimeline();
+    } else {
+      image.onload = initTimeline;
+    }
+  }
+});
+
+function initTimeline() {
+  const tl = gsap.timeline();
+  tl.add(flightAnimation);
+  tl.add(proudAnimation);
+}
+
 function flightAnimation() {
   const flightImg = flightImgRef.value!;
   const tl = gsap.timeline(
@@ -116,12 +132,8 @@ function proudAnimation() {
   });
 }
 
-onMounted(() => {
-  const tl = gsap.timeline();
-  tl.add(flightAnimation);
-  tl.add(proudAnimation);
-
-  // TODO destory gsap before leaving
+onUnmounted(() => {
+  ScrollTrigger.killAll();
 });
 </script>
 
