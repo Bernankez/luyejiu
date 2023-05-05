@@ -3,8 +3,9 @@ export const useAppStore = defineStore("app", () => {
   const showPlayerBar = ref(true);
   const headerHeight = ref("4rem");
   const playerBarHeight = ref("71px");
-  const paddingTop = computed(() => showHeader.value ? headerHeight.value : "0");
-  const paddingBottom = computed(() => showPlayerBar.value ? playerBarHeight.value : "0");
+  // 0px for calc css
+  const paddingTop = computed(() => showHeader.value ? headerHeight.value : "0px");
+  const paddingBottom = computed(() => showPlayerBar.value ? playerBarHeight.value : "0px");
 
   return {
     showHeader,
