@@ -1,8 +1,15 @@
 <template>
   <div class="overflow-hidden">
-    <div class="font-bold text-10 text-center">
-      luyejiu.live
-      some introduction
+    <div class="description flex flex-col justify-between items-center w-full">
+      <div>
+        <div ref="titleRef" class="font-bold text-10">
+          luyejiu.live
+        </div>
+        <div ref="introRef">
+          是一只由祥云化作的十岁柴犬少年vup！
+        </div>
+      </div>
+      <img ref="avatarRef" class="max-h-60vh object-scale-down" src="~/assets/demo.png" />
     </div>
     <img ref="flightImgRef" class="m-x-auto scale-0 object-scale-down" :src="flightImgSrc" alt="luyejiu-flight" />
     <div class="w-full h-100vh"></div>
@@ -18,12 +25,55 @@ import flight0 from "~/assets/gsap/lyj-flight-0.png";
 import flight1 from "~/assets/gsap/lyj-flight-1.png";
 import flight2 from "~/assets/gsap/lyj-flight-2.png";
 
+const { paddingTop, paddingBottom } = storeToRefs(useAppStore());
+
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 const flightImgSrc = ref(flight0);
 const flightImgRef = ref<HTMLImageElement>();
-
 const proudImgRef = ref<HTMLImageElement>();
+const titleRef = ref<HTMLDivElement>();
+const introRef = ref<HTMLDivElement>();
+const avatarRef = ref<HTMLDivElement>();
+
+onMounted(() => {
+  avatarAnimation();
+});
+
+// TODO random avatar
+function avatarAnimation() {
+  const title = titleRef.value!;
+  const intro = introRef.value!;
+  const avatar = avatarRef.value!;
+  const tl = gsap.timeline(
+    {
+      scrollTrigger: {
+        start: "top bottom",
+        end: "bottom top",
+        toggleActions: "restart none restart none",
+        markers: true,
+      },
+    },
+  );
+  tl.from(title, {
+    ease: "elastic.out(1.5, 0.3)",
+    yPercent: -100,
+    opacity: 0,
+    duration: 1,
+  });
+  tl.from(intro, {
+    ease: "elastic.out(1.5, 0.3)",
+    yPercent: -100,
+    opacity: 0,
+    duration: 1,
+  }, "<=0.3");
+  tl.from(avatar, {
+    ease: "elastic.out(1, 0.3)",
+    yPercent: 50,
+    opacity: 0,
+    duration: 1.5,
+  }, "<=0.3");
+}
 
 watch(flightImgRef, (image) => {
   if (image) {
@@ -140,3 +190,8 @@ onUnmounted(() => {
 });
 </script>
 
+<style scoped>
+.description {
+  height: calc(100vh - v-bind(paddingTop) - v-bind(paddingBottom));
+}
+</style>
