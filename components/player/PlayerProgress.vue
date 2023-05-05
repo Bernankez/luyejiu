@@ -1,10 +1,10 @@
 <template>
   <!-- The layer was wrapped to increase the touch area. -->
   <div class="group p-y-1" :class="disabled ? 'cursor-not-allowed' : ''" @mousedown="onMouseDown" @touchstart="onMouseDown">
-    <div ref="railRef" class="relative w-full h-1" :class="[{ rounded: round }, colorRail]">
+    <div ref="railRef" class="relative h-1 w-full" :class="[{ rounded: round }, colorRail]">
       <div class="buffer absolute top-0 h-full" :class="[{ rounded: round }, colorBufferProgress]"></div>
       <div class="slider relative h-full" :class="[disabled ? colorDisabled : colorActive, { rounded: round }]">
-        <div class="absolute left-100% top-50% -translate-x-50% -translate-y-50% w-2.5 h-2.5 rounded-2 transition-all" :class="[disabled ? colorDisabled : colorActive, { 'hidden group-hover:block group-active:block': !isDefined(showIndicate) }]"></div>
+        <div class="absolute left-100% top-50% h-2.5 w-2.5 rounded-2 transition-all -translate-x-50% -translate-y-50%" :class="[disabled ? colorDisabled : colorActive, { 'hidden group-hover:block group-active:block': !isDefined(showIndicate) }]"></div>
       </div>
     </div>
   </div>

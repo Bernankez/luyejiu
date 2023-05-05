@@ -2,16 +2,16 @@
   <HeadlessMenu v-slot="{ close }" as="div" class="relative">
     <HeadlessMenuButton role="button" as="div" class="i-solar:menu-dots-bold text-5" />
     <Transition name="menu-panel">
-      <HeadlessMenuItems as="div" class="absolute right-0 min-w-50 m-t-2 p-1 box-border text-gray-900 rounded-2 bg-gray-50 shadow select-none">
+      <HeadlessMenuItems as="div" class="absolute right-0 m-t-2 box-border min-w-50 select-none rounded-2 bg-gray-50 p-1 text-gray-900 shadow">
         <HeadlessMenuItem as="div" class="menu-item p-0! p-r-1.5!">
-          <select :value="locale" class="h-full w-full p-x-2 p-y-2 box-border text-4.5 rounded-1 bg-gray-50 hover:bg-gray-200 focus:outline-none" @change="(e) => onLocale(e, close)" @click.stop>
+          <select :value="locale" class="box-border h-full w-full rounded-1 bg-gray-50 p-x-2 p-y-2 text-4.5 hover:bg-gray-200 focus:outline-none" @change="(e) => onLocale(e, close)" @click.stop>
             <option v-for="item in locales" :key="item.code" :value="item.code" :selected="locale === item.code">
               {{ item.name }}
             </option>
           </select>
         </HeadlessMenuItem>
         <HeadlessMenuItem as="div" class="menu-item">
-          <NuxtLink to="https://github.com/Bernankez/luyejiu" external target="_blank" class="flex items-center justify-between w-full cursor-default">
+          <NuxtLink to="https://github.com/Bernankez/luyejiu" external target="_blank" class="w-full flex cursor-default items-center justify-between">
             <div class="flex items-center flex-gap-2">
               <div class="i-fa:github text-5"></div>
               <div class="text-4.5">

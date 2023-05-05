@@ -7,7 +7,7 @@
     <!-- Cannot perform animation on iOS -->
     <!-- <BackgroundCSS /> -->
     <Transition name="header">
-      <Header v-if="showHeader" class="fixed top-0 left-0" />
+      <Header v-if="showHeader" class="fixed left-0 top-0" />
     </Transition>
     <main class="z-0 h-full">
       <NuxtPage />

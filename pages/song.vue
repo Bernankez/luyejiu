@@ -26,7 +26,7 @@
     <input v-model="mute" type="checkbox" :truevalue="true" :falsevalue="false" />
 
     <div class="flex flex-col flex-gap-2">
-      <div v-for="song in songs" :key="song.id" class="bg-green cursor-pointer" @click="() => change(song.id)">
+      <div v-for="song in songs" :key="song.id" class="cursor-pointer bg-green" @click="() => change(song.id)">
         {{ song.name }}
       </div>
     </div>

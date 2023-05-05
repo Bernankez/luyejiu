@@ -1,5 +1,5 @@
 <template>
-  <header class="z-609 flex justify-center items-center h-16 w-full bg-gray-50 bg-opacity-70 backdrop-blur backdrop-saturate-100">
+  <header class="z-609 h-16 w-full flex items-center justify-center bg-gray-50 bg-opacity-70 backdrop-blur backdrop-saturate-100">
     <div class="relative flex items-center flex-gap-4">
       <HeaderGroup>
         <HeaderItem icon="i-solar:home-smile-bold" to="/" aria-label="Homepage">
@@ -15,15 +15,15 @@
           {{ $t('header.aboutItem') }}
         </HeaderItem>
       </HeaderGroup>
-      <div class="w-2px h-4 bg-gray-500"></div>
+      <div class="h-4 w-2px bg-gray-500"></div>
       <HeaderGroup>
         <HeaderItem icon="i-fa6-brands:bilibili" to="https://space.bilibili.com/5659864" aria-label="Bilibili" :show-title="false" target="_blank">
           {{ $t("header.bilibiliItem") }}
         </HeaderItem>
       </HeaderGroup>
-      <div class="w-2px h-4 bg-gray-500"></div>
+      <div class="h-4 w-2px bg-gray-500"></div>
       <HeaderMenu />
-      <div class="header-active-bar -z-1 absolute h-50% m-t-6% bg-yellow transition-all-300"></div>
+      <div class="header-active-bar absolute m-t-6% h-50% bg-yellow transition-all-300 -z-1"></div>
     </div>
   </header>
 </template>

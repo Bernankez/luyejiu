@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full bg-gray box-border b-0 b-solid b-green">
+  <div class="box-border h-full w-full b-0 b-green b-solid bg-gray">
     <PlayerCore />
   </div>
 </template>

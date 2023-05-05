@@ -2,7 +2,7 @@
   <div ref="triggerRef" @click="onTrigger">
     <slot></slot>
   </div>
-  <div v-if="showContent && !disabled" ref="contentRef" class="tooltip-content p-x-2 rounded-1 box-border shadow-md b-1 b-solid b-gray-100 bg-gray-50">
+  <div v-if="showContent && !disabled" ref="contentRef" class="tooltip-content box-border b-1 b-gray-100 rounded-1 b-solid bg-gray-50 p-x-2 shadow-md">
     <slot name="content">
     </slot>
   </div>

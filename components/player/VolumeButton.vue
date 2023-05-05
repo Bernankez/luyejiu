@@ -1,13 +1,13 @@
 <template>
   <HeadlessPopover class="relative">
     <Transition name="slide-fade">
-      <HeadlessPopoverPanel class="z-7 absolute bottom-100% left-50% -translate-x-50% m-b-1">
-        <div ref="railRef" class="flex flex-col-reverse h-22 w-10 rounded-3 bg-primary-50 shadow-inset shadow shadow-amber-100 overflow-hidden" @mousedown="onMouseDown" @touchstart="onMouseDown">
+      <HeadlessPopoverPanel class="absolute bottom-100% left-50% z-7 m-b-1 -translate-x-50%">
+        <div ref="railRef" class="h-22 w-10 flex flex-col-reverse overflow-hidden rounded-3 bg-primary-50 shadow shadow-amber-100 shadow-inset" @mousedown="onMouseDown" @touchstart="onMouseDown">
           <div class="slider bg-primary-300"></div>
         </div>
       </HeadlessPopoverPanel>
     </Transition>
-    <HeadlessPopoverButton as="div" role="button" class="text-7 cursor-pointer" :class="volumeIcon" />
+    <HeadlessPopoverButton as="div" role="button" class="cursor-pointer text-7" :class="volumeIcon" />
   </HeadlessPopover>
 </template>
 

@@ -1,12 +1,12 @@
 <template>
   <div class="relative">
-    <div class="absolute w-full h-full flex justify-center">
-      <div class=" w-150 bg-white"></div>
+    <div class="absolute h-full w-full flex justify-center">
+      <div class="w-150 bg-white"></div>
     </div>
     <div class="overflow-hidden">
-      <div class="description flex flex-col justify-between items-center w-full">
+      <div class="description w-full flex flex-col items-center justify-between">
         <div>
-          <div ref="titleRef" class="font-bold text-10">
+          <div ref="titleRef" class="text-10 font-bold">
             luyejiu.live
           </div>
           <div ref="introRef">
@@ -16,7 +16,7 @@
         <img ref="avatarRef" class="max-h-60vh object-scale-down" src="~/assets/demo.png" />
       </div>
       <img ref="flightImgRef" class="m-x-auto scale-0 object-scale-down" :src="flightImgSrc" alt="luyejiu-flight" />
-      <div class="w-full h-100vh"></div>
+      <div class="h-100vh w-full"></div>
       <img ref="proudImgRef" class="m-x-auto max-h-90vh object-scale-down" src="~/assets/gsap/lyj-proud.png" alt="luyejiu-proud" />
     </div>
   </div>

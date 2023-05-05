@@ -1,7 +1,7 @@
 <template>
   <div
     ref="railRef"
-    class="flex flex-col-reverse h-2 md:h-4 w-full rounded-99 bg-gray-200 bg-opacity-50 overflow-hidden"
+    class="h-2 w-full flex flex-col-reverse overflow-hidden rounded-99 bg-gray-200 bg-opacity-50 md:h-4"
     @mousedown="onMouseDown" @touchstart="onMouseDown"
   >
     <div class="slider h-full bg-white"></div>

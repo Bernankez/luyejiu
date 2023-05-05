@@ -1,29 +1,29 @@
 <template>
-  <div class="background grid w-full min-h-full">
-    <div class="relative flex flex-col w-full h-full p-x-8 box-border bg-gray-800 bg-opacity-60 backdrop-blur-60 backdrop-saturate-80">
-      <div class="z-1 absolute top-8 box-border text-8 text-gray-50">
+  <div class="background grid min-h-full w-full">
+    <div class="relative box-border h-full w-full flex flex-col bg-gray-800 bg-opacity-60 p-x-8 backdrop-blur-60 backdrop-saturate-80">
+      <div class="absolute top-8 z-1 box-border text-8 text-gray-50">
         <div role="button" class="i-solar:reply-outline cursor-pointer"></div>
       </div>
-      <div class="flex flex-col h-full w-full">
-        <div class="flex flex-col md:flex-row md:flex-gap-8 h-full">
+      <div class="h-full w-full flex flex-col">
+        <div class="h-full flex flex-col md:flex-row md:flex-gap-8">
           <!-- cover image -->
-          <div class="flex items-center justify-center h-full select-none">
-            <img class="cover w-full max-w-100 md:w-100 object-fit rounded-3 shadow-lg transition-500" :class="{ 'cover--playing': playing }" src="~/assets/demo1.png" alt="cover" />
+          <div class="h-full flex select-none items-center justify-center">
+            <img class="cover object-fit max-w-100 w-full rounded-3 shadow-lg transition-500 md:w-100" :class="{ 'cover--playing': playing }" src="~/assets/demo1.png" alt="cover" />
           </div>
-          <div class="md:flex md:flex-col md:justify-between md:p-y-8 box-border md:w-full">
+          <div class="box-border md:w-full md:flex md:flex-col md:justify-between md:p-y-8">
             <!-- song info -->
-            <div class="flex flex-col flex-gap-2 p-b-4 box-border cursor-default">
-              <div class="text-5.5 md:text-8 text-gray-50">
+            <div class="box-border flex flex-col cursor-default flex-gap-2 p-b-4">
+              <div class="text-5.5 text-gray-50 md:text-8">
                 {{ isHydrated ? song?.name : '' }}
               </div>
-              <div class="text-4.5 md:text-6 text-white">
+              <div class="text-4.5 text-white md:text-6">
                 {{ isHydrated ? song?.singer : '' }}
               </div>
             </div>
             <div>
               <!-- volume bar -->
               <div v-if="!isIOS" class="flex justify-center">
-                <div class="flex items-center flex-gap-2 w-full md:max-w-120">
+                <div class="w-full flex items-center flex-gap-2 md:max-w-120">
                   <div class="i-solar:volume-small-bold text-5 text-gray-50"></div>
                   <VolumeProgress />
                   <div class="i-solar:volume-loud-bold text-5 text-gray-50"></div>
@@ -31,11 +31,11 @@
               </div>
               <!-- action buttons -->
               <div class="flex justify-center">
-                <div class="flex items-center justify-evenly p-y-3 w-full max-w-90 text-6 md:text-8 text-gray-50">
-                  <div v-if="!like" role="button" class="i-solar:heart-outline cursor-pointer active:scale-90 transition" @click="like = true"></div>
-                  <div v-if="like" role="button" class="i-solar:heart-bold text-red-500 cursor-pointer active:scale-90 transition" @click="like = false"></div>
-                  <div role="button" class="i-solar:download-outline cursor-pointer active:scale-90 transition"></div>
-                  <div role="button" class="i-solar:add-square-outline cursor-pointer active:scale-90 transition"></div>
+                <div class="max-w-90 w-full flex items-center justify-evenly p-y-3 text-6 text-gray-50 md:text-8">
+                  <div v-if="!like" role="button" class="i-solar:heart-outline cursor-pointer transition active:scale-90" @click="like = true"></div>
+                  <div v-if="like" role="button" class="i-solar:heart-bold cursor-pointer text-red-500 transition active:scale-90" @click="like = false"></div>
+                  <div role="button" class="i-solar:download-outline cursor-pointer transition active:scale-90"></div>
+                  <div role="button" class="i-solar:add-square-outline cursor-pointer transition active:scale-90"></div>
                 </div>
               </div>
             </div>
@@ -45,7 +45,7 @@
           <!-- player progress -->
           <div>
             <PlayerProgress v-model:time-played="timePlayed" round :disabled="loading" :duration="duration" :show-indicate="true" theme="white" :buffer-progress="bufferProgress" @real-time="onRealTime" />
-            <div class="flex items-center justify-between text-3 text-gray-50 cursor-default">
+            <div class="flex cursor-default items-center justify-between text-3 text-gray-50">
               <div>
                 {{ dayjs.duration(realTime, 'seconds').format("mm:ss") }}
               </div>
@@ -56,12 +56,12 @@
           </div>
           <!-- player control buttons -->
           <div class="flex justify-center">
-            <div class="flex items-center justify-between p-b-5 p-t-3 box-border w-full max-w-90 text-7 text-gray-50">
+            <div class="box-border max-w-90 w-full flex items-center justify-between p-b-5 p-t-3 text-7 text-gray-50">
               <PlaymodeButton />
-              <div class="i-solar:skip-previous-bold-duotone cursor-pointer active:scale-90 transition" @click="() => prev()"></div>
-              <div v-if="!playing" class="i-solar:play-circle-outline text-12 cursor-pointer active:scale-90 transition" @click="() => playing = true"></div>
-              <div v-if="playing" class="i-solar:pause-circle-outline text-12 cursor-pointer active:scale-90 transition" @click="() => playing = false"></div>
-              <div class="i-solar:skip-next-bold-duotone cursor-pointer active:scale-90 transition" @click="() => next()"></div>
+              <div class="i-solar:skip-previous-bold-duotone cursor-pointer transition active:scale-90" @click="() => prev()"></div>
+              <div v-if="!playing" class="i-solar:play-circle-outline cursor-pointer text-12 transition active:scale-90" @click="() => playing = true"></div>
+              <div v-if="playing" class="i-solar:pause-circle-outline cursor-pointer text-12 transition active:scale-90" @click="() => playing = false"></div>
+              <div class="i-solar:skip-next-bold-duotone cursor-pointer transition active:scale-90" @click="() => next()"></div>
               <div class="i-solar:playlist-2-bold cursor-pointer"></div>
             </div>
           </div>
