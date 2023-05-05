@@ -28,14 +28,17 @@ const proudImgRef = ref<HTMLImageElement>();
 watch(flightImgRef, (image) => {
   if (image) {
     if (image.complete) {
-      initTimeline();
+      initScrollTrigger();
     } else {
-      image.onload = initTimeline;
+      image.onload = () => {
+        initScrollTrigger();
+        image.onload = noop;
+      };
     }
   }
 });
 
-function initTimeline() {
+function initScrollTrigger() {
   const tl = gsap.timeline();
   tl.add(flightAnimation);
   tl.add(proudAnimation);
@@ -128,7 +131,7 @@ function proudAnimation() {
   });
   tl.to(proudImg, {
     yPercent: 5,
-    ease: "elastic.out(1, 0.3)",
+    ease: "elastic.out(1.5, 0.3)",
   });
 }
 
