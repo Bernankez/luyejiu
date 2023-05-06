@@ -6,6 +6,8 @@
 
 首页文字样式
 
+首页这个效果 https://github.com/Bernankez/sakana-widget
+
 留声机页歌单列表样式，歌曲条目样式，播放列表功能/样式
 
 歌曲分享，PlayerCore链接/路由（参考网易云）
