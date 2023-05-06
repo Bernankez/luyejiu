@@ -2,6 +2,18 @@
 
 ***我为什么想不开要用headlessUI***
 
+### TODO
+
+首页文字样式
+
+留声机页歌单列表样式，歌曲条目样式，播放列表功能/样式
+
+歌曲分享，PlayerCore链接/路由（参考网易云）
+
+设置页面（启用背景，缓存清除）
+
+关于页面
+
 [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction)
 
 [iconify-solar](https://icon-sets.iconify.design/solar)
