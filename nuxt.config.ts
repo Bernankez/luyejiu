@@ -63,11 +63,12 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     // mongodb config
-    mongodbHost: "",
-    mongodbPort: "",
-    mongodbUser: "",
-    mongodbPassword: "",
-    mongodbDatabase: "",
+    mongodbHost: undefined,
+    mongodbPort: undefined,
+    mongodbUser: undefined,
+    mongodbPassword: undefined,
+    mongodbDatabase: undefined,
+    mongodbSRV: undefined,
   },
   eslint: {
     emitWarning: false,
