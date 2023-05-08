@@ -4,20 +4,20 @@
       <div class="w-150 bg-white"></div>
     </div>
     <div class="overflow-hidden">
-      <div class="description w-full flex flex-col items-center justify-between">
-        <div>
-          <div ref="titleRef" class="text-10 font-bold">
-            luyejiu.live
-          </div>
-          <div ref="introRef">
-            是一只由祥云化作的十岁柴犬少年vup！
+      <div class="description w-full flex flex-col items-center justify-evenly">
+        <div class="flex flex-col items-center">
+          <img ref="titleRef" class="max-w-100 w-70vw object-scale-down" :src="title" />
+          <div ref="introRef" class="max-w-90vw cursor-default text-center font-happy text-8 text-primary-500 sm:text-10">
+            {{ $t("homepage.introduction") }}
           </div>
         </div>
-        <img ref="avatarRef" class="max-h-60vh object-scale-down" src="~/assets/demo.png" />
+        <div ref="avatarRef">
+          <WidgetShake :image="avatars" :size="widgetShakeSize" />
+        </div>
       </div>
       <img ref="flightImgRef" class="m-x-auto scale-0 object-scale-down" :src="flightImgSrc" alt="luyejiu-flight" />
       <div class="h-100vh w-full"></div>
-      <img ref="proudImgRef" class="m-x-auto max-h-90vh object-scale-down" src="~/assets/gsap/lyj-proud.png" alt="luyejiu-proud" />
+      <img ref="proudImgRef" class="m-x-auto max-h-90vh object-scale-down" src="~/assets/gsap/animation/lyj-proud.png" alt="luyejiu-proud" />
     </div>
   </div>
 </template>
@@ -26,9 +26,25 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-import flight0 from "~/assets/gsap/lyj-flight-0.png";
-import flight1 from "~/assets/gsap/lyj-flight-1.png";
-import flight2 from "~/assets/gsap/lyj-flight-2.png";
+import { breakpointsTailwind } from "@vueuse/core";
+import flight0 from "~/assets/gsap/animation/lyj-flight-0.png";
+import flight1 from "~/assets/gsap/animation/lyj-flight-1.png";
+import flight2 from "~/assets/gsap/animation/lyj-flight-2.png";
+import title0 from "~/assets/gsap/title/luyejiu-0.png";
+import title1 from "~/assets/gsap/title/luyejiu-1.png";
+import title2 from "~/assets/gsap/title/luyejiu-2.png";
+import title3 from "~/assets/gsap/title/luyejiu-3.png";
+import demo from "~/assets/demo.png";
+import demo1 from "~/assets/demo1.png";
+
+const titles = [title0, title1, title2, title3];
+const title = ref(pickRandom(titles));
+
+// TODO avatars
+const avatars = [demo, demo1];
+
+const { sm } = useBreakpoints(breakpointsTailwind);
+const widgetShakeSize = computed(() => sm.value ? 400 : 300);
 
 const { paddingTop, paddingBottom } = storeToRefs(useAppStore());
 
@@ -37,15 +53,23 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 const flightImgSrc = ref(flight0);
 const flightImgRef = ref<HTMLImageElement>();
 const proudImgRef = ref<HTMLImageElement>();
-const titleRef = ref<HTMLDivElement>();
+const titleRef = ref<HTMLImageElement>();
 const introRef = ref<HTMLDivElement>();
 const avatarRef = ref<HTMLDivElement>();
 
-onMounted(() => {
-  avatarAnimation();
+watch(titleRef, (titleImage) => {
+  if (titleImage) {
+    if (titleImage.complete) {
+      avatarAnimation();
+    } else {
+      titleImage.onload = () => {
+        avatarAnimation();
+        titleImage.onload = noop;
+      };
+    }
+  }
 });
 
-// TODO random avatar
 function avatarAnimation() {
   const title = titleRef.value!;
   const intro = introRef.value!;
@@ -56,7 +80,7 @@ function avatarAnimation() {
         start: "top bottom",
         end: "bottom top",
         toggleActions: "restart none restart none",
-        markers: true,
+        markers: false,
       },
     },
   );
@@ -71,7 +95,7 @@ function avatarAnimation() {
     yPercent: -100,
     opacity: 0,
     duration: 1,
-  }, "<=0.3");
+  }, "<=0.4");
   tl.from(avatar, {
     ease: "elastic.out(1, 0.3)",
     yPercent: 50,
@@ -114,7 +138,7 @@ function flightAnimation() {
         // sticky
         pin: true,
         // 标记，dev only
-        markers: true,
+        markers: false,
         onUpdate(self) {
           // 根据进度切换图片
           // 进度根据下面duration以及动画开始时间延迟计算
@@ -181,7 +205,7 @@ function proudAnimation() {
       pin: true,
       start: "bottom bottom",
       end: "bottom+=1000 bottom",
-      markers: true,
+      markers: false,
     },
   });
   tl.to(proudImg, {
@@ -197,6 +221,6 @@ onUnmounted(() => {
 
 <style scoped>
 .description {
-  height: calc(100vh - v-bind(paddingTop) - v-bind(paddingBottom));
+  min-height: calc(100vh - v-bind(paddingTop) - v-bind(paddingBottom));
 }
 </style>

@@ -1,8 +1,17 @@
-import { defineConfig, presetIcons, presetUno, transformerDirectives } from "unocss";
+import { defineConfig, presetIcons, presetUno, presetWebFonts, transformerDirectives } from "unocss";
 import { amber, deepOrange, gray, primary, red, yellow } from "./styles/color";
 
 export default defineConfig({
-  presets: [presetUno(), presetIcons()],
+  presets: [
+    presetUno(),
+    presetIcons(),
+    presetWebFonts({
+      provider: "google",
+      fonts: {
+        happy: "ZCOOL KuaiLe",
+      },
+    }),
+  ],
   transformers: [transformerDirectives()],
   theme: {
     colors: {
