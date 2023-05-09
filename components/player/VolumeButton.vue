@@ -2,7 +2,7 @@
   <HeadlessPopover class="relative">
     <Transition name="slide-fade">
       <HeadlessPopoverPanel class="absolute bottom-100% left-50% z-7 m-b-1 -translate-x-50%">
-        <div ref="railRef" class="h-22 w-10 flex flex-col-reverse overflow-hidden rounded-3 bg-primary-50 shadow shadow-amber-100 shadow-inset" @mousedown="onMouseDown" @touchstart="onMouseDown">
+        <div ref="railRef" class="h-22 w-10 flex flex-col-reverse overflow-hidden rounded-3 bg-primary-50 shadow shadow-primary-200 shadow-inset" @mousedown="onMouseDown" @touchstart="onMouseDown">
           <div class="slider bg-primary-300"></div>
         </div>
       </HeadlessPopoverPanel>
