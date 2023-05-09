@@ -1,5 +1,5 @@
 <template>
-  test
+  <SongListItem />
 </template>
 
 <script setup lang="ts">
