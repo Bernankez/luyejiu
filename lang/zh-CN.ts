@@ -1,5 +1,8 @@
 export default defineI18nLocale(async (_context, _locale) => {
   return {
+    homepage: {
+      introduction: "一只由 祥云 化作的十岁 柴犬 少年VUP！",
+    },
     player: {
       releaseToSwitchPrev: "松手切换上一曲",
       releaseToSwitchNext: "松手切换下一曲",

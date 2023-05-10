@@ -1,5 +1,8 @@
 export default defineI18nLocale(async (_context, _locale) => {
   return {
+    homepage: {
+      introduction: "A ten-year-old boy VUP transformed by clouds!",
+    },
     player: {
       releaseToSwitchPrev: "Switch to previous",
       releaseToSwitchNext: "Switch to next",

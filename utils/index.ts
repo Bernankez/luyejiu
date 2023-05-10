@@ -5,3 +5,7 @@ export function shuffle<T = any>(array: T[]) {
 }
 
 export function noop() {}
+
+export function pickRandom<T>(things: T[]) {
+  return things[Math.floor(Math.random() * things.length)];
+}

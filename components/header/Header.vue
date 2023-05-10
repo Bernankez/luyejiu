@@ -6,13 +6,13 @@
           <template #icon>
             <NuxtIcon class="block h-1em w-1em text-4.3" name="paw" />
           </template>
-          {{ $t('header.homepageItem') }}
+          {{ $t("header.homepageItem") }}
         </HeaderItem>
         <HeaderItem icon="i-solar:music-note-3-bold" to="/phonograph" aria-label="Phonograph">
-          {{ $t('header.phonographItem') }}
+          {{ $t("header.phonographItem") }}
         </HeaderItem>
         <HeaderItem icon="i-fa6-solid:dog" to="/preview" aria-label="About">
-          {{ $t('header.aboutItem') }}
+          {{ $t("header.aboutItem") }}
         </HeaderItem>
       </HeaderGroup>
       <div class="h-4 w-2px bg-gray-500"></div>
