@@ -2,7 +2,7 @@
   <div class="box-border flex cursor-default items-center bg-gray-50 p-y-2 p-r-3 transition hover:bg-gray-100" @pointerup="onPointerUp" @dblclick="onDoubleClick">
     <div class="w-12 flex items-center justify-center text-4.5 sm:text-5" :class="[playing ? 'text-primary-500' : 'text-gray-900 ']">
       <template v-if="!playing">
-        {{ props.index }}1
+        {{ props.index }}
       </template>
       <div v-else class="i-svg-spinners:bars-scale-middle text-5 sm:text-6"></div>
     </div>
@@ -20,6 +20,7 @@
         <div v-if="like" role="button" class="i-solar:heart-bold cursor-pointer text-red-500 transition active:scale-90" @click="like = false"></div>
         <div role="button" class="i-solar:playlist-broken transition active:scale-90 hover:text-gray-900" @click.stop="onInsert"></div>
         <div role="button" class="i-solar:menu-dots-square-outline transition hover:text-gray-900" @click.stop="onMenu"></div>
+        <SongListItemMenu />
       </div>
       <div class="flex items-center text-3 text-gray-600">
         26:26

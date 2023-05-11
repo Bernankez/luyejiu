@@ -2,7 +2,7 @@
   <HeadlessMenu v-slot="{ close }" as="div" class="relative">
     <HeadlessMenuButton role="button" as="div" class="i-solar:menu-dots-bold text-5" />
     <Transition name="menu-panel">
-      <HeadlessMenuItems as="div" class="absolute right-0 m-t-2 box-border min-w-50 select-none rounded-2 bg-gray-50 p-1 text-gray-900 shadow">
+      <HeadlessMenuItems as="div" class="absolute right-0 z-1 m-t-2 box-border min-w-50 select-none rounded-2 bg-gray-50 p-1 text-gray-900 shadow">
         <HeadlessMenuItem as="div" class="menu-item p-0! p-r-1.5!">
           <select :value="locale" class="box-border h-full w-full rounded-1 bg-gray-50 p-x-2 p-y-2 text-4.5 hover:bg-gray-200 focus:outline-none" @change="(e) => onLocale(e, close)" @click.stop>
             <option v-for="item in locales" :key="item.code" :value="item.code" :selected="locale === item.code">
