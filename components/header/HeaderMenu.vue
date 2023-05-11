@@ -54,7 +54,8 @@ const onLocale = (e: Event, close: Fn) => {
 
 .menu-panel-enter-from,
 .menu-panel-leave-to {
-  transform: translateY(-10px);
+  transform: translateX(10%) translateY(-10%);
+  scale: 0.9;
   opacity: 0;
 }
 </style>
