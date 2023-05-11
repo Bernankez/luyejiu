@@ -111,9 +111,6 @@ export default defineNuxtConfig({
       cookieKey: "i18n_redirected",
       redirectOn: "root",
     },
-    vueI18n: {
-      fallbackLocale: "zh",
-    },
   },
   pwa: {
     // NOTE

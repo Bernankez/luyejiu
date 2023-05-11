@@ -1,5 +1,5 @@
 import type { Howl } from "howler";
-import LRU from "lru-cache";
+import { LRUCache } from "lru-cache";
 
 export const howlCache = useHowlCache(5);
 export function useHowlCache<T extends Howl = Howl>(max = 10) {
@@ -15,7 +15,7 @@ export function useHowlCache<T extends Howl = Howl>(max = 10) {
     ? useNoneCache<string, T>({
       dispose: beforeDelete,
     })
-    : new LRU<string, T>({
+    : new LRUCache<string, T>({
       max,
       dispose: beforeDelete,
     });

@@ -113,8 +113,8 @@ const { x, y, strategy } = useFloating(triggerRef, contentRef, {
 <style scoped>
 .tooltip-content {
   position: v-bind(strategy);
-  top: v-bind(`${y ?? 0}px`);
-  left: v-bind(`${x ?? 0}px`);
+  top: v-bind(`${y}px`);
+  left: v-bind(`${x}px`);
   width: max-content;
 }
 </style>

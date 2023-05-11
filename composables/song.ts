@@ -1,10 +1,9 @@
-import type { MaybeComputedRef } from "@unhead/vue";
-import type { AnyFn, Fn } from "@vueuse/core";
+import type { AnyFn, Fn, MaybeRefOrGetter } from "@vueuse/core";
 import { Howl } from "howler";
 import { getSongById } from "~/api";
 import type { Song } from "~/types/song";
 
-export function useSong(id: MaybeComputedRef<string | undefined>) {
+export function useSong(id: MaybeRefOrGetter<string | undefined>) {
   const loading = ref(false);
   const playing = ref(false);
   const duration = ref(0);

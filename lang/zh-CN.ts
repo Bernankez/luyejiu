@@ -1,4 +1,4 @@
-export default defineI18nLocale(async (_context, _locale) => {
+export default defineI18nLocale(async (_locale) => {
   return {
     homepage: {
       introduction: "一只由 祥云 化作的十岁 柴犬 少年VUP！",

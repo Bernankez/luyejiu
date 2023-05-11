@@ -1,4 +1,4 @@
-import type { MaybeComputedRef } from "@vueuse/core";
+import type { MaybeRefOrGetter } from "@vueuse/core";
 import { v4 as uuid } from "uuid";
 import type { Songlist } from "~/types/song";
 
@@ -42,7 +42,7 @@ function _useSonglists() {
 /** 单例全局歌单 */
 export const useSonglists = createSharedComposable(_useSonglists);
 
-export function useSonglist(id: MaybeComputedRef<string>) {
+export function useSonglist(id: MaybeRefOrGetter<string>) {
   const { get } = useSonglists();
   const songlist = computed(() => get(resolveUnref(id)));
 
