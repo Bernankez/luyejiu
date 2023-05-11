@@ -1,4 +1,4 @@
-export default defineI18nLocale(async (_context, _locale) => {
+export default defineI18nLocale(async (_locale) => {
   return {
     homepage: {
       introduction: "A ten-year-old boy VUP transformed by clouds!",

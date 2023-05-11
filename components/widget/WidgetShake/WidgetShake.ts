@@ -2,20 +2,20 @@
  * @see https://github.com/dsrkafuu/sakana-widget
  */
 
-import type { Fn, MaybeComputedRef, MaybeRef } from "@vueuse/core";
+import type { Fn, MaybeRef, MaybeRefOrGetter } from "@vueuse/core";
 
 export type StrokeStyle = CanvasGradient | CanvasGradient | string;
 
 export interface Options {
   size?: MaybeRef<number>;
   /** image url */
-  image?: MaybeComputedRef<string>;
+  image?: MaybeRefOrGetter<string>;
   /** 惯性 inertia */
-  i?: MaybeComputedRef<number>;
+  i?: MaybeRefOrGetter<number>;
   /** 粘性 stickiness */
-  s?: MaybeComputedRef<number>;
+  s?: MaybeRefOrGetter<number>;
   /** 衰减 decay */
-  d?: MaybeComputedRef<number>;
+  d?: MaybeRefOrGetter<number>;
   /** angle */
   r?: MaybeRef<number>;
   /** height */
@@ -25,14 +25,14 @@ export interface Options {
   /** horizontalSpeed */
   w?: MaybeRef<number>;
   /** rotate origin */
-  rotate?: MaybeComputedRef<number>;
-  strokeStyle?: MaybeComputedRef<StrokeStyle> | ((ctx: CanvasRenderingContext2D, canvas?: HTMLCanvasElement) => StrokeStyle);
-  strokeWidth?: MaybeComputedRef<number>;
-  rod?: MaybeComputedRef<boolean>;
-  draggable?: MaybeComputedRef<boolean>;
+  rotate?: MaybeRefOrGetter<number>;
+  strokeStyle?: MaybeRefOrGetter<StrokeStyle> | ((ctx: CanvasRenderingContext2D, canvas?: HTMLCanvasElement) => StrokeStyle);
+  strokeWidth?: MaybeRefOrGetter<number>;
+  rod?: MaybeRefOrGetter<boolean>;
+  draggable?: MaybeRefOrGetter<boolean>;
   /** motion stop threshold */
-  threshold?: MaybeComputedRef<number>;
-  autoFit?: MaybeComputedRef<boolean>;
+  threshold?: MaybeRefOrGetter<number>;
+  autoFit?: MaybeRefOrGetter<boolean>;
 }
 
 export function useWidgetShake(options?: Options) {
