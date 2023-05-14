@@ -74,7 +74,7 @@ const referenceVNode = computed(() => {
     consola.warn("UITooltip: slot[default] should not be empty");
     return h("span");
   }
-  const defaults = slots.default();
+  const defaults = flatten(slots.default());
   if (defaults.length > 1) {
     consola.warn("UITooltip: slot[default] should only have one exactly child");
   }
@@ -104,12 +104,10 @@ const showContent = (show: boolean) => {
   uncontrolledModelValue.value = show;
 };
 const openContent = () => {
-  consola.success("open content");
   canceled.value = false;
   debouncedOpenContent.value?.();
 };
 const closeContent = () => {
-  consola.success("close content");
   canceled.value = true;
   showContent(false);
 };
