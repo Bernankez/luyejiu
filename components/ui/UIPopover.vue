@@ -132,9 +132,9 @@ let triggerScope: EffectScope | undefined;
 const dispose = () => {
   triggerScope && triggerScope.stop();
 };
-watch(() => props.trigger, (trigger) => {
+watch([() => props.trigger, () => props.disabled], ([trigger, disabled]) => {
   dispose();
-  if (props.disabled) {
+  if (disabled) {
     return;
   }
   triggerScope = effectScope();
