@@ -1,120 +1,28 @@
 <template>
-  <div ref="triggerRef" @click="onTrigger">
+  <UIPopover v-bind="props">
     <slot></slot>
-  </div>
-  <div v-if="showContent && !disabled" ref="contentRef" class="tooltip-content box-border b-1 b-gray-100 rounded-1 b-solid bg-gray-50 p-x-2 shadow-md">
-    <slot name="content">
-    </slot>
-  </div>
+    <template #content>
+      <slot name="content"></slot>
+    </template>
+  </UIPopover>
 </template>
 
 <script setup lang="ts">
-import type { Placement, Strategy } from "@floating-ui/vue";
-import { offset, useFloating } from "@floating-ui/vue";
-import type { Fn } from "@vueuse/core";
-import type { EffectScope } from "vue";
+import type { Placement } from "@floating-ui/vue";
 
 const props = withDefaults(defineProps<{
-  disabled?: boolean;
-  strategy?: Strategy;
-  placement?: Placement;
   trigger?: "click" | "hover";
+  disabled?: boolean;
   delay?: number;
+  placement?: Placement;
+  strategy?: "fixed" | "absolute";
+  teleport?: boolean;
 }>(), {
-  disabled: false,
   trigger: "hover",
+  disabled: false,
   delay: 0,
-});
-
-const { strategy: _strategy, placement, trigger, delay } = toRefs(props);
-
-const triggerRef = ref<HTMLDivElement>();
-const contentRef = ref<HTMLDivElement>();
-
-const showContent = ref(false);
-
-const canceled = ref(false);
-const debouncedOpenContent = ref<Fn>();
-watch(delay, (newDelay) => {
-  if (newDelay === 0) {
-    debouncedOpenContent.value = () => showContent.value = true;
-  } else {
-    debouncedOpenContent.value = useDebounceFn(() => {
-      if (canceled.value) {
-        canceled.value = false;
-        return;
-      }
-      showContent.value = true;
-    }, newDelay);
-  }
-}, {
-  immediate: true,
-});
-const openContent = () => {
-  canceled.value = false;
-  debouncedOpenContent.value?.();
-};
-const closeContent = () => {
-  showContent.value = false;
-  canceled.value = true;
-};
-
-let triggerScope: EffectScope;
-const dispose = () => {
-  triggerScope && triggerScope.stop();
-};
-onScopeDispose(dispose);
-watch(trigger, (newTrigger) => {
-  dispose();
-  if (newTrigger === "hover") {
-    triggerScope = effectScope();
-    triggerScope.run(() => {
-      const { isOutside } = useMouseInElement(triggerRef);
-      watchEffect(() => {
-        if (isOutside.value) {
-          closeContent();
-        } else {
-          openContent();
-        }
-      });
-    });
-  } else if (newTrigger === "click") {
-    triggerScope = effectScope();
-    triggerScope.run(() => {
-      const activeEl = useActiveElement();
-      watch(activeEl, (el) => {
-        if (el !== triggerRef.value) {
-          closeContent();
-        }
-      });
-    });
-  }
-}, {
-  immediate: true,
-});
-
-const onTrigger = () => {
-  if (trigger.value === "click") {
-    if (showContent.value) {
-      closeContent();
-    } else {
-      openContent();
-    }
-  }
-};
-
-const { x, y, strategy } = useFloating(triggerRef, contentRef, {
-  strategy: _strategy,
-  placement,
-  middleware: [offset(3)],
+  placement: "top",
+  strategy: "absolute",
+  teleport: false,
 });
 </script>
-
-<style scoped>
-.tooltip-content {
-  position: v-bind(strategy);
-  top: v-bind(`${y}px`);
-  left: v-bind(`${x}px`);
-  width: max-content;
-}
-</style>
