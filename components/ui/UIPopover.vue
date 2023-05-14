@@ -150,6 +150,7 @@ watch([() => props.trigger, () => props.disabled], ([trigger, disabled]) => {
       });
     });
   } else if (trigger === "focus") {
+    // TODO not effect
     triggerScope.run(() => {
       const activeEl = useActiveElement();
       watch(activeEl, (el) => {
