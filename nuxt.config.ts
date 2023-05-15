@@ -49,7 +49,8 @@ export default defineNuxtConfig({
   ],
   imports: {
     dirs: [
-      "./store",
+      "composables/**",
+      "store",
     ],
   },
   hooks: {

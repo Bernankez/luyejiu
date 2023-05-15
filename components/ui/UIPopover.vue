@@ -162,7 +162,7 @@ watch([() => props.trigger, () => props.disabled], ([trigger, disabled]) => {
     });
   } else if (trigger === "click") {
     triggerScope.run(() => {
-      const referenceEl = computed(() => unrefElement(referenceRef.value));
+      const referenceEl = computed(() => unrefElement(referenceRef));
       useEventListener(referenceEl, "click", openContent);
       onClickOutside(referenceRef, () => {
         closeContent();
