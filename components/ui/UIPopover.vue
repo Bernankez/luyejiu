@@ -150,17 +150,20 @@ watch([() => props.trigger, () => props.disabled], ([trigger, disabled]) => {
       });
     });
   } else if (trigger === "focus") {
-    // TODO not effect
     triggerScope.run(() => {
-      const activeEl = useActiveElement();
-      watch(activeEl, (el) => {
-        if (el !== referenceRef.value) {
+      const { focused } = useFocusWithin(referenceRef);
+      watchEffect(() => {
+        if (focused.value) {
+          openContent();
+        } else {
           closeContent();
         }
       });
     });
   } else if (trigger === "click") {
     triggerScope.run(() => {
+      const referenceEl = computed(() => unrefElement(referenceRef.value));
+      useEventListener(referenceEl, "click", openContent);
       onClickOutside(referenceRef, () => {
         closeContent();
       });

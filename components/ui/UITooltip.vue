@@ -11,7 +11,7 @@
 import type { Placement } from "@floating-ui/vue";
 
 const props = withDefaults(defineProps<{
-  trigger?: "click" | "hover";
+  trigger?: "click" | "hover" | "focus";
   disabled?: boolean;
   delay?: number;
   placement?: Placement;
