@@ -1,18 +1,19 @@
 <template>
-  <HeadlessPopover class="relative">
+  <div ref="wrapperRef" class="relative">
+    <div ref="referenceRef" role="button" class="cursor-pointer text-7" :class="volumeIcon" @click="() => showContent = !showContent"></div>
     <Transition name="slide-fade">
-      <HeadlessPopoverPanel class="absolute bottom-100% left-50% z-7 m-b-1 -translate-x-50%">
+      <div v-if="showContent" ref="floatingRef" :style="initialStyle" class="absolute z-7">
         <div ref="railRef" class="h-22 w-10 flex flex-col-reverse overflow-hidden rounded-3 bg-primary-50 shadow shadow-primary-200 shadow-inset" @mousedown="onMouseDown" @touchstart="onMouseDown">
           <div class="slider bg-primary-300"></div>
         </div>
-      </HeadlessPopoverPanel>
+      </div>
     </Transition>
-    <HeadlessPopoverButton as="div" role="button" class="cursor-pointer text-7" :class="volumeIcon" />
-  </HeadlessPopover>
+  </div>
 </template>
 
 <script setup lang="ts">
 import type { Fn } from "@vueuse/core";
+import { offset, useFloating } from "@floating-ui/vue";
 import { useVolumeButtonDragging } from "./VolumeButton";
 
 const { volume } = usePlayer();
@@ -25,6 +26,27 @@ const volumeIcon = computed(() => {
   } else {
     return "i-solar:volume-cross-bold";
   }
+});
+
+const showContent = ref(false);
+const wrapperRef = ref<HTMLDivElement>();
+const referenceRef = ref<HTMLDivElement>();
+const floatingRef = ref<HTMLDivElement>();
+onClickOutside(wrapperRef, () => {
+  showContent.value = false;
+});
+
+const { floatingStyles, isPositioned } = useFloating(referenceRef, floatingRef, {
+  placement: "top",
+  middleware: [offset(3)],
+  transform: false,
+});
+
+const { initialStyle } = useInitialStyle({
+  openContent: () => showContent.value = true,
+  closeContent: () => showContent.value = false,
+  floatingStyles,
+  isPositioned,
 });
 
 const railRef = ref<HTMLDivElement>();
@@ -107,7 +129,8 @@ function stopDragging() {
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-  transform: translateX(-50%) translateY(10px);
+  scale: 0.9;
+  transform: translateY(30%);
   opacity: 0;
 }
 </style>
