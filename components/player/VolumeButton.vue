@@ -2,7 +2,7 @@
   <div ref="wrapperRef" class="relative">
     <div ref="referenceRef" role="button" class="cursor-pointer text-7" :class="volumeIcon" @click="() => showContent = !showContent"></div>
     <Transition name="slide-fade">
-      <div v-if="showContent" ref="floatingRef" :style="initialStyle" class="absolute z-7">
+      <div v-if="showContent" ref="floatingRef" :style="floatingStyles" class="absolute z-7">
         <div ref="railRef" class="h-22 w-10 flex flex-col-reverse overflow-hidden rounded-3 bg-primary-50 shadow shadow-primary-200 shadow-inset" @mousedown="onMouseDown" @touchstart.passive="onMouseDown">
           <div class="slider bg-primary-300"></div>
         </div>
@@ -36,17 +36,10 @@ onClickOutside(wrapperRef, () => {
   showContent.value = false;
 });
 
-const { floatingStyles, isPositioned } = useFloating(referenceRef, floatingRef, {
+const { floatingStyles } = useFloating(referenceRef, floatingRef, {
   placement: "top",
   middleware: [offset(3)],
   transform: false,
-});
-
-const { initialStyle } = useInitialStyle({
-  openContent: () => showContent.value = true,
-  closeContent: () => showContent.value = false,
-  floatingStyles,
-  isPositioned,
 });
 
 const railRef = ref<HTMLDivElement>();
@@ -124,7 +117,9 @@ function stopDragging() {
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all 0.15s ease-out;
+  transition-timing-function: ease-out;
+  transition-duration: 0.15s;
+  transition-property: opacity, transform, scale;
 }
 
 .slide-fade-enter-from,

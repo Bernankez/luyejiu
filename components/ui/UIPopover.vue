@@ -203,6 +203,7 @@ const { floatingStyles, middlewareData, placement } = useFloating(referenceRef, 
     }
     return noop;
   },
+  transform: false,
 });
 const arrowStyle = computed(() => {
   const { x, y } = middlewareData.value.arrow || {};
