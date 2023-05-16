@@ -124,8 +124,8 @@ function stopDragging() {
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-  scale: 0.9;
-  transform: translateY(30%);
+  transform: translateY(15%);
   opacity: 0;
+  scale: 0.9;
 }
 </style>
