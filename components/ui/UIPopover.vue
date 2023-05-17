@@ -22,9 +22,7 @@
 import type { Placement, Side, Strategy } from "@floating-ui/vue";
 import { arrow, autoUpdate, flip, offset, shift, useFloating } from "@floating-ui/vue";
 import type { Fn } from "@vueuse/core";
-import type { EffectScope } from "nuxt/dist/app/compat/capi";
-import { createTextVNode } from "vue";
-import type { ComponentPublicInstance, VNode } from "vue";
+import type { EffectScope } from "vue";
 
 const props = withDefaults(defineProps<{
   trigger?: "click" | "hover" | "focus" | "manual";
@@ -68,31 +66,9 @@ const { define: DefineTemplate, reuse: ReuseTemplate } = createReusableTemplate(
 
 // get slot dom
 const slots = useSlots();
-const textVNodeType = createTextVNode("").type;
-const referenceVNode = computed(() => {
-  if (!slots.default) {
-    consola.warn("UITooltip: slot[default] should not be empty");
-    return h("span");
-  }
-  const defaults = flatten(slots.default());
-  if (defaults.length > 1) {
-    consola.warn("UITooltip: slot[default] should only have one exactly child");
-  }
-  const defaultSlot = defaults[0];
-  if (defaultSlot.type === textVNodeType) {
-    return h("span", defaultSlot);
-  }
-  return defaultSlot;
-});
-const referenceRef = ref<ComponentPublicInstance | HTMLElement>();
-const createSlot = (vNode: VNode) => {
-  return defineComponent(() => {
-    return () => h(vNode, { ref: referenceRef });
-  });
-};
-const CustomSlot = createSlot(referenceVNode.value);
-const floatingRef = ref<HTMLDivElement>();
+const { CustomSlot, slotRef: referenceRef } = createSlot(slots.default, "default");
 
+const floatingRef = ref<HTMLDivElement>();
 const arrowRef = ref<HTMLDivElement>();
 
 // handle show/hide
