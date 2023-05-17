@@ -22,7 +22,6 @@
 import type { Placement, Side, Strategy } from "@floating-ui/vue";
 import { arrow, autoUpdate, flip, offset, shift, useFloating } from "@floating-ui/vue";
 import type { Fn } from "@vueuse/core";
-import type { EffectScope } from "vue";
 
 const props = withDefaults(defineProps<{
   trigger?: "click" | "hover" | "focus" | "manual";
@@ -104,51 +103,16 @@ watch(() => props.delay, (delay) => {
 }, {
   immediate: true,
 });
-let triggerScope: EffectScope | undefined;
-const dispose = () => {
-  triggerScope && triggerScope.stop();
-};
+const { dispose, triggerListener } = useFloatingTrigger(referenceRef, {
+  openContent,
+  closeContent,
+});
 watch([() => props.trigger, () => props.disabled], ([trigger, disabled]) => {
   dispose();
   if (disabled) {
     return;
   }
-  triggerScope = effectScope();
-  if (trigger === "hover") {
-    triggerScope.run(() => {
-      const { isOutside } = useMouseInElement(referenceRef);
-      watchEffect(() => {
-        if (isOutside.value) {
-          closeContent();
-        } else {
-          openContent();
-        }
-      });
-    });
-  } else if (trigger === "focus") {
-    triggerScope.run(() => {
-      const { focused } = useFocusWithin(referenceRef);
-      watchEffect(() => {
-        if (focused.value) {
-          openContent();
-        } else {
-          closeContent();
-        }
-      });
-    });
-  } else if (trigger === "click") {
-    triggerScope.run(() => {
-      const referenceEl = computed(() => unrefElement(referenceRef));
-      useEventListener(referenceEl, "click", openContent);
-      onClickOutside(referenceRef, () => {
-        closeContent();
-      });
-    });
-  } else if (trigger === "manual") {
-    // do nothing
-  } else {
-    consola.warn(`UITooltip: trigger[${trigger}] is not supported`);
-  }
+  triggerListener(trigger);
 }, { immediate: true });
 
 const middleware = computed(() => {
