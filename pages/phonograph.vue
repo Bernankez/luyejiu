@@ -1,6 +1,6 @@
 <template>
   <SongListItem v-for="i in 50" :key="i" :index="i" />
-  <UIDropdown @click="onClick">
+  <UIDropdown trigger="click" @click="onClick">
     <div role="button" class="w-max select-none rounded-2 bg-white p-3">
       Menu
     </div>
@@ -8,7 +8,7 @@
       <UIDropdownItem value="tttt">
         testfg
       </UIDropdownItem>
-      <UIDropdown trigger="click" placement="right-start">
+      <UIDropdown placement="right-start">
         <UIDropdownItem nested>
           test
         </UIDropdownItem>

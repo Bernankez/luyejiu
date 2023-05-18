@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import type { Placement, Strategy } from "@floating-ui/vue";
 import { autoUpdate, flip, offset, shift, useFloating } from "@floating-ui/vue";
-import { CloseContentKey, OnItemClickKey } from "./injection-key";
+import { CloseContentKey, OnItemClickKey, SetCanceledKey } from "./injection-key";
 
 const props = withDefaults(defineProps<{
   modelValue?: boolean | typeof unhandledState;
@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   modelValue: unhandledState,
   defaultValue: false,
-  trigger: "click",
+  trigger: "hover",
   strategy: "absolute",
   placement: "bottom-start",
   autoUpdate: true,
@@ -35,7 +35,7 @@ const emit = defineEmits<{
 
 // parent's onItemClick
 // to pass to the nested parent menu
-const parentOnItemClick = inject(OnItemClickKey);
+const parentOnItemClick = inject(OnItemClickKey, undefined);
 provide(OnItemClickKey, onItemClick);
 
 function onItemClick(value?: string | number) {
@@ -46,7 +46,7 @@ function onItemClick(value?: string | number) {
   }
 }
 
-const parentCloseContent = inject(CloseContentKey);
+const parentCloseContent = inject(CloseContentKey, undefined);
 provide(CloseContentKey, provideCloseContent);
 
 function provideCloseContent() {
@@ -54,6 +54,17 @@ function provideCloseContent() {
     parentCloseContent();
   } else {
     closeContent();
+  }
+}
+
+const parentSetCanceled = inject(SetCanceledKey, undefined);
+provide(SetCanceledKey, setCanceled);
+
+function setCanceled(isCanceled: boolean) {
+  if (parentSetCanceled) {
+    parentSetCanceled(isCanceled);
+  } else {
+    canceled.value = isCanceled;
   }
 }
 
@@ -67,11 +78,24 @@ const showContent = (show: boolean) => {
   emit("update:modelValue", show);
   uncontrolledModelValue.value = show;
 };
+const canceled = ref(false);
 function openContent() {
   showContent(true);
 }
 function closeContent() {
   showContent(false);
+}
+
+const debouncedCloseContent = useDebounceFn(() => {
+  if (canceled.value) {
+    canceled.value = false;
+    return;
+  }
+  closeContent();
+}, 200);
+function closeContentWithDelay() {
+  canceled.value = false;
+  debouncedCloseContent();
 }
 
 const slots = useSlots();
@@ -80,6 +104,7 @@ const floatingRef = ref<HTMLElement>();
 const referenceEl = computed(() => unrefElement(referenceRef));
 const floatingEl = computed(() => unrefElement(floatingRef));
 
+// TODO transition direction
 const { triggerListener } = useFloatingTrigger(referenceRef, {
   openContent,
   closeContent,
@@ -98,8 +123,19 @@ const { triggerListener } = useFloatingTrigger(referenceRef, {
     });
   },
   hover() {
-    // useMouseInElement
-    // offset
+    const { isOutside: isOutsideReferenceEl } = useMouseInElement(referenceRef);
+    const { isOutside: isOutsideFloatingEl } = useMouseInElement(floatingRef);
+    watchEffect(() => {
+      if (!isOutsideReferenceEl.value || !isOutsideFloatingEl.value) {
+        canceled.value = true;
+        setCanceled(true);
+        if (!mergedModelValue.value) {
+          openContent();
+        }
+      } else {
+        closeContentWithDelay();
+      }
+    });
   },
 });
 
