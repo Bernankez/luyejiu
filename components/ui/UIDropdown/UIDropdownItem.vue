@@ -6,27 +6,34 @@
 
 <script setup lang="ts">
 import type { StyleValue } from "vue";
-import { OnItemClickKey } from "./injection-key";
+import { CloseContentKey, OnItemClickKey } from "./injection-key";
 
 const props = withDefaults(defineProps<{
-  emitClick?: boolean; // emit on click
+  static?: boolean; // static means not close on item
+  nested?: boolean; // is nested item
   value?: string | number; // unique key
   raw?: boolean; // without style
   style?: StyleValue; // custom style
 }>(), {
-  emitClick: true,
+  static: false,
+  nested: false,
+  raw: false,
 });
 
 const emit = defineEmits<{
-  (event: "click", value: typeof props.value): void;
+  (event: "click", e: MouseEvent): void;
 }>();
 
 const onItemClick = inject(OnItemClickKey, (..._: any[]) => {});
+const closeContent = inject(CloseContentKey, (..._: any[]) => {});
 
-const onClick = () => {
-  if (props.emitClick) {
-    emit("click", props.value);
+const onClick = (e: MouseEvent) => {
+  if (!props.nested) {
+    emit("click", e);
     onItemClick(props.value);
+  }
+  if (!props.static && !props.nested) {
+    closeContent();
   }
 };
 </script>

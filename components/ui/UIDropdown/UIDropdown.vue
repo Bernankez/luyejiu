@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import type { Placement, Strategy } from "@floating-ui/vue";
 import { autoUpdate, flip, offset, shift, useFloating } from "@floating-ui/vue";
-import { OnItemClickKey } from "./injection-key";
+import { CloseContentKey, OnItemClickKey } from "./injection-key";
 
 const props = withDefaults(defineProps<{
   modelValue?: boolean | typeof unhandledState;
@@ -27,7 +27,6 @@ const props = withDefaults(defineProps<{
   placement: "bottom-start",
   autoUpdate: true,
 });
-// TODO offset: number
 
 const emit = defineEmits<{
   (event: "update:modelValue", show: boolean): void;
@@ -47,6 +46,17 @@ function onItemClick(value?: string | number) {
   }
 }
 
+const parentCloseContent = inject(CloseContentKey);
+provide(CloseContentKey, provideCloseContent);
+
+function provideCloseContent() {
+  if (parentCloseContent) {
+    parentCloseContent();
+  } else {
+    closeContent();
+  }
+}
+
 const { placement, strategy, trigger } = toRefs(props);
 
 const uncontrolledModelValue = ref(props.defaultValue);
@@ -57,12 +67,12 @@ const showContent = (show: boolean) => {
   emit("update:modelValue", show);
   uncontrolledModelValue.value = show;
 };
-const openContent = () => {
+function openContent() {
   showContent(true);
-};
-const closeContent = () => {
+}
+function closeContent() {
   showContent(false);
-};
+}
 
 const slots = useSlots();
 const { slotRef: referenceRef, CustomSlot } = createSlot(slots.default, "default");
@@ -81,7 +91,6 @@ const { triggerListener } = useFloatingTrigger(referenceRef, {
         openContent();
       }
     });
-    // TODO close on item ?
     onClickOutside(referenceEl, (e) => {
       if (!floatingEl.value?.contains(e.target as Node)) {
         closeContent();

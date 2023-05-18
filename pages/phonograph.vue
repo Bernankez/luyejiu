@@ -9,7 +9,7 @@
         testfg
       </UIDropdownItem>
       <UIDropdown trigger="click" placement="right-start">
-        <UIDropdownItem :emit-click="false">
+        <UIDropdownItem nested>
           test
         </UIDropdownItem>
         <template #content>
@@ -18,7 +18,7 @@
           </UIDropdownItem>
         </template>
       </UIDropdown>
-      <UIDropdownItem>
+      <UIDropdownItem static>
         test
       </UIDropdownItem>
     </template>
