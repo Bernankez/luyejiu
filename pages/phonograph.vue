@@ -1,19 +1,21 @@
 <template>
   <SongListItem v-for="i in 50" :key="i" :index="i" />
-  <UIDropdown>
+  <UIDropdown @click="onClick">
     <div role="button" class="w-max select-none rounded-2 bg-white p-3">
       Menu
     </div>
     <template #content>
-      <UIDropdownItem>
+      <UIDropdownItem value="tttt">
         testfg
       </UIDropdownItem>
       <UIDropdown trigger="click" placement="right-start">
-        <UIDropdownItem>
+        <UIDropdownItem :emit-click="false">
           test
         </UIDropdownItem>
         <template #content>
-          fffff
+          <UIDropdownItem value="ffff">
+            fffff
+          </UIDropdownItem>
         </template>
       </UIDropdown>
       <UIDropdownItem>
@@ -24,5 +26,7 @@
 </template>
 
 <script setup lang="ts">
-
+const onClick = (value?: string | number) => {
+  console.log(value);
+};
 </script>
