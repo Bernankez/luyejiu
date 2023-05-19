@@ -125,8 +125,8 @@ const { triggerListener } = useFloatingTrigger(referenceRef, {
   hover() {
     const { isOutside: isOutsideReferenceEl } = useMouseInElement(referenceRef);
     const { isOutside: isOutsideFloatingEl } = useMouseInElement(floatingRef);
-    watchEffect(() => {
-      if (!isOutsideReferenceEl.value || !isOutsideFloatingEl.value) {
+    watch([isOutsideReferenceEl, isOutsideFloatingEl], ([isOutsideReferenceEl, isOutsideFloatingEl]) => {
+      if (!isOutsideReferenceEl || !isOutsideFloatingEl) {
         canceled.value = true;
         setCanceled(true);
         if (!mergedModelValue.value) {
