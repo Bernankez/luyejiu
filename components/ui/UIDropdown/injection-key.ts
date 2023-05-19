@@ -4,4 +4,6 @@ export const OnItemClickKey: InjectionKey<(value?: string | number) => void> = S
 
 export const CloseContentKey: InjectionKey<() => void> = Symbol("close-content");
 
-export const SetCanceledKey: InjectionKey<(canceled: boolean) => void> = Symbol("set-canceled");
+export const CancelCloseKey: InjectionKey<() => void> = Symbol("cancel-close");
+
+export const CancelOpenKey: InjectionKey<() => void> = Symbol("cancel-open");

@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import type { Placement, Strategy } from "@floating-ui/vue";
 import { autoUpdate, flip, offset, shift, useFloating } from "@floating-ui/vue";
-import { CloseContentKey, OnItemClickKey, SetCanceledKey } from "./injection-key";
+import { CancelCloseKey, CancelOpenKey, CloseContentKey, OnItemClickKey } from "./injection-key";
 
 const props = withDefaults(defineProps<{
   modelValue?: boolean | typeof unhandledState;
@@ -57,15 +57,24 @@ function provideCloseContent() {
   }
 }
 
-const parentSetCanceled = inject(SetCanceledKey, undefined);
-provide(SetCanceledKey, setCanceled);
+const parentCancelClose = inject(CancelCloseKey, undefined);
+provide(CancelCloseKey, cancelClose);
 
-function setCanceled(isCanceled: boolean) {
-  if (parentSetCanceled) {
-    parentSetCanceled(isCanceled);
-  } else {
-    canceled.value = isCanceled;
+function cancelClose() {
+  if (parentCancelClose) {
+    parentCancelClose();
   }
+  selfCancelClose();
+}
+
+const parentCancelOpen = inject(CancelOpenKey, undefined);
+provide(CancelOpenKey, cancelOpen);
+
+function cancelOpen() {
+  if (parentCancelOpen) {
+    parentCancelOpen();
+  }
+  selfCancelOpen();
 }
 
 const { placement, strategy, trigger } = toRefs(props);
@@ -78,7 +87,6 @@ const showContent = (show: boolean) => {
   emit("update:modelValue", show);
   uncontrolledModelValue.value = show;
 };
-const canceled = ref(false);
 function openContent() {
   showContent(true);
 }
@@ -86,20 +94,12 @@ function closeContent() {
   showContent(false);
 }
 
-const debouncedCloseContent = useDebounceFn(() => {
-  if (canceled.value) {
-    canceled.value = false;
-    return;
-  }
-  closeContent();
-}, 200);
-function closeContentWithDelay() {
-  canceled.value = false;
-  debouncedCloseContent();
-}
+const { fn: closeContentWithDelay, cancel: selfCancelClose } = useDelayFn(closeContent, 200);
+
+const { fn: openContentWithDelay, cancel: selfCancelOpen } = useDelayFn(openContent, 100);
 
 const slots = useSlots();
-const { slotRef: referenceRef, CustomSlot } = createSlot(slots.default, "default");
+const { CustomSlot, slotRef: referenceRef } = createSlot(slots.default, "default");
 const floatingRef = ref<HTMLElement>();
 const referenceEl = computed(() => unrefElement(referenceRef));
 const floatingEl = computed(() => unrefElement(floatingRef));
@@ -127,13 +127,15 @@ const { triggerListener } = useFloatingTrigger(referenceRef, {
     const { isOutside: isOutsideFloatingEl } = useMouseInElement(floatingRef);
     watch([isOutsideReferenceEl, isOutsideFloatingEl], ([isOutsideReferenceEl, isOutsideFloatingEl]) => {
       if (!isOutsideReferenceEl || !isOutsideFloatingEl) {
-        canceled.value = true;
-        setCanceled(true);
+        cancelClose();
         if (!mergedModelValue.value) {
-          openContent();
+          openContentWithDelay();
         }
       } else {
-        closeContentWithDelay();
+        cancelOpen();
+        if (mergedModelValue.value) {
+          closeContentWithDelay();
+        }
       }
     });
   },
