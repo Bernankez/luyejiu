@@ -10,10 +10,10 @@ export function createSlot<T extends Slot<any>>(slot?: T, name?: string) {
     return () => h(slotVNode.value, { ref: slotRef });
   });
 
-  return {
-    slotRef,
-    CustomSlot,
-  };
+  return makeDestructurable(
+    { CustomSlot, slotRef } as const,
+    [CustomSlot, slotRef] as const,
+  );
 }
 
 const textVNodeType = createTextVNode("").type;
