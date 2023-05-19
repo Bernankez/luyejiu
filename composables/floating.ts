@@ -1,4 +1,5 @@
-import type { Fn, MaybeRef } from "@vueuse/core";
+import type { Placement } from "@floating-ui/vue";
+import type { Fn, MaybeRef, MaybeRefOrGetter } from "@vueuse/core";
 import type { EffectScope } from "nuxt/dist/app/compat/capi";
 import type { ComponentPublicInstance } from "vue";
 
@@ -81,4 +82,28 @@ export function useFloatingTrigger<R extends MaybeRef<ComponentPublicInstance | 
     triggerListener,
     dispose,
   };
+}
+
+export function useTransition(placement: MaybeRefOrGetter<Placement>, offset: MaybeRefOrGetter<string | number> = "10%") {
+  return computed(() => {
+    const _placement = resolveUnref(placement);
+    const _offset = resolveUnref(offset);
+
+    const placementMap: Record<Placement, string> = {
+      "top": `translateY(${_offset})`,
+      "top-start": `translateY(${_offset}) translateX(-${_offset})`,
+      "top-end": `translateY(${_offset}) translateX(${_offset})`,
+      "bottom": `translateY(-${_offset})`,
+      "bottom-start": `translateY(-${_offset}) translateX(-${_offset})`,
+      "bottom-end": `translateY(-${_offset}) translateX(${_offset})`,
+      "left": `translateX(${_offset})`,
+      "left-start": `translateX(${_offset}) translateY(-${_offset})`,
+      "left-end": `translateX(${_offset}) translateY(${_offset})`,
+      "right": `translateX(-${_offset})`,
+      "right-start": `translateX(-${_offset}) translateY(-${_offset})`,
+      "right-end": `translateX(-${_offset}) translateY(${_offset})`,
+    };
+
+    return placementMap[_placement];
+  });
 }

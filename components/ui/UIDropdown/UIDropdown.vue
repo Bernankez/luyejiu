@@ -104,7 +104,6 @@ const floatingRef = ref<HTMLElement>();
 const referenceEl = computed(() => unrefElement(referenceRef));
 const floatingEl = computed(() => unrefElement(floatingRef));
 
-// TODO transition direction
 const { triggerListener } = useFloatingTrigger(referenceRef, {
   openContent,
   closeContent,
@@ -147,7 +146,7 @@ watch(trigger, (trigger) => {
 
 const middleware = ref([offset(5), flip(), shift()]);
 
-const { floatingStyles } = useFloating(referenceRef, floatingRef, {
+const { floatingStyles, placement: finalPlacement } = useFloating(referenceRef, floatingRef, {
   placement,
   strategy,
   middleware,
@@ -159,6 +158,8 @@ const { floatingStyles } = useFloating(referenceRef, floatingRef, {
     return noop;
   },
 });
+
+const transform = useTransition(finalPlacement, "10%");
 </script>
 
 <style scoped>
@@ -166,12 +167,13 @@ const { floatingStyles } = useFloating(referenceRef, floatingRef, {
 .menu-leave-active {
   transition-timing-function: ease;
   transition-duration: 0.1s;
-  transition-property: opacity, scale;
+  transition-property: opacity, scale, transform;
 }
 
 .menu-enter-from,
 .menu-leave-to {
-  scale: 0.8;
+  transform: v-bind(transform);
   opacity: 0;
+  scale: 0.8;
 }
 </style>
