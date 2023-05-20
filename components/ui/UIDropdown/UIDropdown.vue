@@ -1,7 +1,7 @@
 <template>
   <CustomSlot />
   <Transition name="menu">
-    <div v-if="mergedModelValue" ref="floatingRef" :style="floatingStyles" class="absolute left-0 top-0 z-1 box-border min-w-50 w-max select-none rounded-2 bg-gray-50 p-1 text-gray-900 shadow">
+    <div v-if="mergedModelValue" ref="floatingRef" :style="{ ...floatingStyles, ...transitionStyles }" class="absolute left-0 top-0 z-1 box-border min-w-50 w-max select-none rounded-2 bg-gray-50 p-1 text-gray-900 shadow">
       <slot name="content" :close="closeContent"></slot>
     </div>
   </Transition>
@@ -159,21 +159,30 @@ const { floatingStyles, placement: finalPlacement } = useFloating(referenceRef, 
   },
 });
 
+// NOTE finalPlacement在floatingRef第一次被展示后才是最终的placement
+// 所以这里首次得到的transform是根据传入的placement计算的
+// 在首次展示时transition的方向会不正确
+// 目前没有解决办法
 const transform = useTransition(finalPlacement, "10%");
+const transitionStyles = computed(() => {
+  return {
+    "--menu-transform": transform.value,
+  };
+});
 </script>
 
 <style scoped>
 .menu-enter-active,
 .menu-leave-active {
   transition-timing-function: ease;
-  transition-duration: 0.1s;
-  transition-property: opacity, scale, transform;
+  transition-duration: 0.15s;
+  transition-property: transform, opacity, scale;
 }
 
 .menu-enter-from,
 .menu-leave-to {
-  transform: v-bind(transform);
-  opacity: 0;
+  transform: var(--menu-transform);
   scale: 0.8;
+  opacity: 0;
 }
 </style>

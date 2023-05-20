@@ -3,7 +3,7 @@
 
   <DefineTemplate>
     <Transition name="fade">
-      <div v-if="mergedModelValue && !disabled" ref="floatingRef" class="left-0 top-0 box-border w-max b-1 b-gray-100 rounded-1 b-solid bg-gray-50 p-x-2 shadow-md" :style="floatingStyles">
+      <div v-if="mergedModelValue && !disabled" ref="floatingRef" class="left-0 top-0 box-border w-max b-1 b-gray-100 rounded-1 b-solid bg-gray-50 p-x-2 shadow-md" :style="{ ...floatingStyles, ...transitionStyles }">
         <slot name="content">
           {{ content }}
         </slot>
@@ -170,6 +170,10 @@ const arrowStyle = computed(() => {
     [staticSide]: `${offset}px`,
   };
 });
+const transform = useTransition(placement, "10%");
+const transitionStyles = computed(() => ({
+  "--menu-transform": transform.value,
+}));
 </script>
 
 <style scoped>
@@ -177,11 +181,12 @@ const arrowStyle = computed(() => {
 .fade-leave-active {
   transition-timing-function: ease;
   transition-duration: v-bind("`${props.animationDuration}ms`");
-  transition-property: opacity;
+  transition-property: opacity, transform;
 }
 
 .fade-enter-from,
 .fade-leave-to {
+  transform: var(--menu-transform);
   opacity: 0;
 }
 </style>
