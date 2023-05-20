@@ -9,8 +9,8 @@
           </option>
         </select>
       </UIDropdownItem>
-      <UIDropdownItem>
-        <NuxtLink to="https://github.com/Bernankez/luyejiu" external target="_blank" class="w-full flex cursor-default items-center justify-between">
+      <UIDropdownItem :style="{ padding: 0 }">
+        <NuxtLink to="https://github.com/Bernankez/luyejiu" external target="_blank" class="w-full flex cursor-default items-center justify-between p-x-2 p-y-1.5">
           <div class="flex items-center flex-gap-2">
             <div class="i-fa:github text-5"></div>
             <div class="text-4.5">

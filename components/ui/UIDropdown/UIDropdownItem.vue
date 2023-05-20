@@ -1,5 +1,5 @@
 <template>
-  <div :style="style" :class="[raw ? '' : 'cursor-default items-center flex-gap-2 rounded-2 p-x-2 p-y-1.5 hover-bg-gray-200']" @click="onClick">
+  <div :style="style" :class="[raw ? '' : 'cursor-default items-center flex-gap-2 rounded-2 p-x-2 p-y-2.5 box-border hover-bg-gray-200']" @click="onClick">
     <slot></slot>
   </div>
 </template>
