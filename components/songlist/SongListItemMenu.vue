@@ -1,20 +1,15 @@
 <template>
-  <HeadlessMenu as="div" class="relative">
-    <HeadlessMenuButton role="button" as="div" class="i-solar:menu-dots-square-outline transition hover:text-gray-900" />
-    <Transition name="menu-panel">
-      <HeadlessMenuItems
-        as="div"
-        class="absolute right-0 z-1 m-t-2 box-border min-w-50 select-none rounded-2 bg-gray-50 p-1 text-gray-900 shadow"
-      >
-        <HeadlessMenuItem as="div" class="menu-item">
-          复制链接
-        </HeadlessMenuItem>
-        <HeadlessMenuItem as="div" class="menu-item">
-          下载
-        </HeadlessMenuItem>
-      </HeadlessMenuItems>
-    </Transition>
-  </HeadlessMenu>
+  <UIDropdown trigger="click" placement="bottom-end">
+    <div role="button" class="i-solar:menu-dots-square-outline transition hover:text-gray-900"></div>
+    <template #content>
+      <UIDropdownItem class="menu-item">
+        复制链接
+      </UIDropdownItem>
+      <UIDropdownItem class="menu-item">
+        下载
+      </UIDropdownItem>
+    </template>
+  </UIDropdown>
 </template>
 
 <script setup lang="ts">
@@ -23,7 +18,7 @@
 
 <style scoped>
 .menu-item {
-  @apply flex items-center flex-gap-2 p-x-2 p-y-2 text-4 sm:text-4.5 hover-bg-gray-200 rounded-2 cursor-default;
+  @apply text-4 sm:text-4.5;
 }
 
 .menu-panel-enter-active,

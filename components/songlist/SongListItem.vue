@@ -16,10 +16,7 @@
     </div>
     <div class="m-l-3 flex flex-col self-stretch justify-between">
       <div class="flex items-center justify-end flex-gap-3 text-5 leading-[1] text-gray-700 sm:text-6">
-        <div v-if="!like" role="button" class="i-solar:heart-outline cursor-pointer transition active:scale-90 hover:text-gray-900" @click="like = true"></div>
-        <div v-if="like" role="button" class="i-solar:heart-bold cursor-pointer text-red-500 transition active:scale-90" @click="like = false"></div>
         <div role="button" class="i-solar:playlist-broken transition active:scale-90 hover:text-gray-900" @click.stop="onInsert"></div>
-        <div role="button" class="i-solar:menu-dots-square-outline transition hover:text-gray-900" @click.stop="onMenu"></div>
         <SongListItemMenu />
       </div>
       <div class="flex items-center text-3 text-gray-600">
@@ -44,22 +41,6 @@ const emit = defineEmits<{
   (event: "click", song: Song): void;
   (event: "insert", song: Song): void;
 }>();
-
-const id = computed(() => props.song?.id);
-const { favoriteList, add, remove } = useFavoriteList();
-const like = computed({
-  get() {
-    return id.value && favoriteList.value?.songs.includes(id.value);
-  },
-  set(like) {
-    if (!id.value) { return; }
-    if (like) {
-      add(id.value);
-    } else {
-      remove(id.value);
-    }
-  },
-});
 
 function onPointerUp(event: PointerEvent) {
   // pointerType: touch | mouse

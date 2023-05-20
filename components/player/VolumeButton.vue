@@ -3,7 +3,7 @@
     <div ref="referenceRef" role="button" class="cursor-pointer text-7" :class="volumeIcon" @click="() => showContent = !showContent"></div>
     <Transition name="slide-fade">
       <div v-if="showContent" ref="floatingRef" :style="floatingStyles" class="absolute z-7">
-        <div ref="railRef" class="h-22 w-10 flex flex-col-reverse overflow-hidden rounded-3 bg-primary-50 shadow shadow-primary-200 shadow-inset" @mousedown="onMouseDown" @touchstart.passive="onMouseDown">
+        <div ref="railRef" class="h-22 w-10 flex flex-col-reverse overflow-hidden rounded-3 bg-primary-50 shadow shadow-primary-200 shadow-inset" @mousedown="onMouseDown" @touchstart="onMouseDown">
           <div class="slider bg-primary-300"></div>
         </div>
       </div>
@@ -97,7 +97,7 @@ function startDragging() {
     listenerCleanups.value.push(
       useEventListener(document, "touchend", onMouseUp),
       useEventListener(document, "mouseup", onMouseUp),
-      useEventListener(document, "touchmove", onMouseMove, { passive: true }),
+      useEventListener(document, "touchmove", onMouseMove),
       useEventListener(document, "mousemove", onMouseMove),
     );
   }

@@ -2,7 +2,7 @@
   <div
     ref="railRef"
     class="h-2 w-full flex flex-col-reverse overflow-hidden rounded-99 bg-gray-200 bg-opacity-50 md:h-4"
-    @mousedown="onMouseDown" @touchstart.passive="onMouseDown"
+    @mousedown="onMouseDown" @touchstart="onMouseDown"
   >
     <div class="slider h-full bg-white"></div>
   </div>
@@ -68,7 +68,7 @@ function startDragging() {
     listenerCleanups.value.push(
       useEventListener(document, "touchend", onMouseUp),
       useEventListener(document, "mouseup", onMouseUp),
-      useEventListener(document, "touchmove", onMouseMove, { passive: true }),
+      useEventListener(document, "touchmove", onMouseMove),
       useEventListener(document, "mousemove", onMouseMove),
     );
   }
