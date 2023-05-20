@@ -1,18 +1,19 @@
 <template>
-  <HeadlessPopover class="relative">
+  <div ref="wrapperRef" class="relative">
+    <div ref="referenceRef" role="button" class="cursor-pointer text-7" :class="volumeIcon" @click="() => showContent = !showContent"></div>
     <Transition name="slide-fade">
-      <HeadlessPopoverPanel class="absolute bottom-100% left-50% z-7 m-b-1 -translate-x-50%">
-        <div ref="railRef" class="h-22 w-10 flex flex-col-reverse overflow-hidden rounded-3 bg-primary-50 shadow shadow-primary-200 shadow-inset" @mousedown="onMouseDown" @touchstart="onMouseDown">
+      <div v-if="showContent" ref="floatingRef" :style="floatingStyles" class="absolute z-7">
+        <div ref="railRef" class="h-22 w-10 flex flex-col-reverse overflow-hidden rounded-3 bg-primary-50 shadow shadow-primary-200 shadow-inset" @mousedown="onMouseDown" @touchstart.passive="onMouseDown">
           <div class="slider bg-primary-300"></div>
         </div>
-      </HeadlessPopoverPanel>
+      </div>
     </Transition>
-    <HeadlessPopoverButton as="div" role="button" class="cursor-pointer text-7" :class="volumeIcon" />
-  </HeadlessPopover>
+  </div>
 </template>
 
 <script setup lang="ts">
 import type { Fn } from "@vueuse/core";
+import { offset, useFloating } from "@floating-ui/vue";
 import { useVolumeButtonDragging } from "./VolumeButton";
 
 const { volume } = usePlayer();
@@ -25,6 +26,20 @@ const volumeIcon = computed(() => {
   } else {
     return "i-solar:volume-cross-bold";
   }
+});
+
+const showContent = ref(false);
+const wrapperRef = ref<HTMLDivElement>();
+const referenceRef = ref<HTMLDivElement>();
+const floatingRef = ref<HTMLDivElement>();
+onClickOutside(wrapperRef, () => {
+  showContent.value = false;
+});
+
+const { floatingStyles } = useFloating(referenceRef, floatingRef, {
+  placement: "top",
+  middleware: [offset(3)],
+  transform: false,
 });
 
 const railRef = ref<HTMLDivElement>();
@@ -82,7 +97,7 @@ function startDragging() {
     listenerCleanups.value.push(
       useEventListener(document, "touchend", onMouseUp),
       useEventListener(document, "mouseup", onMouseUp),
-      useEventListener(document, "touchmove", onMouseMove),
+      useEventListener(document, "touchmove", onMouseMove, { passive: true }),
       useEventListener(document, "mousemove", onMouseMove),
     );
   }
@@ -102,12 +117,15 @@ function stopDragging() {
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all 0.15s ease-out;
+  transition-timing-function: ease-out;
+  transition-duration: 0.15s;
+  transition-property: opacity, transform, scale;
 }
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-  transform: translateX(-50%) translateY(10px);
+  transform: translateY(15%);
   opacity: 0;
+  scale: 0.9;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <!-- The layer was wrapped to increase the touch area. -->
-  <div class="group p-y-1" :class="disabled ? 'cursor-not-allowed' : ''" @mousedown="onMouseDown" @touchstart="onMouseDown">
+  <div class="group p-y-1" :class="disabled ? 'cursor-not-allowed' : ''" @mousedown="onMouseDown" @touchstart.passive="onMouseDown">
     <div ref="railRef" class="relative h-1 w-full" :class="[{ rounded: round }, colorRail]">
       <div class="buffer absolute top-0 h-full" :class="[{ rounded: round }, colorBufferProgress]"></div>
       <div class="slider relative h-full" :class="[disabled ? colorDisabled : colorActive, { rounded: round }]">
@@ -142,7 +142,7 @@ function startDragging() {
     listenerCleanups.value.push(
       useEventListener(document, "touchend", onMouseUp),
       useEventListener(document, "mouseup", onMouseUp),
-      useEventListener(document, "touchmove", onMouseMove),
+      useEventListener(document, "touchmove", onMouseMove, { passive: true }),
       useEventListener(document, "mousemove", onMouseMove),
     );
   }

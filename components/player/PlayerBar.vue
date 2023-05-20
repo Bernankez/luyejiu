@@ -36,6 +36,7 @@
             <!-- next button -->
             <div v-if="sm" role="button" class="i-solar:skip-next-bold-duotone cursor-pointer text-4.5" @click="() => next()"></div>
             <!-- repeat button -->
+            <!-- TODO fix -->
             <PlaymodeButton v-if="sm" class="cursor-pointer text-6" />
           </div>
           <!-- volume button -->

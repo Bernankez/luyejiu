@@ -191,7 +191,7 @@ function flightAnimation() {
     rotate: 0,
   }, ">=1");
   tl.to(flightImg, {
-    y: "100vh",
+    yPercent: 150,
     duration: 5,
   }, "main+=3");
 }

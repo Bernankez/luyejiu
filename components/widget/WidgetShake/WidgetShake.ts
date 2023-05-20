@@ -223,7 +223,7 @@ export function useWidgetShake(options?: Options) {
     if (image) {
       if (drag) {
         const mousedownStop = useEventListener(image, "mousedown", onStart);
-        const touchstartStop = useEventListener(image, "touchstart", onStart);
+        const touchstartStop = useEventListener(image, "touchstart", onStart, { passive: true });
         listeners.push(mousedownStop, touchstartStop);
       } else {
         listeners.forEach(fn => fn());
@@ -242,7 +242,7 @@ export function useWidgetShake(options?: Options) {
     w.value = 0;
     t.value = 0;
 
-    const moveStop = useEventListener(document, isTouchEvent(e) ? "touchmove" : "mousemove", _onMove);
+    const moveStop = useEventListener(document, isTouchEvent(e) ? "touchmove" : "mousemove", _onMove, { passive: true });
     const endStop = useEventListener(document, isTouchEvent(e) ? "touchend" : "mouseup", _onEnd);
 
     function _onMove(_e: MouseEvent | TouchEvent) {

@@ -62,6 +62,7 @@ export function useSong(id: MaybeRefOrGetter<string | undefined>) {
            * @see https://github.com/goldfire/howler.js/issues/1309
            */
           html5: true,
+          autoplay: false,
           preload: "metadata",
           onload() {
             consola.info(`useSong:${id}: new Howl loaded`);
