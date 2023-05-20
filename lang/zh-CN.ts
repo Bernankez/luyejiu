@@ -12,6 +12,7 @@ export default defineI18nLocale(async (_locale) => {
       phonographItem: "留声机",
       aboutItem: "关于",
       bilibiliItem: "鹿野灸b站",
+      tiktokItem: "鹿野灸抖音",
       githubItem: "GitHub",
     },
     song: {

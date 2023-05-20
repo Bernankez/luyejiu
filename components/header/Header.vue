@@ -21,6 +21,11 @@
           {{ $t("header.bilibiliItem") }}
         </HeaderItem>
       </HeaderGroup>
+      <HeaderGroup>
+        <HeaderItem icon="i-fa6-brands:tiktok" to="https://www.douyin.com/user/MS4wLjABAAAAoFd2tlG2BXnAxi1HyhUZk7hJ-VYUX_6DPwBaZfpvHQCnrsGrcvFMany2KvIDabR3" aria-label="TikTok" :show-title="false" target="_blank">
+          {{ $t("header.tiktokItem") }}
+        </HeaderItem>
+      </HeaderGroup>
       <div class="h-4 w-2px bg-gray-500"></div>
       <HeaderMenu />
       <div class="header-active-bar absolute m-t-6% h-50% bg-yellow transition-all-300 -z-1"></div>
