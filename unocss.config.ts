@@ -26,6 +26,11 @@ export default defineConfig({
   preflights: [
     {
       getCSS: () => `
+          * {
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-tap-highlight-color:transparent;
+          }
+
           html, body, #__nuxt {
             height: 100%;
             width: 100%;
