@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <div class="absolute h-full w-full flex justify-center">
-      <div class="bg-white" :style="{ width: pageMaxWidth }"></div>
+      <div class="w-150 bg-white"></div>
     </div>
     <div class="overflow-hidden">
       <div class="description w-full flex flex-col items-center justify-evenly">
@@ -46,7 +46,7 @@ const avatars = [demo, demo1];
 const { sm } = useBreakpoints(breakpointsTailwind);
 const widgetShakeSize = computed(() => sm.value ? 400 : 300);
 
-const { paddingTop, paddingBottom, pageMaxWidth } = storeToRefs(useAppStore());
+const { paddingTop, paddingBottom } = storeToRefs(useAppStore());
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 

@@ -7,8 +7,6 @@ export const useAppStore = defineStore("app", () => {
   const paddingTop = computed(() => showHeader.value ? headerHeight.value : "0px");
   const paddingBottom = computed(() => showPlayerBar.value ? playerBarHeight.value : "0px");
 
-  const pageMaxWidth = ref("600px");
-
   return {
     showHeader,
     showPlayerBar,
@@ -16,6 +14,5 @@ export const useAppStore = defineStore("app", () => {
     playerBarHeight,
     paddingTop,
     paddingBottom,
-    pageMaxWidth,
   };
 });
