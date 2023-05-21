@@ -1,15 +1,24 @@
 <template>
   <CustomSlot />
-  <Transition name="menu">
-    <div v-if="mergedModelValue" ref="floatingRef" :style="{ ...floatingStyles, ...transitionStyles }" class="absolute left-0 top-0 z-1 box-border min-w-50 w-max select-none rounded-2 bg-gray-50 p-1 text-gray-900 shadow">
-      <slot name="content" :close="closeContent"></slot>
-    </div>
-  </Transition>
+
+  <DefineTemplate>
+    <Transition name="menu">
+      <div v-if="mergedModelValue" ref="floatingRef" :style="[{ ...floatingStyles, ...transitionStyles }, style]" :class="props.class" class="absolute left-0 top-0 z-1 box-border min-w-50 w-max select-none rounded-2 bg-gray-50 p-1 text-gray-900 shadow">
+        <slot name="content" :close="closeContent"></slot>
+      </div>
+    </Transition>
+  </DefineTemplate>
+
+  <Teleport v-if="teleport" to="body">
+    <ReuseTemplate />
+  </Teleport>
+  <ReuseTemplate v-else />
 </template>
 
 <script setup lang="ts">
 import type { Placement, Strategy } from "@floating-ui/vue";
 import { autoUpdate, flip, offset, shift, useFloating } from "@floating-ui/vue";
+import type { StyleValue } from "vue";
 import { CancelCloseKey, CancelOpenKey, CloseContentKey, OnItemClickKey } from "./injection-key";
 
 const props = withDefaults(defineProps<{
@@ -19,6 +28,9 @@ const props = withDefaults(defineProps<{
   strategy?: Strategy;
   placement?: Placement;
   autoUpdate?: boolean;
+  teleport?: boolean;
+  style?: StyleValue;
+  class?: any;
 }>(), {
   modelValue: unhandledState,
   defaultValue: false,
@@ -26,12 +38,17 @@ const props = withDefaults(defineProps<{
   strategy: "absolute",
   placement: "bottom-start",
   autoUpdate: true,
+  teleport: false,
+  style: () => ({}),
+  class: "",
 });
 
 const emit = defineEmits<{
   (event: "update:modelValue", show: boolean): void;
   (event: "click", value?: string | number): void;
 }>();
+
+const { define: DefineTemplate, reuse: ReuseTemplate } = createReusableTemplate();
 
 // parent's onItemClick
 // to pass to the nested parent menu
