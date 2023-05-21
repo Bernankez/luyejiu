@@ -3,7 +3,7 @@
 
   <DefineTemplate>
     <Transition name="fade">
-      <div v-if="mergedModelValue && !disabled" ref="floatingRef" class="left-0 top-0 box-border w-max b-1 b-gray-100 rounded-1 b-solid bg-gray-50 p-x-2 shadow-md" :style="{ ...floatingStyles, ...transitionStyles }">
+      <div v-if="mergedModelValue && !disabled" ref="floatingRef" :class="props.class" class="left-0 top-0 box-border w-max b-1 b-gray-100 rounded-1 b-solid bg-gray-50 p-x-2 shadow-md" :style="[{ ...floatingStyles, ...transitionStyles }, style]">
         <slot name="content">
           {{ content }}
         </slot>
@@ -22,6 +22,7 @@
 import type { Placement, Side, Strategy } from "@floating-ui/vue";
 import { arrow, autoUpdate, flip, offset, shift, useFloating } from "@floating-ui/vue";
 import type { Fn } from "@vueuse/core";
+import type { StyleValue } from "vue";
 
 const props = withDefaults(defineProps<{
   trigger?: "click" | "hover" | "focus" | "manual";
@@ -39,6 +40,8 @@ const props = withDefaults(defineProps<{
   defaultValue?: boolean;
   modelValue?: boolean | typeof unhandledState;
   animationDuration?: number;
+  style?: StyleValue; // content wrapper style
+  class?: any; // content wrapper class
 }>(), {
   trigger: "hover",
   arrow: false,
@@ -55,6 +58,8 @@ const props = withDefaults(defineProps<{
   defaultValue: false,
   modelValue: unhandledState,
   animationDuration: 0,
+  style: () => ({}),
+  class: "",
 });
 
 const emit = defineEmits<{
