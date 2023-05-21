@@ -1,5 +1,5 @@
 <template>
-  <UIPopover v-bind="props">
+  <UIPopover v-bind="props" class="text-4 leading-[1.5] text-dark">
     <slot></slot>
     <template #content>
       <slot name="content"></slot>
