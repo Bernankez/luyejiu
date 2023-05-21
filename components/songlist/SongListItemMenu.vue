@@ -1,7 +1,10 @@
 <template>
-  <UIDropdown trigger="click" placement="bottom-end">
+  <UIDropdown teleport class="z-610" trigger="click" placement="bottom-end">
     <div role="button" class="i-solar:menu-dots-square-outline transition hover:text-gray-900"></div>
     <template #content>
+      <UIDropdownItem class="menu-item">
+        下一首播放
+      </UIDropdownItem>
       <UIDropdownItem class="menu-item">
         复制链接
       </UIDropdownItem>

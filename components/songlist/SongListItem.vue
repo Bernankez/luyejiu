@@ -14,16 +14,14 @@
         鹿野灸鹿野灸鹿野灸鹿野灸鹿野灸鹿野灸鹿野灸鹿野灸鹿野灸
       </div>
     </div>
-    <div class="m-l-3 flex flex-col self-stretch justify-between">
-      <div class="flex items-center justify-end flex-gap-3 text-5 leading-[1] text-gray-700 sm:text-6">
+    <div class="flex items-center justify-end flex-gap-3 text-6 leading-[1] text-gray-700 sm:text-6.5">
+      <UITooltip placement="bottom" :delay="700">
         <div role="button" class="i-solar:playlist-broken transition active:scale-90 hover:text-gray-900" @click.stop="onInsert"></div>
-        <SongListItemMenu />
-      </div>
-      <div class="flex items-center text-3 text-gray-600">
-        26:26
-        <div class="m-x-2 h-80% w-1px bg-gray-600"></div>
-        2023/03/10
-      </div>
+        <template #content>
+          下一首播放
+        </template>
+      </UITooltip>
+      <SongListItemMenu />
     </div>
   </div>
 </template>
