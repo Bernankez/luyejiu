@@ -12,10 +12,13 @@ export type TriggerFunctions = {
 export interface UseFloatingTriggerOptions extends TriggerFunctions {
   openContent?: Fn;
   closeContent?: Fn;
+  isOpened?: MaybeRefOrGetter<boolean | undefined>;
 }
 
 export function useFloatingTrigger<R extends MaybeRef<ComponentPublicInstance | HTMLElement | undefined>>(referenceRef: R, options: UseFloatingTriggerOptions = {}) {
-  const { openContent = noop, closeContent = noop, hover, click, focus, manual } = options;
+  const { openContent = noop, closeContent = noop, hover, click, focus, manual, isOpened: _isOpened } = options;
+
+  const isOpened = computed(() => resolveUnref(_isOpened) || false);
 
   const triggerScope = ref<EffectScope>();
   const dispose = () => {
@@ -62,9 +65,16 @@ export function useFloatingTrigger<R extends MaybeRef<ComponentPublicInstance | 
           click();
         } else {
           const referenceEl = computed(() => unrefElement(referenceRef));
-          useEventListener(referenceEl, "click", openContent);
-          onClickOutside(referenceRef, () => {
+          const { start, stop } = useListenClickOutside(referenceRef, () => {
             closeContent();
+          });
+          useEventListener(referenceEl, "click", openContent);
+          watchEffect(() => {
+            if (isOpened.value) {
+              start();
+            } else {
+              stop();
+            }
           });
         }
       });
@@ -81,6 +91,24 @@ export function useFloatingTrigger<R extends MaybeRef<ComponentPublicInstance | 
   return {
     triggerListener,
     dispose,
+  };
+}
+
+export function useListenClickOutside(...args: Parameters<typeof onClickOutside>) {
+  const _stop = ref<Fn>();
+
+  function stop() {
+    _stop.value?.();
+    _stop.value = undefined;
+  }
+
+  function start() {
+    _stop.value = onClickOutside(...args);
+  }
+
+  return {
+    start,
+    stop,
   };
 }
 

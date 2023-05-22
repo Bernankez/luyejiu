@@ -111,6 +111,7 @@ watch(() => props.delay, (delay) => {
 const { dispose, triggerListener } = useFloatingTrigger(referenceRef, {
   openContent,
   closeContent,
+  isOpened: mergedModelValue,
 });
 watch([() => props.trigger, () => props.disabled], ([trigger, disabled]) => {
   dispose();

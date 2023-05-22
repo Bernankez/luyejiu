@@ -125,6 +125,11 @@ const { triggerListener } = useFloatingTrigger(referenceRef, {
   openContent,
   closeContent,
   click() {
+    const { start, stop } = useListenClickOutside(referenceEl, (e) => {
+      if (!floatingEl.value?.contains(e.target as Node)) {
+        closeContent();
+      }
+    });
     useEventListener(referenceEl, "click", () => {
       if (mergedModelValue.value) {
         closeContent();
@@ -132,9 +137,11 @@ const { triggerListener } = useFloatingTrigger(referenceRef, {
         openContent();
       }
     });
-    onClickOutside(referenceEl, (e) => {
-      if (!floatingEl.value?.contains(e.target as Node)) {
-        closeContent();
+    watchEffect(() => {
+      if (mergedModelValue.value) {
+        start();
+      } else {
+        stop();
       }
     });
   },
