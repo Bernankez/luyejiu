@@ -1,7 +1,7 @@
 <template>
   <header class="z-609 h-16 w-full flex items-center justify-center bg-gray-50 bg-opacity-70 backdrop-blur backdrop-saturate-100">
     <div class="relative flex items-center flex-gap-4">
-      <HeaderGroup>
+      <!-- <HeaderGroup>
         <HeaderItem icon="i-solar:home-smile-bold" to="/" aria-label="Homepage">
           <template #icon>
             <NuxtIcon class="block h-1em w-1em text-4.3" name="paw" />
@@ -25,7 +25,7 @@
         <HeaderItem icon="i-fa6-brands:tiktok" to="https://www.douyin.com/user/MS4wLjABAAAAoFd2tlG2BXnAxi1HyhUZk7hJ-VYUX_6DPwBaZfpvHQCnrsGrcvFMany2KvIDabR3" aria-label="TikTok" :show-title="false" target="_blank">
           {{ $t("header.tiktokItem") }}
         </HeaderItem>
-      </HeaderGroup>
+      </HeaderGroup> -->
       <div class="h-4 w-2px bg-gray-500"></div>
       <HeaderMenu />
       <div class="header-active-bar absolute m-t-6% h-50% bg-yellow transition-all-300 -z-1"></div>
