@@ -22,7 +22,7 @@ import type { StyleValue } from "vue";
 import { CancelCloseKey, CancelOpenKey, CloseContentKey, OnItemClickKey } from "./injection-key";
 
 const props = withDefaults(defineProps<{
-  modelValue?: boolean | typeof unhandledState;
+  modelValue?: boolean;
   defaultValue?: boolean;
   trigger?: "click" | "hover" | "focus" | "manual";
   strategy?: Strategy;
@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<{
   style?: StyleValue;
   class?: any;
 }>(), {
-  modelValue: unhandledState,
+  modelValue: undefined,
   defaultValue: false,
   trigger: "hover",
   strategy: "absolute",

@@ -1,16 +1,14 @@
 import type { MaybeRefOrGetter } from "@vueuse/core";
 
-export const unhandledState = Symbol("unhandledState");
-
-export function useMergedState<T>(controlledRef: MaybeRefOrGetter<T | typeof unhandledState>, uncontrolledRef: Ref<T>) {
+export function useMergedState<T>(controlledRef: MaybeRefOrGetter<T | undefined>, uncontrolledRef: Ref<T>) {
   watch(() => resolveUnref(controlledRef), (value) => {
-    if (value !== unhandledState) {
+    if (value !== undefined) {
       uncontrolledRef.value = value;
     }
   });
 
   return computed(() => {
-    if (resolveUnref(controlledRef) === unhandledState) {
+    if (resolveUnref(controlledRef) === undefined) {
       return uncontrolledRef.value;
     }
     return resolveUnref(controlledRef);

@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<{
   teleport?: boolean;
   content?: string;
   defaultValue?: boolean;
-  modelValue?: boolean | typeof unhandledState;
+  modelValue?: boolean;
   animationDuration?: number;
   style?: StyleValue; // content wrapper style
   class?: any; // content wrapper class
@@ -56,7 +56,7 @@ const props = withDefaults(defineProps<{
   teleport: false,
   content: "",
   defaultValue: false,
-  modelValue: unhandledState,
+  modelValue: undefined,
   animationDuration: 0,
   style: () => ({}),
   class: "",
