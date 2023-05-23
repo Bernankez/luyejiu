@@ -15,6 +15,14 @@ export default defineI18nLocale(async (_locale) => {
       tiktokItem: "鹿野灸抖音",
       githubItem: "GitHub",
     },
+    songListMenu: {
+      addNext: "下一首播放",
+      copyLink: "复制歌曲链接",
+      download: "下载",
+    },
+    playlistMenu: {
+      inputPlaceholder: "歌手、歌曲以及更多内容",
+    },
     song: {
       myFavorite: "我喜欢",
     },

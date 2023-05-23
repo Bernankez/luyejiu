@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col">
-    <UIInput placeholder="歌手、歌曲以及更多内容">
+    <UIInput :placeholder="$t('playlistMenu.inputPlaceholder')">
       <template #prefix>
-        <div class="i-eva:search-outline text-5"></div>
+        <div class="i-solar:magnifer-linear text-5"></div>
       </template>
     </UIInput>
     <div class="flex flex-gap-4 bg-primary-100">

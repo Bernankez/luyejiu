@@ -3,13 +3,13 @@
     <div role="button" class="i-solar:menu-dots-square-outline transition hover:text-gray-900"></div>
     <template #content>
       <UIDropdownItem class="menu-item">
-        下一首播放
+        {{ $t('songListMenu.addNext') }}
       </UIDropdownItem>
       <UIDropdownItem class="menu-item">
-        复制链接
+        {{ $t('songListMenu.copyLink') }}
       </UIDropdownItem>
       <UIDropdownItem class="menu-item">
-        下载
+        {{ $t("songListMenu.download") }}
       </UIDropdownItem>
     </template>
   </UIDropdown>

@@ -15,6 +15,14 @@ export default defineI18nLocale(async (_locale) => {
       tiktokItem: "visit TikTok",
       githubItem: "GitHub",
     },
+    songListMenu: {
+      addNext: "Add to next",
+      copyLink: "Copy link",
+      download: "Download",
+    },
+    playlistMenu: {
+      inputPlaceholder: "Artist, song, and more",
+    },
     song: {
       myFavorite: "My favorite",
     },
