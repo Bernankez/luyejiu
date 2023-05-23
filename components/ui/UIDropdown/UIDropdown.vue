@@ -117,6 +117,9 @@ const { fn: openContentWithDelay, cancel: selfCancelOpen } = useDelayFn(openCont
 
 const slots = useSlots();
 const { CustomSlot, slotRef: referenceRef } = createSlot(slots.default, "default");
+defineExpose({
+  slotRef: referenceRef,
+});
 const floatingRef = ref<HTMLElement>();
 const referenceEl = computed(() => unrefElement(referenceRef));
 const floatingEl = computed(() => unrefElement(floatingRef));

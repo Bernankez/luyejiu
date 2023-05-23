@@ -1,13 +1,20 @@
-import type { Slot, VNode, VNodeChild } from "vue";
+import type { ComponentPublicInstance, Slot, VNode, VNodeChild } from "vue";
 import { Comment, Fragment, createTextVNode } from "vue";
 
 export function createSlot<T extends Slot<any>>(slot?: T, name?: string) {
-  const slotRef = ref<ComponentPublicInstance | HTMLElement>();
+  const _slotRef = ref<ComponentPublicInstance | HTMLElement>();
+  const slotRef = computed(() => {
+    const instance = _slotRef.value as ComponentPublicInstance;
+    if (instance?.slotRef) {
+      return instance.slotRef as ComponentPublicInstance | HTMLElement;
+    }
+    return _slotRef.value;
+  });
 
   const slotVNode = computed(() => slotToVNode(slot, name));
 
   const CustomSlot = defineComponent(() => {
-    return () => h(slotVNode.value, { ref: slotRef });
+    return () => h(slotVNode.value, { ref: _slotRef });
   });
 
   return makeDestructurable(

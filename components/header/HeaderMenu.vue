@@ -1,13 +1,6 @@
 <template>
   <UIDropdown trigger="click" placement="bottom-end">
-    <UITooltip>
-      <div role="button" class="i-solar:menu-dots-bold text-5"></div>
-      <template #content>
-        <div>
-          更多
-        </div>
-      </template>
-    </UITooltip>
+    <div role="button" class="i-solar:menu-dots-bold text-5"></div>
     <template #content="{ close }">
       <UIDropdownItem class="group" static :style="{ padding: 0 }">
         <select :value="locale" class="box-border h-full w-full rounded-1 bg-gray-50 p-x-2 p-y-1.5 text-4.5 group-hover:bg-gray-200 focus:outline-none" @change="(e) => onLocale(e, close)">

@@ -71,6 +71,9 @@ const { define: DefineTemplate, reuse: ReuseTemplate } = createReusableTemplate(
 // get slot dom
 const slots = useSlots();
 const { CustomSlot, slotRef: referenceRef } = createSlot(slots.default, "default");
+defineExpose({
+  slotRef: referenceRef,
+});
 
 const floatingRef = ref<HTMLDivElement>();
 const arrowRef = ref<HTMLDivElement>();

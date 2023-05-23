@@ -1,6 +1,6 @@
 <template>
   <UIPopover v-bind="props" class="text-4 leading-[1.5] text-dark">
-    <slot></slot>
+    <CustomSlot />
     <template #content>
       <slot name="content"></slot>
     </template>
@@ -24,5 +24,11 @@ const props = withDefaults(defineProps<{
   placement: "top",
   strategy: "absolute",
   teleport: false,
+});
+
+const slots = useSlots();
+const { CustomSlot, slotRef } = createSlot(slots.default, "default");
+defineExpose({
+  slotRef,
 });
 </script>
