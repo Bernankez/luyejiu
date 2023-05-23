@@ -26,16 +26,19 @@ const { focused } = useFocus(inputRef);
 const onClick = () => {
   inputRef.value?.focus();
 };
+
+const caretColor = computed(() => primary[600]);
+const placeholderColor = computed(() => primary[200]);
 </script>
 
 <style scoped>
 input {
   all: unset;
-  caret-color: v-bind("primary[600]");
+  caret-color: v-bind(caretColor);
   width: 100%;
 }
 
 input::placeholder {
-  color: v-bind("primary[200]");
+  color: v-bind(placeholderColor);
 }
 </style>
