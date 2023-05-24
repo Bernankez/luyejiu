@@ -1,5 +1,5 @@
 import type { MaybeRefOrGetter } from "@vueuse/core";
-import { v4 as uuid } from "uuid";
+import { nanoid } from "~/utils";
 import type { Songlist } from "~/types/song";
 
 /** 歌单 */
@@ -7,7 +7,7 @@ function _useSonglists() {
   const songlists = useLocalStorage(`${SONG_PREFIX}-songlist`, <Songlist[]>[]);
 
   function add(songlist: Omit<Songlist, "id">, id?: string) {
-    const _id = id || uuid();
+    const _id = id || nanoid();
     songlists.value.push({ ...songlist, id: _id });
   }
 

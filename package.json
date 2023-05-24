@@ -28,10 +28,10 @@
     "gsap": "^3.11.5",
     "howler": "^2.2.3",
     "mongoose": "^7.1.1",
+    "nanoid": "^4.0.2",
     "nuxt-icons": "^3.2.1",
     "pinia": "^2.0.36",
-    "ua-parser-js": "^1.0.35",
-    "uuid": "^9.0.0"
+    "ua-parser-js": "^1.0.35"
   },
   "devDependencies": {
     "@bernankez/eslint-config": "^0.4.3",
@@ -45,7 +45,6 @@
     "@nuxtjs/stylelint-module": "^5.0.1",
     "@types/howler": "^2.2.7",
     "@types/ua-parser-js": "^0.7.36",
-    "@types/uuid": "^9.0.1",
     "@unocss/nuxt": "^0.51.12",
     "@vite-pwa/nuxt": "^0.0.7",
     "@vueuse/core": "^10.1.2",
