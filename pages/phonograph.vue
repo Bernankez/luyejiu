@@ -1,8 +1,8 @@
 <template>
-  <div class="flex justify-center">
+  <div class="h-full flex justify-center">
     <div class="max-w-200 w-full bg-white">
       <PlaylistMenu />
-      <SongListItem v-for="i in 50" :key="i" :index="i" />
+      <!-- <SongListItem v-for="i in 50" :key="i" :index="i" /> -->
       <UIDropdown trigger="click" @click="onClick">
         <div role="button" class="w-max select-none rounded-2 bg-white p-3">
           Menu

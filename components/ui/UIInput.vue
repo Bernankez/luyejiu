@@ -1,5 +1,5 @@
 <template>
-  <div class="box-border flex items-center flex-gap-1 b-1 b-primary-100 rounded-2 b-solid p-x-2 p-y-1.5 text-4.5 transition hover:cursor-text" :class="[focused ? 'bg-primary-50' : '']" @mousedown.prevent="onClick">
+  <div class="box-border flex items-center flex-gap-1 b-1 b-primary-100 rounded-2 b-solid p-x-2 p-y-1.5 text-4.5 text-primary-700 transition hover:cursor-text" :class="[focused ? 'bg-primary-50' : 'bg-white']" @mousedown.prevent="onClick">
     <div class="h-6 w-6 flex items-center justify-center">
       <slot name="prefix"></slot>
     </div>
