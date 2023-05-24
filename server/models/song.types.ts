@@ -91,4 +91,10 @@ export class SongRelatedSource {
    */
   @prop({ required: true, enum: SongRelatedSourceType, type: () => String })
   public type!: SongRelatedSourceType;
+
+  /**
+   * @description 相关音视频tooltip
+   */
+  @prop({ type: () => String })
+  public label?: string;
 }
