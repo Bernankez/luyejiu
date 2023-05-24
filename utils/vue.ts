@@ -4,7 +4,7 @@ import { Comment, Fragment, createTextVNode } from "vue";
 export function createSlot<T extends Slot<any>>(slot?: T, name?: string) {
   const _slotRef = ref<ComponentPublicInstance | HTMLElement>();
   const slotRef = computed(() => {
-    const instance = _slotRef.value as ComponentPublicInstance;
+    const instance = _slotRef.value as ComponentPublicInstance & { slotRef?: ComponentPublicInstance | HTMLElement };
     if (instance?.slotRef) {
       return instance.slotRef as ComponentPublicInstance | HTMLElement;
     }
