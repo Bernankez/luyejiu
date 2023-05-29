@@ -17,6 +17,9 @@
       <PlaylistMenuItem icon-class="text-primary-600" icon="i-solar:music-note-slider-2-bold" :count="4" title="全部歌曲" />
       <PlaylistMenuItem icon-class="text-primary-600" icon="i-solar:music-note-slider-2-bold" :count="4" title="全部歌曲" />
       <PlaylistMenuItem icon-class="text-primary-600" icon="i-solar:music-note-slider-2-bold" :count="4" title="全部歌曲" />
+      <PlaylistMenuItem icon-class="text-primary-600" icon="i-solar:music-note-slider-2-bold" :count="4" title="全部歌曲" />
+      <PlaylistMenuItem icon-class="text-primary-600" icon="i-solar:music-note-slider-2-bold" :count="4" title="全部歌曲" />
+      <PlaylistMenuItem icon-class="text-primary-600" icon="i-solar:music-note-slider-2-bold" :count="4" title="全部歌曲" />
       <PlaylistMenuAddItem />
     </div>
   </div>

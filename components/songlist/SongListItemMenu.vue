@@ -2,8 +2,9 @@
   <UIDropdown teleport class="z-610" trigger="click" placement="bottom-end">
     <div role="button" class="i-solar:menu-dots-square-outline transition hover:text-gray-900"></div>
     <template #content>
-      <UIDropdownItem class="menu-item">
+      <UIDropdownItem class="menu-item flex items-center justify-between">
         {{ $t("songListMenu.addNext") }}
+        <div class="i-solar:playlist-broken text-6"></div>
       </UIDropdownItem>
       <UIDropdownItem class="menu-item">
         {{ $t("songListMenu.copyLink") }}
