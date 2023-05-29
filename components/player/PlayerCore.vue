@@ -14,10 +14,10 @@
             <!-- song info -->
             <div class="box-border flex flex-col cursor-default flex-gap-2 p-b-4">
               <div class="text-5.5 text-gray-50 md:text-8">
-                {{ isHydrated ? song?.name : '' }}
+                {{ isHydrated ? song?.name : "" }}
               </div>
               <div class="text-4.5 text-white md:text-6">
-                {{ isHydrated ? song?.singer : '' }}
+                {{ isHydrated ? song?.singer : "" }}
               </div>
             </div>
             <div>
@@ -47,10 +47,10 @@
             <PlayerProgress v-model:time-played="timePlayed" round :disabled="loading" :duration="duration" :show-indicate="true" theme="white" :buffer-progress="bufferProgress" @real-time="onRealTime" />
             <div class="flex cursor-default items-center justify-between text-3 text-gray-50">
               <div>
-                {{ dayjs.duration(realTime, 'seconds').format("mm:ss") }}
+                {{ dayjs.duration(realTime, "seconds").format("mm:ss") }}
               </div>
               <div>
-                {{ dayjs.duration(duration, 'seconds').format("mm:ss") }}
+                {{ dayjs.duration(duration, "seconds").format("mm:ss") }}
               </div>
             </div>
           </div>

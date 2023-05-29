@@ -3,10 +3,10 @@
     <div role="button" class="i-solar:menu-dots-square-outline transition hover:text-gray-900"></div>
     <template #content>
       <UIDropdownItem class="menu-item">
-        {{ $t('songListMenu.addNext') }}
+        {{ $t("songListMenu.addNext") }}
       </UIDropdownItem>
       <UIDropdownItem class="menu-item">
-        {{ $t('songListMenu.copyLink') }}
+        {{ $t("songListMenu.copyLink") }}
       </UIDropdownItem>
       <UIDropdownItem class="menu-item">
         {{ $t("songListMenu.download") }}

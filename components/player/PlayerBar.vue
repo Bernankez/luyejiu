@@ -11,14 +11,14 @@
         </div>
         <div class="w-0 flex flex-auto flex-col flex-gap-1">
           <div class="cursor-default truncate text-3.5">
-            {{ isHydrated ? song?.name : '' }}
+            {{ isHydrated ? song?.name : "" }}
           </div>
           <div class="flex items-center flex-gap-2 text-3 text-primary-400">
             <div class="shrink-0">
-              {{ isHydrated ? song?.singer : '' }}
+              {{ isHydrated ? song?.singer : "" }}
             </div>
             <div>
-              {{ dayjs.duration(realTime, 'seconds').format("mm:ss") }}/{{ dayjs.duration(duration, 'seconds').format("mm:ss") }}
+              {{ dayjs.duration(realTime, "seconds").format("mm:ss") }}/{{ dayjs.duration(duration, "seconds").format("mm:ss") }}
             </div>
           </div>
         </div>
@@ -50,10 +50,10 @@
       <Transition name="fade">
         <div v-if="triggerPrev || triggerNext" class="absolute left-0 top-0 h-full w-full bg-gray-50 bg-opacity-60 text-6 font-normal backdrop-blur backdrop-saturate-50">
           <div v-if="triggerPrev" class="m-l-4 h-full flex items-center">
-            {{ $t('player.releaseToSwitchPrev') }}
+            {{ $t("player.releaseToSwitchPrev") }}
           </div>
           <div v-if="triggerNext" class="m-r-4 h-full flex items-center justify-end">
-            {{ $t('player.releaseToSwitchNext') }}
+            {{ $t("player.releaseToSwitchNext") }}
           </div>
         </div>
       </Transition>

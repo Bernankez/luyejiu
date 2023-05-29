@@ -18,7 +18,7 @@
       <UITooltip placement="bottom" :delay="700">
         <div role="button" class="i-solar:playlist-broken transition active:scale-90 hover:text-gray-900" @click.stop="onInsert"></div>
         <template #content>
-          {{ $t('songListMenu.addNext') }}
+          {{ $t("songListMenu.addNext") }}
         </template>
       </UITooltip>
       <SongListItemMenu />
