@@ -34,7 +34,7 @@
     "ua-parser-js": "^1.0.35"
   },
   "devDependencies": {
-    "@bernankez/eslint-config": "^0.4.3",
+    "@bernankez/eslint-config": "^0.7.0",
     "@bernankez/eslint-config-unocss": "^0.4.3",
     "@bernankez/stylelint-config": "^0.3.0",
     "@iconify/json": "^2.2.63",
