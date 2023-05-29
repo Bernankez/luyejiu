@@ -1,6 +1,6 @@
 <template>
   <div class="group box-border flex flex-1 cursor-default select-none items-center flex-gap-3 rounded-2 p-3">
-    <UIInput ref="inputRef" v-model="value" class="w-full" />
+    <UIInput ref="inputRef" v-model="value" autofocus class="w-full" />
     <div class="box-border rounded-2 p-2 transition hover:bg-gray-50" @click="onConfirm">
       <div class="i-ic:outline-check text-6"></div>
     </div>
