@@ -27,4 +27,17 @@ export class SongService {
     const doc = await this._song.findByIds(ids).populate("artists.artist");
     return doc.map(item => item.toObject());
   }
+
+  async findByPage(options?: { page: number; size: number }) {
+    const { page = 0, size = 10 } = options || {};
+    const data = this._song.find({}).skip(page * size).limit(size).populate("artists.artist");
+    const count = this._song.find({}).count();
+    const [doc, totalElements] = await Promise.all([data, count]);
+    return {
+      page,
+      size,
+      totalElements,
+      data: doc.map(item => item.toObject()),
+    };
+  }
 }
