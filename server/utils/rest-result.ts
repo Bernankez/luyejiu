@@ -1,44 +1,47 @@
-import type { Status } from "./type";
+import type { MaybePromise } from "./type";
 
-export class RestResult<T = unknown> {
-  status: Status;
-  code: number;
-  message?: string;
-  data?: T;
-
-  constructor(status: Status, options?: { code?: number; message?: string; data?: T }) {
-    this.status = status;
-    const { code, message, data } = options || {};
-    if (!isDefined(code)) {
-      if (status === "SUCCESS") {
-        this.code = 0;
-      } else {
-        this.code = -1;
-      }
-    } else {
-      this.code = code;
-    }
-    this.message = message;
-    this.data = data;
+export function success<T>(data: MaybePromise<T>, options?: { message?: string }) {
+  const { message } = options || {};
+  if (data instanceof Promise) {
+    return data.then((res) => {
+      return {
+        status: "SUCCESS" as const,
+        code: 0,
+        message,
+        data: res,
+      };
+    });
   }
 
-  static success<D>(data: D, options?: { message?: string }) {
-    const restResult = new RestResult<D>("SUCCESS", { message: options?.message, data });
-    return {
-      status: restResult.status as "SUCCESS",
-      code: restResult.code,
-      message: restResult.message,
-      data: restResult.data as D,
-    };
-  }
-
-  static fail<D>(message: string, options?: { code?: number; data?: D }) {
-    const restResult = new RestResult("FAILURE", { message, code: options?.code, data: options?.data });
-    return {
-      status: restResult.status as "FAILURE",
-      code: restResult.code,
-      message: restResult.message!,
-      data: restResult.data,
-    };
-  }
+  return {
+    status: "SUCCESS" as const,
+    message,
+    data,
+  };
 }
+
+export function fail<T>(message: string, options?: { code?: number; data?: MaybePromise<T> }) {
+  const { code = -1, data } = options || {};
+  if (data instanceof Promise) {
+    return data.then((res) => {
+      return {
+        status: "FAILURE" as const,
+        code,
+        message,
+        data: res,
+      };
+    });
+  }
+
+  return {
+    status: "FAILURE" as const,
+    code,
+    message,
+    data,
+  };
+}
+
+export const RestResult = {
+  success,
+  fail,
+};
