@@ -26,6 +26,10 @@ watchEffect(() => {
     lockScroll.value = showPlaylistPanel.value && !sm.value;
   }
 });
+
+onBeforeRouteLeave(() => {
+  lockScroll.value = false;
+});
 </script>
 
 <style scoped>
