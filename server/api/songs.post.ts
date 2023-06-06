@@ -3,12 +3,12 @@ import { SongService } from "../service/song";
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   if (!Array.isArray(body)) {
-    throw createServiceError(400, "Expected an array of songIds");
+    return RestResult.fail("Expected an array of songIds", { code: 400 });
   }
   const songService = new SongService();
   const res = songService.findByIds(body);
   if (!res) {
-    throw createServiceError(404, "Song not found");
+    return RestResult.fail("Song not found", { code: 404 });
   }
-  return res;
+  return RestResult.success(res);
 });

@@ -1,15 +1,14 @@
-import { createServiceError } from "~/server/utils/create";
 import { SongService } from "~/server/service/song";
 
 export default defineEventHandler(async (event) => {
   const id = event.context.params?.id;
   if (!id) {
-    throw createServiceError(400, "songId is required");
+    return RestResult.fail("songId is required", { code: 400 });
   }
   const songService = new SongService();
   const song = await songService.findById(id);
   if (!song) {
-    throw createServiceError(404, `Song:${id} not found`);
+    return RestResult.fail(`Song:${id} not found`, { code: 404 });
   }
-  return song;
+  return RestResult.success(song);
 });
