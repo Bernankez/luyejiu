@@ -6,7 +6,7 @@
       </template>
       <div v-else class="i-svg-spinners:bars-scale-middle text-5 sm:text-6"></div>
     </div>
-    <div class="w-0 flex-auto truncate">
+    <div class="w-0 flex-auto select-none truncate">
       <div class="truncate text-4 sm:text-4.5" :class="[playing ? 'text-primary-500' : 'text-gray-900 ']">
         大貔貅大貔貅大貔貅大貔貅大貔貅大貔貅大貔貅大貔貅大貔貅
       </div>

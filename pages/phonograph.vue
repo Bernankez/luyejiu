@@ -4,17 +4,15 @@
       <SongListMenu class="overflow-auto" />
     </div>
     <div class="w-full">
-      <MusicListItem v-for="i in 50" :key="i" />
+      <ClientOnly>
+        <NuxtPage />
+      </ClientOnly>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { breakpointsTailwind } from "@vueuse/core";
-
-const onClick = (value?: string | number) => {
-  console.log(value);
-};
 
 const { paddingTop, paddingBottom, lockScroll } = storeToRefs(useAppStore());
 
