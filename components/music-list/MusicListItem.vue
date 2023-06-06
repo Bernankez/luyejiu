@@ -21,7 +21,7 @@
           {{ $t("songListMenu.addNext") }}
         </template>
       </UITooltip>
-      <SongListItemMenu />
+      <MusicListItemMenu />
     </div>
   </div>
 </template>

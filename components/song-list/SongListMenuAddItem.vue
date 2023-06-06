@@ -7,7 +7,7 @@
       新建歌单
     </div>
   </div>
-  <PlaylistMenuItemInput v-else @cancel="() => showInput = false" />
+  <SongListMenuItemInput v-else @cancel="() => showInput = false" />
 </template>
 
 <script setup lang="ts">
