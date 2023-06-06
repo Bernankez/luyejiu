@@ -9,7 +9,7 @@
     <Transition name="header">
       <Header v-if="showHeader" class="fixed left-0 top-0" />
     </Transition>
-    <main class="z-0 h-full">
+    <main class="z-0" :class="[lockScroll ? 'h-100vh overflow-hidden' : 'h-full']">
       <NuxtPage />
     </main>
     <Transition name="player-bar">
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-const { paddingBottom, paddingTop, showPlayerBar, showHeader } = storeToRefs(useAppStore());
+const { paddingBottom, paddingTop, showPlayerBar, showHeader, lockScroll } = storeToRefs(useAppStore());
 </script>
 
 <style scoped>
