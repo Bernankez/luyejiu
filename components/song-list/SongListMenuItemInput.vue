@@ -38,9 +38,10 @@ const onCancel = () => {
 };
 
 const inputRef = ref<InstanceType<typeof UIInput>>();
-watchEffect(() => {
+const stop = watchEffect(() => {
   if (inputRef.value) {
     inputRef.value.focus();
+    stop();
   }
 });
 </script>
