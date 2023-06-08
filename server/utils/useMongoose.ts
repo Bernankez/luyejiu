@@ -8,7 +8,7 @@ export function useMongoose() {
   async function connect() {
     const config = useRuntimeConfig();
     const { mongodbHost = "localhost", mongodbPort = 27017, mongodbUser, mongodbDatabase = "luyejiu", mongodbPassword, mongodbSRV = false } = config;
-    const url = `mongodb${mongodbSRV ? "+srv" : ""}://${mongodbHost}${mongodbPort ? `:${mongodbPort}` : ""}`;
+    const url = `mongodb${mongodbSRV ? "+srv" : ""}://${mongodbHost}${(!mongodbSRV && mongodbPort) ? `:${mongodbPort}` : ""}`;
     try {
       const res = await mongoose.connect(url, {
         dbName: mongodbDatabase,
