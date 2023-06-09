@@ -9,16 +9,16 @@ export async function addSong() {
   const artist = await artistService.find({ name: "鹿野灸" });
   const songService = new SongService();
   const res = await songService.create({
-    coverPath: "",
+    coverPath: "http://bucket.luyejiu.live/%E9%B9%BF%E9%87%8E%E7%81%B8/%E5%A4%A7%E8%B2%94%E8%B2%85/cover.jpg",
     title: "大貔貅",
     originSinger: ["ONER", "宋木子"],
     artists: [{
       artist: new mongoose.Types.ObjectId(artist[0].id),
       feat: false,
     }],
-    lyricist: "",
-    songwritter: "",
-    album: "",
+    lyricist: "熟悉的配方",
+    songwritter: "熟悉的味道",
+    album: "大貔貅",
     lyric: "",
     duration: 201,
     relatedSource: [
@@ -27,22 +27,14 @@ export async function addSong() {
         type: SongRelatedSourceType.Video,
       },
       {
-        url: "https://music.163.com/song?id=2029212359&userid=349400380",
+        url: "https://music.163.com/#/song?id=2029212359",
         type: SongRelatedSourceType.Audio,
       },
     ],
     sources: [
       {
         quality: SongQuality.Standard,
-        url: "http://rtrx90goj.sabkt.gdipper.com/%E9%B9%BF%E9%87%8E%E7%81%B8%20-%20%E5%A4%A7%E8%B2%94%E8%B2%85%C2%B7%E5%B0%8F%E5%B0%91%E5%B9%B4%E7%89%88.mp3",
-      },
-      {
-        quality: SongQuality.High,
-        url: "http://rtrx90goj.sabkt.gdipper.com/%E9%B9%BF%E9%87%8E%E7%81%B8%20-%20%E5%A4%A7%E8%B2%94%E8%B2%85%C2%B7%E5%B0%8F%E5%B0%91%E5%B9%B4%E7%89%88-hq.mp3",
-      },
-      {
-        quality: SongQuality.Lossless,
-        url: "http://rtrx90goj.sabkt.gdipper.com/%E9%B9%BF%E9%87%8E%E7%81%B8%20-%20%E5%A4%A7%E8%B2%94%E8%B2%85%C2%B7%E5%B0%8F%E5%B0%91%E5%B9%B4%E7%89%88.flac",
+        url: "http://bucket.luyejiu.live/%E9%B9%BF%E9%87%8E%E7%81%B8/%E5%A4%A7%E8%B2%94%E8%B2%85/%E9%B9%BF%E9%87%8E%E7%81%B8%20-%20%E5%A4%A7%E8%B2%94%E8%B2%85%C2%B7%E5%B0%8F%E5%B0%91%E5%B9%B4%E7%89%88.mp3",
       },
     ],
     singingTime: dayjs("2023-03-10 19:48:00").toDate(),

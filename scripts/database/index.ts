@@ -1,7 +1,7 @@
-import { findArtists } from "./artist";
 import { run } from "./run";
-import { findSongs, findSongsByIds } from "./song";
+import { addSong } from "./song";
 
-// run([addArtist, addSong]);
+// run([addArtist]);
+run([addSong]);
 
-run([findSongs, findArtists, findSongsByIds]);
+// run([findSongs, findArtists, findSongsByIds]);
