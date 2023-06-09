@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "nuxt-typed-router",
     /**
      * if @nuxt/devtools reports an error, please run `pnpm dlx nuxi@latest devtools enable` manually
+     * and clear the absolute path stored in `~/.nuxtrc`
      * @see https://github.com/nuxt/devtools/issues/50#issuecomment-1442572171
      */
     "@nuxt/devtools",
