@@ -6,8 +6,9 @@ import { ArtistClass } from "./artist";
  * @description 歌曲标签
  */
 export enum SongTag {
-  Official = "Official",
-  Cut = "Cut",
+  Official = "Official", // 官方
+  Cut = "Cut", // 切片
+  Fragment = "Fragment", // 片段
   AI = "AI",
 }
 
