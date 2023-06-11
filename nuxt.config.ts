@@ -26,6 +26,26 @@ export default defineNuxtConfig({
     "@vite-pwa/nuxt",
     "nuxt-icons",
   ],
+  app: {
+    head: {
+      title: "鹿野灸.live",
+      viewport: "width=device-width,initial-scale=1,viewport-fit=cover",
+      link: [
+        { rel: "icon", href: "/favicon.ico", sizes: "any" },
+        { rel: "icon", type: "image/svg+xml", href: "/logo.svg" },
+        { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      ],
+      meta: [
+        { name: "description", content: "luyejiu.live" },
+        { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+        // open graph social image
+        { property: "og:title", content: "鹿野灸.live" },
+        { property: "og:description", content: "luyejiu.live" },
+        { property: "og:type", content: "website" },
+        { property: "og:site_name", content: "鹿野灸" },
+      ],
+    },
+  },
   typescript: {
     tsConfig: {
       compilerOptions: {
@@ -47,6 +67,7 @@ export default defineNuxtConfig({
   ],
   css: [
     "@unocss/reset/tailwind.css",
+    "~/styles/global.css",
   ],
   imports: {
     dirs: [

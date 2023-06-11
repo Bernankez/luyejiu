@@ -7,7 +7,7 @@
       <div class="description w-full flex flex-col items-center justify-evenly">
         <div class="flex flex-col items-center">
           <img ref="titleRef" class="max-w-100 w-70vw object-scale-down" :src="title" />
-          <div ref="introRef" class="max-w-90vw cursor-default text-center font-happy text-8 text-primary-500 sm:text-10">
+          <div ref="introRef" class="font-biantao max-w-90vw cursor-default text-center text-8 text-primary-500 sm:text-10">
             {{ $t("homepage.introduction") }}
           </div>
         </div>
@@ -226,5 +226,9 @@ onUnmounted(() => {
 <style scoped>
 .description {
   min-height: calc(100vh - v-bind(paddingTop) - v-bind(paddingBottom));
+}
+
+.font-biantao {
+  font-family: Biantao, Arial, sans-serif;
 }
 </style>
