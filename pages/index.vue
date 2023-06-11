@@ -12,7 +12,7 @@
           </div>
         </div>
         <div ref="avatarRef">
-          <WidgetShake :image="avatars" :size="widgetShakeSize" />
+          <WidgetShake :image="avatar" :size="widgetShakeSize" />
         </div>
       </div>
       <img ref="flightImgRef" class="m-x-auto scale-0 object-scale-down" :src="flightImgSrc" alt="luyejiu-flight" />
@@ -30,18 +30,22 @@ import { breakpointsTailwind } from "@vueuse/core";
 import flight0 from "~/assets/gsap/animation/lyj-flight-0.png";
 import flight1 from "~/assets/gsap/animation/lyj-flight-1.png";
 import flight2 from "~/assets/gsap/animation/lyj-flight-2.png";
-import title0 from "~/assets/gsap/title/luyejiu-0.png";
-import title1 from "~/assets/gsap/title/luyejiu-1.png";
-import title2 from "~/assets/gsap/title/luyejiu-2.png";
-import title3 from "~/assets/gsap/title/luyejiu-3.png";
-import demo from "~/assets/demo.png";
-import demo1 from "~/assets/demo1.png";
 
-const titles = [title0, title1, title2, title3];
-const title = ref(pickRandom(titles));
+function loadImage(images: Record<string, unknown>): string {
+  const keys = Object.keys(images);
+  const key = pickRandom(keys);
+  const module = images[key];
+  if (typeof module === "function") {
+    return module()?.default;
+  }
+  return (module as Record<string, string>).default;
+}
 
-// TODO avatars
-const avatars = [demo, demo1];
+const titleModules = import.meta.glob("@/assets/gsap/title/*", { eager: true });
+const avatarModules = import.meta.glob("@/assets/gsap/avatars/*", { eager: true });
+
+const title = ref(loadImage(titleModules));
+const avatar = ref(loadImage(avatarModules));
 
 const { sm } = useBreakpoints(breakpointsTailwind);
 const widgetShakeSize = computed(() => sm.value ? 400 : 300);
