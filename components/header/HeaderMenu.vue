@@ -9,7 +9,7 @@
           </option>
         </select>
       </UIDropdownItem>
-      <UIDropdownItem :style="{ padding: 0 }">
+      <!-- <UIDropdownItem :style="{ padding: 0 }">
         <NuxtLink to="https://github.com/Bernankez/luyejiu" external target="_blank" class="w-full flex cursor-default items-center justify-between p-x-2 p-y-1.5">
           <div class="flex items-center flex-gap-2">
             <div class="i-fa:github text-5"></div>
@@ -19,7 +19,7 @@
           </div>
           <div class="i-solar:square-top-down-outline"></div>
         </NuxtLink>
-      </UIDropdownItem>
+      </UIDropdownItem> -->
     </template>
   </UIDropdown>
 </template>

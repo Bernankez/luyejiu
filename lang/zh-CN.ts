@@ -1,7 +1,7 @@
 export default defineI18nLocale(async (_locale) => {
   return {
     homepage: {
-      introduction: "一只由 祥云 化作的十岁 柴犬 少年VUP！",
+      introduction: "2023 生日快乐！",
     },
     player: {
       releaseToSwitchPrev: "松手切换上一曲",
