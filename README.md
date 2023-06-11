@@ -1,42 +1,19 @@
-# Nuxt 3 Minimal Starter
+# luyejiu.live
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+***我为什么想不开要用headlessUI***
 
-## Setup
+[Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction)
 
-Make sure to install the dependencies:
+[iconify-solar](https://icon-sets.iconify.design/solar)
 
-```bash
-# yarn
-yarn install
+[Icônes-solar](https://icones.netlify.app/collection/solar)
 
-# npm
-npm install
+https://nuxt.com.cn/docs/guide/directory-structure/server
 
-# pnpm
-pnpm install
-```
+https://www.jsdocs.io/package/h3#package-index-functions
 
-## Development Server
+https://github.com/jiayisheji/blog/issues/30
 
-Start the development server on http://localhost:3000
+https://dev.to/swyx/4-things-i-learned-from-mastering-mongoose-js-25e#4-principle-of-least-cardinality
 
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+https://typegoose.github.io/typegoose/docs/api/virtuals/#virtual-populate
