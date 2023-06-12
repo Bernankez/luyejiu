@@ -12,7 +12,9 @@
           </div>
         </div>
         <div ref="avatarRef">
-          <WidgetShake :image="avatar" :size="widgetShakeSize" />
+          <ClientOnly>
+            <WidgetShake :image="avatar" :size="widgetShakeSize" />
+          </ClientOnly>
         </div>
       </div>
       <img ref="flightImgRef" class="m-x-auto scale-0 object-scale-down" :src="flightImgSrc" alt="luyejiu-flight" />
