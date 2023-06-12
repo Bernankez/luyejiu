@@ -7,7 +7,10 @@
       <div class="description w-full flex flex-col items-center justify-evenly">
         <div class="flex flex-col items-center">
           <img ref="titleRef" class="max-w-100 w-70vw object-scale-down" :src="title" />
-          <div ref="introRef" class="font-biantao max-w-90vw cursor-default text-center text-12 text-primary-500 sm:text-15">
+          <div
+            ref="introRef"
+            class="font-biantao max-w-90vw cursor-default text-center text-8 text-primary-500 sm:text-10"
+          >
             {{ $t("homepage.introduction") }}
           </div>
         </div>
@@ -19,7 +22,10 @@
       </div>
       <img ref="flightImgRef" class="m-x-auto scale-0 object-scale-down" :src="flightImgSrc" alt="luyejiu-flight" />
       <div class="h-100vh w-full"></div>
-      <img ref="proudImgRef" class="m-x-auto max-h-90vh object-scale-down" src="http://bucket.luyejiu.live/assets/gsap/animation/lyj-proud.webp" alt="luyejiu-proud" />
+      <img
+        ref="proudImgRef" class="m-x-auto max-h-90vh object-scale-down" src="/gsap/animation/lyj-proud.webp"
+        alt="luyejiu-proud"
+      />
     </div>
   </div>
 </template>
@@ -30,17 +36,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { breakpointsTailwind } from "@vueuse/core";
 
-const flight0 = "http://bucket.luyejiu.live/assets/gsap/animation/lyj-flight-0.webp";
-const flight1 = "http://bucket.luyejiu.live/assets/gsap/animation/lyj-flight-1.webp";
-const flight2 = "http://bucket.luyejiu.live/assets/gsap/animation/lyj-flight-2.webp";
+const flight0 = "/gsap/animation/lyj-flight-0.webp";
+const flight1 = "/gsap/animation/lyj-flight-1.webp";
+const flight2 = "/gsap/animation/lyj-flight-2.webp";
 
 const titles = [
-  "http://bucket.luyejiu.live/assets/gsap/title/luyejiu-0.webp",
-  "http://bucket.luyejiu.live/assets/gsap/title/luyejiu-1.webp",
-  "http://bucket.luyejiu.live/assets/gsap/title/luyejiu-2.webp",
-  "http://bucket.luyejiu.live/assets/gsap/title/luyejiu-3.webp",
+  "/gsap/title/luyejiu-0.webp",
+  "/gsap/title/luyejiu-1.webp",
+  "/gsap/title/luyejiu-2.webp",
+  "/gsap/title/luyejiu-3.webp",
 ];
-const avatars = ["http://bucket.luyejiu.live/assets/gsap/avatars/birthday.webp"];
+const avatars = ["/gsap/avatars/birthday.webp"];
 
 const title = ref(pickRandom(titles));
 const avatar = ref(avatars);

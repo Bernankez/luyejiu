@@ -29,20 +29,12 @@
 
 <script setup lang="ts">
 import { orange } from "~/styles/color";
+import paw from "/icons/paw.svg?raw";
 
 const fill = ref(orange[500]);
 const ratio = 1.0619;
 const height = ref(100);
 const width = computed(() => height.value * ratio);
-
-const paw = ref("");
-watchEffect(async () => {
-  const icons = import.meta.glob("assets/icons/**/**.svg", {
-    as: "raw",
-    eager: false,
-  });
-  paw.value = await icons["/assets/icons/paw.svg"]();
-});
 </script>
 
 <style scoped>

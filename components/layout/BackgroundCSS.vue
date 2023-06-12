@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import pawSvg from "~/assets/icons/paw.svg";
+import pawSvg from "/icons/paw.svg";
 
 const backgroundUrl = computed(() => `url(${pawSvg})`);
 const ratio = 1.0619;
