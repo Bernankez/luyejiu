@@ -24,7 +24,6 @@ export default defineNuxtConfig({
     "@unocss/nuxt",
     "nuxt-headlessui",
     "@vite-pwa/nuxt",
-    "nuxt-icons",
   ],
   app: {
     head: {
