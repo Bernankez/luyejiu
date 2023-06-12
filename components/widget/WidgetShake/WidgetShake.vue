@@ -6,7 +6,7 @@
       </div>
       <canvas ref="canvasRef" class="pointer-events-none absolute left-50% top-50% z-10 -translate-50%"></canvas>
       <div ref="mainRef" class="pointer-events-none absolute z-20 flex flex-col items-center justify-between">
-        <div ref="imageRef" :style="{ backgroundImage: `url('${image}')` }" class="pointer-events-auto relative cursor-pointer bg-cover bg-center bg-no-repeat"></div>
+        <div ref="imageRef" class="widget-image pointer-events-auto relative cursor-pointer bg-cover bg-center bg-no-repeat"></div>
       </div>
     </div>
   </div>
@@ -30,6 +30,7 @@ const image = computed(() => {
   }
   return images.value;
 });
+const backgroundImage = computed(() => `url('${image.value}')`);
 
 const createStrokeStyle = (ctx: CanvasRenderingContext2D, canvas?: HTMLCanvasElement) => {
   const x = (canvas?.width || 2) / 2;
@@ -43,3 +44,8 @@ const createStrokeStyle = (ctx: CanvasRenderingContext2D, canvas?: HTMLCanvasEle
 const { wrapperRef, appRef, canvasRef, mainRef, imageRef } = useWidgetShake({ strokeStyle: createStrokeStyle, size, image });
 </script>
 
+<style scoped>
+.widget-image {
+  background-image: v-bind(backgroundImage);
+}
+</style>
