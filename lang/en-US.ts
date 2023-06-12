@@ -1,7 +1,7 @@
 export default defineI18nLocale(async (_locale) => {
   return {
     homepage: {
-      introduction: "2023 Happy Birthday!",
+      introduction: "A ten-year-old boy VUP transformed by clouds!",
     },
     player: {
       releaseToSwitchPrev: "Switch to previous",

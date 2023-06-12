@@ -7,7 +7,7 @@
       <div class="description w-full flex flex-col items-center justify-evenly">
         <div class="flex flex-col items-center">
           <img ref="titleRef" class="max-w-100 w-70vw object-scale-down" :src="title" />
-          <div ref="introRef" class="font-biantao max-w-90vw cursor-default text-center text-12 text-primary-500 sm:text-15">
+          <div ref="introRef" class="font-biantao max-w-90vw cursor-default text-center text-8 text-primary-500 sm:text-10">
             {{ $t("homepage.introduction") }}
           </div>
         </div>
