@@ -28,9 +28,6 @@ dependencies:
   nanoid:
     specifier: ^4.0.2
     version: 4.0.2
-  nuxt-icons:
-    specifier: ^3.2.1
-    version: 3.2.1(rollup@2.79.1)
   pinia:
     specifier: ^2.0.36
     version: 2.0.36(typescript@5.0.4)(vue@3.3.1)
@@ -1917,6 +1914,11 @@ packages:
   /@intlify/shared@9.3.0-beta.17:
     resolution: {integrity: sha512-mscf7RQsUTOil35jTij4KGW1RC9SWQjYScwLxP53Ns6g24iEd5HN7ksbt9O6FvTmlQuX77u+MXpBdfJsGqizLQ==}
     engines: {node: '>= 14'}
+    dev: true
+
+  /@intlify/shared@9.3.0-beta.19:
+    resolution: {integrity: sha512-+lhQggrLvlQ/O5OmIYAc9gadcYXMoaDi0Doef+X/f6TLZFr9PTMjOpBWmpwNNHi026e54jckntUn6GzqDtIN4w==}
+    engines: {node: '>= 16'}
     dev: true
 
   /@intlify/unplugin-vue-i18n@0.10.0(rollup@2.79.1)(vue-i18n@9.3.0-beta.17):
@@ -9279,15 +9281,6 @@ packages:
       - vue
     dev: true
 
-  /nuxt-icons@3.2.1(rollup@2.79.1):
-    resolution: {integrity: sha512-trvAFq9oWYwWEQ0qZDHVxvLK+TwOdFnoXYOXQvN1CRUlp1DBJdxC8vXO3mED2Kb+Suag+bpWLC6eXGrRwhfffQ==}
-    dependencies:
-      '@nuxt/kit': 3.4.3(rollup@2.79.1)
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: false
-
   /nuxt-typed-router@3.2.2(rollup@2.79.1):
     resolution: {integrity: sha512-DjPG/9gI68jWyTPBOWXUzMFcxcK7oBFp06NKjL8A7ExiWlgSzUQMV2TI/opupMwADZQ/hVbYxY+wzAelJksQbQ==}
     dependencies:
@@ -13086,7 +13079,7 @@ packages:
       vue-router:
         optional: true
     dependencies:
-      '@intlify/shared': 9.3.0-beta.17
+      '@intlify/shared': 9.3.0-beta.19
       '@intlify/vue-i18n-bridge': 0.8.0(vue-i18n@9.3.0-beta.17)
       '@intlify/vue-router-bridge': 0.8.0(vue@3.3.1)
       ufo: 1.1.2

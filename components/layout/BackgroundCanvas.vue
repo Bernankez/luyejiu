@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import pawSvg from "~/assets/icons/paw.svg";
+import pawSvg from "/icons/paw.svg";
 
 const canvasRef = ref<HTMLCanvasElement>();
 
