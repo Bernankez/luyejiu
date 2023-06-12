@@ -17,7 +17,7 @@
       </div>
       <img ref="flightImgRef" class="m-x-auto scale-0 object-scale-down" :src="flightImgSrc" alt="luyejiu-flight" />
       <div class="h-100vh w-full"></div>
-      <img ref="proudImgRef" class="m-x-auto max-h-90vh object-scale-down" src="~/assets/gsap/animation/lyj-proud.png" alt="luyejiu-proud" />
+      <img ref="proudImgRef" class="m-x-auto max-h-90vh object-scale-down" src="http://bucket.luyejiu.live/assets/gsap/animation/lyj-proud.webp" alt="luyejiu-proud" />
     </div>
   </div>
 </template>
@@ -27,25 +27,21 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { breakpointsTailwind } from "@vueuse/core";
-import flight0 from "~/assets/gsap/animation/lyj-flight-0.png";
-import flight1 from "~/assets/gsap/animation/lyj-flight-1.png";
-import flight2 from "~/assets/gsap/animation/lyj-flight-2.png";
 
-function loadImage(images: Record<string, unknown>): string {
-  const keys = Object.keys(images);
-  const key = pickRandom(keys);
-  const module = images[key];
-  if (typeof module === "function") {
-    return module()?.default;
-  }
-  return (module as Record<string, string>).default;
-}
+const flight0 = "http://bucket.luyejiu.live/assets/gsap/animation/lyj-flight-0.webp";
+const flight1 = "http://bucket.luyejiu.live/assets/gsap/animation/lyj-flight-1.webp";
+const flight2 = "http://bucket.luyejiu.live/assets/gsap/animation/lyj-flight-2.webp";
 
-const titleModules = import.meta.glob("@/assets/gsap/title/*", { eager: true });
-const avatarModules = import.meta.glob("@/assets/gsap/avatars/*", { eager: true });
+const titles = [
+  "http://bucket.luyejiu.live/assets/gsap/title/luyejiu-0.webp",
+  "http://bucket.luyejiu.live/assets/gsap/title/luyejiu-1.webp",
+  "http://bucket.luyejiu.live/assets/gsap/title/luyejiu-2.webp",
+  "http://bucket.luyejiu.live/assets/gsap/title/luyejiu-3.webp",
+];
+const avatars = ["http://bucket.luyejiu.live/assets/gsap/avatars/birthday.webp"];
 
-const title = ref(loadImage(titleModules));
-const avatar = ref(loadImage(avatarModules));
+const title = ref(pickRandom(titles));
+const avatar = ref(avatars);
 
 const { sm } = useBreakpoints(breakpointsTailwind);
 const widgetShakeSize = computed(() => sm.value ? 400 : 300);
