@@ -107,9 +107,9 @@ export function useWidgetShake(options?: Options) {
   const _lastRunUnix = ref(Date.now());
   const _frameUnix = ref(1000 / 60); // default to speed of 60 fps
 
-  function updateDom() {
-    if (imageRef.value && image.value) {
-      imageRef.value.style.backgroundImage = `url('${image.value}')`;
+  function updateDom(image: string | undefined, oldImage: string | undefined) {
+    if (imageRef.value && image && image !== oldImage) {
+      imageRef.value.style.backgroundImage = `url('${image}')`;
     }
   }
   watch(image, updateDom, { immediate: true });
