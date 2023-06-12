@@ -107,13 +107,6 @@ export function useWidgetShake(options?: Options) {
   const _lastRunUnix = ref(Date.now());
   const _frameUnix = ref(1000 / 60); // default to speed of 60 fps
 
-  function updateDom() {
-    if (imageRef.value && image.value) {
-      imageRef.value.style.backgroundImage = `url('${image.value}')`;
-    }
-  }
-  watch(image, updateDom, { immediate: true });
-
   function updateSize() {
     const app = appRef.value;
     if (app) {
@@ -337,7 +330,6 @@ export function useWidgetShake(options?: Options) {
   }
 
   onMounted(() => {
-    updateDom();
     updateSize();
     autoRun();
   });

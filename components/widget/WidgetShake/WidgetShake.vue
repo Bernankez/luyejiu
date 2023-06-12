@@ -6,7 +6,7 @@
       </div>
       <canvas ref="canvasRef" class="pointer-events-none absolute left-50% top-50% z-10 -translate-50%"></canvas>
       <div ref="mainRef" class="pointer-events-none absolute z-20 flex flex-col items-center justify-between">
-        <div ref="imageRef" class="pointer-events-auto relative cursor-pointer bg-cover bg-center bg-no-repeat"></div>
+        <div ref="imageRef" :style="{ backgroundImage: `url('${image}')` }" class="pointer-events-auto relative cursor-pointer bg-cover bg-center bg-no-repeat"></div>
       </div>
     </div>
   </div>
