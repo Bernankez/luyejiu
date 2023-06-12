@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { orange } from "~/styles/color";
-import paw from "/icons/paw.svg?raw";
+import paw from "~/assets/icons/paw.svg?raw";
 
 const fill = ref(orange[500]);
 const ratio = 1.0619;
