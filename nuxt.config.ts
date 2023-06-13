@@ -85,6 +85,9 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
+    public: {
+      apiBase: "/api",
+    },
     // mongodb config
     mongodbHost: undefined,
     mongodbPort: undefined,

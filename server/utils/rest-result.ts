@@ -1,5 +1,12 @@
 import type { MaybePromise } from "./type";
 
+export interface RestOptions<T = unknown> {
+  status: "SUCCESS" | "FAILURE";
+  code: number;
+  message?: string;
+  data?: T;
+}
+
 export function success<T>(data: MaybePromise<T>, options?: { message?: string }) {
   const { message } = options || {};
   if (data instanceof Promise) {
